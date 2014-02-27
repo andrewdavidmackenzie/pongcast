@@ -36,18 +36,33 @@ Paddle.prototype.move = function (x, y) {
     }
 }
 
-//////////////////////////////////// COMPUTER ////////////////////////////////
-function Computer(name) {
+//////////////////////////////////// BASE PLAYER ////////////////////////////////
+function BasePlayer(name) {
     this.name = name;
 }
 
-Computer.prototype.givePaddle = function(paddle) {
+BasePlayer.prototype.givePaddle = function(paddle) {
     this.paddle = paddle;
 }
 
+//////////////////////////////////// PLAYER ////////////////////////////////
+function Player(name) {
+    BasePlayer.call(name);
+}
+Player.prototype.constructor = Player;
+Player.prototype = new BasePlayer(name);
+
+
+//////////////////////////////////// COMPUTER ////////////////////////////////
+function Computer(name) {
+    BasePlayer.call(name);
+}
+
+Computer.prototype.constructor = Computer;
+Computer.prototype = new BasePlayer(name);
+
 Computer.prototype.updatePaddle = function (ball) {
-    var x_pos = ball.x;
-    var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
+    var diff = -((this.paddle.x + (this.paddle.width / 2)) - ball.x);
     if (diff < 0 && diff < -4) {
         diff = -5;
     } else if (diff > 0 && diff > 4) {
@@ -55,15 +70,6 @@ Computer.prototype.updatePaddle = function (ball) {
     }
 
     this.paddle.move(diff, 0);
-}
-
-//////////////////////////////////// PLAYER ////////////////////////////////
-function Player(name) {
-    this.name = name;
-}
-
-Player.prototype.givePaddle = function(paddle) {
-    this.paddle = paddle;
 }
 
 //////////////////////////////////// BALL ////////////////////////////////
