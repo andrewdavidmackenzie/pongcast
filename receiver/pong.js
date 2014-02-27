@@ -91,7 +91,7 @@ Ball.prototype.reset = function (x, y) {
 
 Ball.prototype.render = function () {
     this.context.beginPath();
-    this.context.arc(this.x, this.y, ballRadius, 2 * Math.PI, false);
+    this.context.arc(this.x, this.y, ballSize, 2 * Math.PI, false);
     this.context.fillStyle = ballColor;
     this.context.fill();
 }
@@ -99,19 +99,19 @@ Ball.prototype.render = function () {
 Ball.prototype.update = function (paddle1, paddle2) {
     this.x += this.x_speed;
     this.y += this.y_speed;
-    var top_x = this.x - ballRadius;
-    var top_y = this.y - ballRadius;
-    var bottom_x = this.x + ballRadius;
-    var bottom_y = this.y + ballRadius;
+    var top_x = this.x - ballSize;
+    var top_y = this.y - ballSize;
+    var bottom_x = this.x + ballSize;
+    var bottom_y = this.y + ballSize;
 
     // If hits the left wall
-    if (this.x - ballRadius < 0) {
-        this.x = ballRadius;
+    if (this.x - ballSize < 0) {
+        this.x = ballSize;
         this.x_speed = -this.x_speed;
     } else
     // if hits right wall
-    if (this.x + ballRadius > this.width) {
-        this.x = this.width - ballRadius;
+    if (this.x + ballSize > this.width) {
+        this.x = this.width - ballSize;
         this.x_speed = -this.x_speed;
     }
 
@@ -140,10 +140,12 @@ Ball.prototype.update = function (paddle1, paddle2) {
     }
 }
 
+//////////////////////////////////// COURT ////////////////////////////////
+// TODO
+
 //////////////////////////////////// GAME ////////////////////////////////
 function Game(canvas) {
     window.game = this;
-    this.canvas = canvas;
     this.width = canvas.width;
     this.height = canvas.height;
     this.context = canvas.getContext('2d');
