@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="pong.js"></script>
+</head>
+<body>
+<canvas id='court' width="400" height="600" style="border:1px solid #FF00FF;"></canvas>
+
+<script>
+    var ballRadius = 5;
+    var paddleColor = "#0000FF";
+    var ballColor = "#000000";
+    var courtColor = "#FF00FF";
+    var fps = 60;
+    var paddleWidth = 50;
+    var paddleHeight = 10;
+    var paddleYOffset = 10;
+
+    window.onload = function () {
+        var canvas = document.getElementById('court');
+        var game = new Game(canvas);
+        game.setPlayer1(new Player("test"));
+
+        window.addEventListener("keydown", function (event) {
+            var key = event.keyCode;
+
+            var value = Number(key);
+            if (value == 37) {
+                window.game.player1.paddle.move(-4, 0);
+            } else if (value == 39) {
+                window.game.player1.paddle.move(4, 0);
+            }
+        });
+        game.start();
+    };
+
+</script>
+</body>
+</html>
