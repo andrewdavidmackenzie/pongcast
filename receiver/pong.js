@@ -1,17 +1,13 @@
-/**
- * Created by andrew on 24/02/14.
- */
-
 //////////////////////////////////// PADDLE ////////////////////////////////
-function Paddle(x, y, width, height, courtWidth, color, context) {
+function Paddle(x, y, width, height, courtHeight, color, context) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.courtWidth = courtWidth;
+    this.courtHeight = courtHeight;
     this.color = color;
     this.context = context;
-    this.x_speed = 0;
+    this.speed = 0;
 }
 
 Paddle.prototype.render = function () {
@@ -19,16 +15,16 @@ Paddle.prototype.render = function () {
     this.context.fillRect(this.x, this.y, this.width, this.height);
 }
 
-Paddle.prototype.move = function (x) {
-    this.x += x;
-    this.x_speed = x;
+Paddle.prototype.move = function (distance) {
+    this.y += distance;
+    this.speed = distance;
 
-    if (this.x < 0) {
-        this.x = 0;
-        this.x_speed = 0;
-    } else if (this.x + this.width > this.courtWidth) {
-        this.x = this.courtWidth - this.width;
-        this.x_speed = 0;
+    if (this.y < 0) {
+        this.y = 0;
+        this.speed = 0;
+    } else if (this.y + this.height > this.courtHeight) {
+        this.x = this.courtHeight - this.height;
+        this.speed = 0;
     }
 }
 
@@ -59,7 +55,7 @@ Computer.prototype.constructor = Computer;
 Computer.prototype = new BasePlayer(name);
 
 Computer.prototype.updatePaddle = function (ball) {
-    var diff = -((this.paddle.x + (this.paddle.width / 2)) - ball.x);
+    var diff = -((this.paddle.y + (this.paddle.height / 2)) - ball.y);
     if (diff < 0 && diff < -4) {
         diff = -5;
     } else if (diff > 0 && diff > 4) {
@@ -70,12 +66,12 @@ Computer.prototype.updatePaddle = function (ball) {
 }
 
 //////////////////////////////////// BALL ////////////////////////////////
-function Ball(x, y, ballSize, context) {
-    this.width = x;
-    this.height = y;
+function Ball(width, height, ballSize, context) {
+    this.width = width;
+    this.height = height;
     this.ballSize = ballSize;
     this.context = context;
-    this.reset(x / 2, y / 2);
+    this.reset(width / 2, height / 2);
 }
 
 // Reset the speed of the ball in X and Y to the default values
@@ -83,8 +79,8 @@ function Ball(x, y, ballSize, context) {
 Ball.prototype.reset = function (x, y) {
     this.x = x;
     this.y = y;
-    this.x_speed = 0;
-    this.y_speed = 3;
+    this.y_speed = 0;
+    this.x_speed = 3;
 }
 
 Ball.prototype.render = function () {
@@ -95,45 +91,57 @@ Ball.prototype.render = function () {
 }
 
 Ball.prototype.update = function (paddle1, paddle2) {
+    // update position according to its speed
     this.x += this.x_speed;
     this.y += this.y_speed;
+
+    // Calculate ball limits
     var top_x = this.x - this.ballSize;
     var top_y = this.y - this.ballSize;
     var bottom_x = this.x + this.ballSize;
     var bottom_y = this.y + this.ballSize;
 
-    // If hits the left wall
-    if (this.x - this.ballSize < 0) {
-        this.x = this.ballSize;
-        this.x_speed = -this.x_speed;
+    // If hits the top wall
+    if (top_y < 0) {
+        this.y = this.ballSize;
+        // Bounce
+        this.y_speed = -this.y_speed;
     } else
-    // if hits right wall
-    if (this.x + this.ballSize > this.width) {
-        this.x = this.width - this.ballSize;
-        this.x_speed = -this.x_speed;
+    // if hits bottom wall
+    if (bottom_y > this.height) {
+        this.y = this.height - this.ballSize;
+        // Bounce
+        this.y_speed = -this.y_speed;
     }
 
-    // if leaves the court at the top
-    if (this.y < 0) {
+    // if leaves the court at the left
+    if (this.x < 0) {
+        // TODO New point for player on right
         this.reset(this.width / 2, this.height / 2);
     }
 
-    // if leaves the court at the bottom
-    if (this.y > this.height) {
+    // if leaves the court at the right
+    if (this.x > this.width) {
+        // TODO new point for player on left
         this.reset(this.width / 2, this.height / 2);
     }
 
     // Check for bounces of the paddles
-    if (top_y > 300) {
-        if (top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
-            this.y_speed = -3;
-            this.x_speed += (paddle1.x_speed / 2);
-            this.y += this.y_speed;
-        }
-    } else {
-        if (top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y && top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x) {
-            this.y_speed = 3;
-            this.x_speed += (paddle2.x_speed / 2);
+    if (top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x && top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y) {
+        // Bounce of paddle 1
+        this.x_speed = -this.x_speed;
+        // Pick up later speed from the paddle
+        this.y_speed += (paddle1.speed / 2);
+        // Advance it
+        this.x += this.x_speed;
+    }
+    else {
+        if (top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x && top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y) {
+            // Bounce of paddle 1
+            this.x_speed = -this.x_speed;
+            // Pick up later speed from the paddle
+            this.y_speed += (paddle2.speed / 2);
+            // Advance it
             this.y += this.y_speed;
         }
     }
@@ -145,17 +153,19 @@ function Court(canvas) {
     this.ballColor = "#000000";
     this.courtColor = "#FF00FF";
 
-    var fps = 60;
-    var paddleWidth = 50;
-    var paddleHeight = 10;
-    var paddleYOffset = 10;
+    var paddleWidth = 10;
+    var paddleHeight = 50;
+    var paddleXOffset = 10;
     var paddleColor = "#0000FF";
 
     this.width = canvas.width;
     this.height = canvas.height;
     this.context = canvas.getContext('2d');
-    this.paddle1 = new Paddle((this.width / 2) - (paddleWidth / 2), this.height - (paddleYOffset + paddleHeight), paddleWidth, paddleHeight, this.width, paddleColor, this.context);
-    this.paddle2 = new Paddle((this.width / 2) - (paddleWidth / 2), paddleYOffset, paddleWidth, paddleHeight, this.width, paddleColor, this.context);
+
+    var courtMiddleY = (this.height / 2) - (paddleHeight / 2);
+    this.paddle1 = new Paddle(paddleXOffset, courtMiddleY, paddleWidth, paddleHeight, this.width, paddleColor, this.context);
+    this.paddle2 = new Paddle(this.width - (paddleXOffset + paddleWidth), courtMiddleY, paddleWidth, paddleHeight, this.width, paddleColor, this.context);
+
     // Create a new ball in the center of the court - not moving
     this.ball = new Ball(this.width, this.height, this.ballSize, this.context);
 
@@ -231,6 +241,6 @@ Game.prototype.end = function () {
 }
 
 animater = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-    window.setTimeout(callback, 1000 / fps)
+    window.setTimeout(callback, 1000 / 60)
 };
 
