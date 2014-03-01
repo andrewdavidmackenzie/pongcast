@@ -158,9 +158,12 @@ function Court(canvas) {
     var paddleXOffset = 10;
     var paddleColor = "#0000FF";
 
+    this.context = canvas.getContext('2d');
+    this.context.canvas.width  = window.innerWidth;
+    this.context.canvas.height = window.innerHeight;
+
     this.width = canvas.width;
     this.height = canvas.height;
-    this.context = canvas.getContext('2d');
 
     var courtMiddleY = (this.height / 2) - (paddleHeight / 2);
     this.paddle1 = new Paddle(paddleXOffset, courtMiddleY, paddleWidth, paddleHeight, this.width, paddleColor, this.context);

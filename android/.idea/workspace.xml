@@ -77,7 +77,7 @@
       <file leaf-file-name="pong.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="40" selection-start="4477" selection-end="4477" vertical-scroll-proportion="-27.73913" vertical-offset="916" max-vertical-offset="1680">
+            <state line="97" column="54" selection-start="4014" selection-end="4014" vertical-scroll-proportion="-14.0" vertical-offset="1036" max-vertical-offset="1806">
               <folding />
             </state>
           </provider>
@@ -86,7 +86,7 @@
       <file leaf-file-name="pong.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="26" selection-start="5475" selection-end="5475" vertical-scroll-proportion="0.6053097" vertical-offset="2178" max-vertical-offset="3528">
+            <state line="163" column="0" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.6778761" vertical-offset="1899" max-vertical-offset="3570">
               <folding />
             </state>
           </provider>
@@ -461,12 +461,12 @@
       <changelist id="934b33c7-f5f4-4567-90f1-332221113ecc" name="Default" comment="" />
       <created>1393535855193</created>
       <updated>1393535855193</updated>
-      <workItem from="1393535857833" duration="10801000" />
+      <workItem from="1393535857833" duration="11042000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10801000" />
+    <option name="totallyTimeSpent" value="11042000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -578,14 +578,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="40" selection-start="4477" selection-end="4477" vertical-scroll-proportion="-27.73913" vertical-offset="916" max-vertical-offset="1680">
+        <state line="97" column="54" selection-start="4014" selection-end="4014" vertical-scroll-proportion="-14.0" vertical-offset="1036" max-vertical-offset="1806">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="26" selection-start="5475" selection-end="5475" vertical-scroll-proportion="0.6053097" vertical-offset="2178" max-vertical-offset="3528">
+        <state line="163" column="0" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.6778761" vertical-offset="1899" max-vertical-offset="3570">
           <folding />
         </state>
       </provider>
