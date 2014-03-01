@@ -77,27 +77,16 @@
       <file leaf-file-name="pong.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="26" selection-start="367" selection-end="367" vertical-scroll-proportion="-2.3333333" vertical-offset="28" max-vertical-offset="616">
-              <folding>
-                <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pong.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="25" selection-start="2921" selection-end="2921" vertical-scroll-proportion="0.0" vertical-offset="2544" max-vertical-offset="3024">
+            <state line="108" column="0" selection-start="4405" selection-end="4405" vertical-scroll-proportion="-20.086956" vertical-offset="1050" max-vertical-offset="1708">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <file leaf-file-name="pong.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="12" selection-start="483" selection-end="483" vertical-scroll-proportion="0.31237322" vertical-offset="0" max-vertical-offset="493">
+            <state line="216" column="60" selection-start="6312" selection-end="6312" vertical-scroll-proportion="0.6366782" vertical-offset="2656" max-vertical-offset="3388">
               <folding />
             </state>
           </provider>
@@ -122,9 +111,9 @@
         <option value="$PROJECT_DIR$/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
         <option value="$USER_HOME$/Google Drive/pongcast/receiver/1.html" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/../receiver/pong.html" />
         <option value="$PROJECT_DIR$/../receiver/pong.js" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -277,7 +266,7 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../receiver/pong.js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../chromecast/CastHelloText-android/receiver/receiver.html" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -472,12 +461,12 @@
       <changelist id="934b33c7-f5f4-4567-90f1-332221113ecc" name="Default" comment="" />
       <created>1393535855193</created>
       <updated>1393535855193</updated>
-      <workItem from="1393535857833" duration="2166000" />
+      <workItem from="1393535857833" duration="8407000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2166000" />
+    <option name="totallyTimeSpent" value="8407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -504,7 +493,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22237197" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="CafeBabe" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31084657" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18121693" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.7427056" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -573,25 +562,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="12" selection-start="483" selection-end="483" vertical-scroll-proportion="0.31237322" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../chromecast/CastHelloText-android/receiver/receiver.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="9" selection-start="573" selection-end="4303" vertical-scroll-proportion="-15.826087" vertical-offset="1078" max-vertical-offset="1554">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="367" selection-end="367" vertical-scroll-proportion="-2.3333333" vertical-offset="28" max-vertical-offset="616">
-          <folding>
-            <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="108" column="0" selection-start="4405" selection-end="4405" vertical-scroll-proportion="-20.086956" vertical-offset="1050" max-vertical-offset="1708">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="25" selection-start="2921" selection-end="2921" vertical-scroll-proportion="0.0" vertical-offset="2544" max-vertical-offset="3024">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="12" selection-start="483" selection-end="483" vertical-scroll-proportion="0.31237322" vertical-offset="0" max-vertical-offset="493">
+        <state line="216" column="60" selection-start="6312" selection-end="6312" vertical-scroll-proportion="0.6366782" vertical-offset="2656" max-vertical-offset="3388">
           <folding />
         </state>
       </provider>
