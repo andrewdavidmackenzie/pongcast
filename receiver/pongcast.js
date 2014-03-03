@@ -61,27 +61,7 @@ window.onload = function () {
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
-
-    var canvas = document.getElementById('court');
-    var court = new Court(canvas);
-    court.render();
-
-    court.setPlayer1(new Player("test"));
-    var game = new Game(court);
-
-    window.addEventListener("keydown", function (event) {
-        var key = event.keyCode;
-
-        var value = Number(key);
-        if (value == 37) {
-            window.court.player1.paddle.move(-4);
-        } else if (value == 39) {
-            window.court.player1.paddle.move(4);
-        }
-    });
-
-    game.start();
-};
+}
 
 // utility function to display the text message in the input field
 function outputLine(text) {
