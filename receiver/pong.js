@@ -5,7 +5,7 @@ function Paddle(x, y, width, height, courtHeight, context, courtColor) {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.halfHeight = this.height / 2;
+    this.halfHeight = Math.floor(this.height / 2);
     this.context = context;
     this.speed = 0;
     this.maxY = courtHeight - this.height;
@@ -73,7 +73,7 @@ Computer.prototype.updatePaddle = function (ball) {
      */
 
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(-(diff * 3) / 4);
+    this.paddle.move(Math.floor(-(diff * 3) / 4));
 }
 
 //////////////////////////////////// BALL ////////////////////////////////
@@ -84,8 +84,8 @@ function Ball(court, ballSize, context, courtColor) {
     this.halfBallSize = Math.floor(ballSize / 2);
     this.context = context;
     this.courtColor = courtColor;
-    this.x = this.court.width / 2;
-    this.y = this.court.height / 2;
+    this.x = Math.floor(this.court.width / 2);
+    this.y = Math.floor(this.court.height / 2);
     this.y_speed = 0;
     this.x_speed = this.defaultSpeed;
 }
@@ -102,7 +102,7 @@ Ball.prototype.bounceWall = function () {
 
 Ball.prototype.bouncePaddle = function (paddleSpeed) {
     this.x_speed = -this.x_speed;
-    this.y_speed += (paddleSpeed / 2);
+    this.y_speed += Math.floor(paddleSpeed / 2);
     // TODO sound here
 }
 
@@ -176,15 +176,15 @@ function Court(canvas) {
 
     this.width = canvas.width;
     this.height = canvas.height;
-    this.halfWidth = this.width / 2;
+    this.halfWidth = Math.floor(this.width / 2);
 
     var paddleWidth = 10;
     var paddleHeight = 50;
     var paddleXOffset = 60;
     this.paddleColor = "#FFFFFF";
-    var courtMiddleY = this.height / 2;
-    this.paddle1 = new Paddle(paddleXOffset, courtMiddleY - (paddleHeight / 2), paddleWidth, paddleHeight, this.width, this.context, this.courtColor);
-    this.paddle2 = new Paddle(this.width - paddleXOffset - paddleWidth, courtMiddleY - (paddleHeight / 2), paddleWidth, paddleHeight, this.width, this.context, this.courtColor);
+    var courtMiddleY = Math.floor((this.height - paddleHeight)/ 2);
+    this.paddle1 = new Paddle(paddleXOffset,                            courtMiddleY, paddleWidth, paddleHeight, this.width, this.context, this.courtColor);
+    this.paddle2 = new Paddle(this.width - paddleXOffset - paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.width, this.context, this.courtColor);
 
     // Create a new ball in the center of the court - not moving
     this.ballSize = 10;
