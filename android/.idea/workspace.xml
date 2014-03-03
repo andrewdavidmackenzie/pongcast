@@ -74,19 +74,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pong.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pong.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="12" selection-start="426" selection-end="1099" vertical-scroll-proportion="-7.304348" vertical-offset="70" max-vertical-offset="756">
+            <state line="37" column="2" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.5809859" vertical-offset="188" max-vertical-offset="756">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pongcast.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="0" selection-start="516" selection-end="1082" vertical-scroll-proportion="-5.826087" vertical-offset="188" max-vertical-offset="756">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pongcast.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pongcast.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.26565143" vertical-offset="473" max-vertical-offset="1064">
+            <state line="45" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="1064">
               <folding />
             </state>
           </provider>
@@ -95,9 +104,9 @@
       <file leaf-file-name="pong.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="23" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.0" vertical-offset="798" max-vertical-offset="4172">
+            <state line="83" column="48" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.0" vertical-offset="1106" max-vertical-offset="4214">
               <folding>
-                <marker date="1393834851000" expanded="true" signature="2485:2617" placeholder="{...}" />
+                <marker date="1393871654000" expanded="true" signature="2523:2655" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -123,9 +132,10 @@
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
         <option value="$USER_HOME$/Google Drive/pongcast/receiver/1.html" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/../receiver/pongcast.js" />
+        <option value="$USER_HOME$/Desktop/test.html" />
         <option value="$PROJECT_DIR$/../receiver/pong.js" />
         <option value="$PROJECT_DIR$/../receiver/pong.html" />
-        <option value="$PROJECT_DIR$/../receiver/pongcast.js" />
       </list>
     </option>
   </component>
@@ -278,7 +288,7 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../receiver/pongcast.js" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/test.html" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -478,12 +488,12 @@
       <workItem from="1393535857833" duration="11540000" />
       <workItem from="1393754783550" duration="3056000" />
       <workItem from="1393757888326" duration="11091000" />
-      <workItem from="1393808425026" duration="989000" />
+      <workItem from="1393808425026" duration="1844000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26676000" />
+    <option name="totallyTimeSpent" value="27531000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -560,7 +570,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="0" selection-start="2479" selection-end="2479" vertical-scroll-proportion="0.0" vertical-offset="1932" max-vertical-offset="4172">
           <folding>
-            <marker date="1393834851000" expanded="true" signature="2485:2617" placeholder="{...}" />
+            <marker date="1393871654000" expanded="true" signature="2523:2655" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -576,7 +586,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="109" column="41" selection-start="2971" selection-end="3052" vertical-scroll-proportion="0.0" vertical-offset="1284" max-vertical-offset="3836">
           <folding>
-            <marker date="1393834851000" expanded="true" signature="2485:2617" placeholder="{...}" />
+            <marker date="1393871654000" expanded="true" signature="2523:2655" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -592,7 +602,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="163" column="0" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.0" vertical-offset="1899" max-vertical-offset="3570">
           <folding>
-            <marker date="1393834851000" expanded="true" signature="2485:2617" placeholder="{...}" />
+            <marker date="1393871654000" expanded="true" signature="2523:2655" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -634,25 +644,32 @@
         <state line="103" column="9" selection-start="573" selection-end="4303" vertical-scroll-proportion="-15.826087" vertical-offset="1078" max-vertical-offset="1554" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/pongcast.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="1064">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="516" selection-end="1082" vertical-scroll-proportion="-5.826087" vertical-offset="188" max-vertical-offset="756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="23" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.0" vertical-offset="798" max-vertical-offset="4172">
+        <state line="83" column="48" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.0" vertical-offset="1106" max-vertical-offset="4214">
           <folding>
-            <marker date="1393834851000" expanded="true" signature="2485:2617" placeholder="{...}" />
+            <marker date="1393871654000" expanded="true" signature="2523:2655" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="12" selection-start="426" selection-end="1099" vertical-scroll-proportion="-7.304348" vertical-offset="70" max-vertical-offset="756">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pongcast.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.26565143" vertical-offset="473" max-vertical-offset="1064">
+        <state line="37" column="2" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.5809859" vertical-offset="188" max-vertical-offset="756">
           <folding />
         </state>
       </provider>

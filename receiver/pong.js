@@ -1,6 +1,6 @@
 //////////////////////////////////// PADDLE ////////////////////////////////
 function Paddle(x, y, width, height, courtHeight, context, courtColor) {
-    this.defaultSpeed = (2 * courtHeight) / 100; // 2% of the height
+    this.defaultSpeed = Math.floor(2 * courtHeight) / 100; // 2% of the height
     this.x = x;
     this.y = y;
     this.width = width;
@@ -73,15 +73,15 @@ Computer.prototype.updatePaddle = function (ball) {
      */
 
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(-(diff*3)/4);
+    this.paddle.move(-(diff * 3) / 4);
 }
 
 //////////////////////////////////// BALL ////////////////////////////////
 function Ball(court, ballSize, context, courtColor) {
-    this.defaultSpeed = court.width / 200;
+    this.defaultSpeed = Math.floor(court.width / 200);
     this.court = court;
     this.ballSize = ballSize;
-    this.halfBallSize = ballSize / 2;
+    this.halfBallSize = Math.floor(ballSize / 2);
     this.context = context;
     this.courtColor = courtColor;
     this.x = this.court.width / 2;
@@ -91,10 +91,8 @@ function Ball(court, ballSize, context, courtColor) {
 }
 
 Ball.prototype.render = function (color) {
-    this.context.beginPath();
-    this.context.rect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
     this.context.fillStyle = color;
-    this.context.fill();
+    this.context.fillRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
 }
 
 Ball.prototype.bounceWall = function () {
@@ -288,6 +286,11 @@ Game.prototype.end = function (winner) {
     this.playing = false;
 }
 
-animater = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-    window.setTimeout(callback, 1000 / 30)
-};
+window.animater = (function () {
+    return  window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
