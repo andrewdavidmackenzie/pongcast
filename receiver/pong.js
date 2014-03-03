@@ -73,7 +73,7 @@ Computer.prototype.updatePaddle = function (ball) {
      */
 
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(-diff);
+    this.paddle.move(-(diff*3)/4);
 }
 
 //////////////////////////////////// BALL ////////////////////////////////
@@ -182,7 +182,7 @@ function Court(canvas) {
 
     var paddleWidth = 10;
     var paddleHeight = 50;
-    var paddleXOffset = 10;
+    var paddleXOffset = 60;
     this.paddleColor = "#FFFFFF";
     var courtMiddleY = this.height / 2;
     this.paddle1 = new Paddle(paddleXOffset, courtMiddleY - (paddleHeight / 2), paddleWidth, paddleHeight, this.width, this.context, this.courtColor);
