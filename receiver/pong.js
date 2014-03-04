@@ -173,11 +173,12 @@ Ball.prototype.update = function () {
 }
 
 //////////////////////////////////// COURT ////////////////////////////////
-function Court(canvas, statistics) {
+function Court(canvas, stats) {
     this.context = canvas.getContext('2d');
+    this.courtColor = "#999999"
+
 //    this.context.canvas.width = window.innerWidth;
 //    this.context.canvas.height = window.innerHeight;
-    this.courtColor = "#999999"
 
     this.width = canvas.width;
     this.height = canvas.height;
@@ -205,6 +206,8 @@ function Court(canvas, statistics) {
     this.setPlayer2(new Computer("Demo2"));
 
     this.bounce = new Audio('court.ogg');
+
+    this.stats = stats;
 
     // Install into the global window object
     window.court = this;
@@ -246,15 +249,15 @@ Court.prototype.render = function () {
 
 Court.prototype.step = function () {
     if (window.court.game.playing) {
-        if (window.stats) {
-            window.stats.begin();
+        if (this.stats) {
+            this.stats.begin();
         }
 
         // Update the positions of the objects
         window.court.update();
 
-        if (window.stats) {
-            window.stats.end();
+        if (this.stats) {
+            this.stats.end();
         }
 
         // reschedule next animation update

@@ -74,30 +74,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pong.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pong.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="26" selection-start="694" selection-end="694" vertical-scroll-proportion="-3.652174" vertical-offset="308" max-vertical-offset="910">
+            <state line="27" column="13" selection-start="649" selection-end="649" vertical-scroll-proportion="0.16197184" vertical-offset="286" max-vertical-offset="896">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pongcast.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../receiver/pongcast.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="36" selection-start="2005" selection-end="2005" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="1064">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pong.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pong.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="57" selection-start="5700" selection-end="5700" vertical-scroll-proportion="0.51557094" vertical-offset="2320" max-vertical-offset="4494">
+            <state line="210" column="0" selection-start="6617" selection-end="6617" vertical-scroll-proportion="0.0" vertical-offset="2412" max-vertical-offset="4536">
               <folding>
-                <marker date="1393970165000" expanded="true" signature="2763:2919" placeholder="{...}" />
+                <marker date="1393971352000" expanded="true" signature="2763:2919" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -127,8 +118,8 @@
         <option value="$USER_HOME$/Desktop/test.html" />
         <option value="$PROJECT_DIR$/../receiver/stats.min.js" />
         <option value="$PROJECT_DIR$/../receiver/basic.html" />
-        <option value="$PROJECT_DIR$/../receiver/pong.html" />
         <option value="$PROJECT_DIR$/../receiver/pong.js" />
+        <option value="$PROJECT_DIR$/../receiver/pong.html" />
       </list>
     </option>
   </component>
@@ -481,12 +472,12 @@
       <workItem from="1393535857833" duration="11540000" />
       <workItem from="1393754783550" duration="3056000" />
       <workItem from="1393757888326" duration="11091000" />
-      <workItem from="1393808425026" duration="6643000" />
+      <workItem from="1393808425026" duration="7866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32330000" />
+    <option name="totallyTimeSpent" value="33553000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="6" />
@@ -496,7 +487,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.65782493" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2413793" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -506,13 +497,13 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="CafeBabe" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="CafeBabe" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18121693" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.7427056" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21816881" sideWeight="0.7771883" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30862534" sideWeight="0.52582496" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19081779" sideWeight="0.6710875" order="9" side_tool="true" content_ui="tabs" />
@@ -563,7 +554,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="86" column="0" selection-start="2479" selection-end="2479" vertical-scroll-proportion="0.0" vertical-offset="1932" max-vertical-offset="4172">
           <folding>
-            <marker date="1393970165000" expanded="true" signature="2763:2919" placeholder="{...}" />
+            <marker date="1393971352000" expanded="true" signature="2763:2919" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -579,7 +570,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="109" column="41" selection-start="2971" selection-end="3052" vertical-scroll-proportion="0.0" vertical-offset="1284" max-vertical-offset="3836">
           <folding>
-            <marker date="1393970165000" expanded="true" signature="2763:2919" placeholder="{...}" />
+            <marker date="1393971352000" expanded="true" signature="2763:2919" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -595,7 +586,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="163" column="0" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.0" vertical-offset="1899" max-vertical-offset="3570">
           <folding>
-            <marker date="1393970165000" expanded="true" signature="2763:2919" placeholder="{...}" />
+            <marker date="1393971352000" expanded="true" signature="2763:2919" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -665,19 +656,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="26" selection-start="694" selection-end="694" vertical-scroll-proportion="-3.652174" vertical-offset="308" max-vertical-offset="910">
-          <folding />
+        <state line="210" column="0" selection-start="6617" selection-end="6617" vertical-scroll-proportion="0.0" vertical-offset="2412" max-vertical-offset="4536">
+          <folding>
+            <marker date="1393971352000" expanded="true" signature="2763:2919" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="57" selection-start="5700" selection-end="5700" vertical-scroll-proportion="0.51557094" vertical-offset="2320" max-vertical-offset="4494">
-          <folding>
-            <marker date="1393970165000" expanded="true" signature="2763:2919" placeholder="{...}" />
-          </folding>
+        <state line="27" column="13" selection-start="649" selection-end="649" vertical-scroll-proportion="0.16197184" vertical-offset="286" max-vertical-offset="896">
+          <folding />
         </state>
       </provider>
     </entry>
