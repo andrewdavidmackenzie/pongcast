@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script type="text/javascript" src="http://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script src="pong.js"></script>
     <script src="pongcast.js"></script>
     <!-- Scale the canvas to fill the screen, independently of the "real" size in pixels for rendering -->
@@ -17,6 +17,11 @@
             height: 100%;
             background: #999999;
         }
+
+        @font-face {
+            font-family: 'Pong';
+            src: url('pong.ttf');
+        }
     </style>
 
 
@@ -25,7 +30,7 @@
 <script src="stats.min.js"></script>
 
 <script>
-    if (false) {
+    if (true) {
         window.stats = new Stats();
         window.stats.setMode(0);
         document.body.appendChild(window.stats.domElement);
@@ -38,22 +43,11 @@
 
         court.setPlayer1(new Player("test"));
         var game = new Game(court);
-
-        window.addEventListener("keydown", function (event) {
-            var key = event.keyCode;
-            var value = Number(key);
-            if (value == 37) {
-                window.court.player1.paddle.moveUp();
-            } else if (value == 39) {
-                window.court.player1.paddle.moveDown();
-            }
-        });
-
         game.start();
     };
 </script>
 
-<canvas id='court' width="960" height="540"></canvas>
+<canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!</canvas>
 
 </body>
 </html>
