@@ -1,4 +1,4 @@
-window.onload = function () {
+function CastController() {
     cast.receiver.logger.setLevelValue(0);
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
