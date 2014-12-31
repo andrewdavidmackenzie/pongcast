@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../CastCompanionLibrary-android/CastCompanionLibrary-android.iml" filepath="$PROJECT_DIR$/../CastCompanionLibrary-android/CastCompanionLibrary-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CastCompanionLibrary-android/CastCompanionLibrary-android.iml" filepath="$PROJECT_DIR$/../CastCompanionLibrary-android/CastCompanionLibrary-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
       <module fileurl="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/appcompat.iml" filepath="$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/appcompat.iml" />
       <module fileurl="file://$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
@@ -10,4 +11,3 @@
     </modules>
   </component>
 </project>
-

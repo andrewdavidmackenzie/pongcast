@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Google Inc. All Rights Reserved.
+ * Copyright (C) 2014 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * A concrete subclass of {@link BaseCastManager} that is suitable for data-centric applications
@@ -59,7 +60,7 @@ import java.util.Set;
  * <li>FEATURE_DEBUGGING: to enable GMS level logging</li>
  * </ul>
  * Beyond managing the connectivity to a cast device, this class provides easy-to-use methods to
- * send and receive messages using one or more namspaces. These namespaces can be configured during
+ * send and receive messages using one or more namespaces. These namespaces can be configured during
  * the initialization as part of the call to <code>initialize()</code> or can be added later on.
  * Clients can subclass this class to extend the features and functionality beyond what this class
  * provides. This class manages various states of the remote cast device. Client applications,
@@ -70,10 +71,10 @@ import java.util.Set;
  * those methods that they are interested in. Since this library depends on the cast functionalities
  * provided by the Google Play services, the library checks to ensure that the right version of that
  * service is installed. It also provides a simple static method
- * <code>checkGooglePlaySevices()</code> that clients can call at an early stage of their
- * applications to provide a dialog for users if they need to update/activate their GMS library. To
- * learn more about this library, please read the documentation that is distributed as part of this
- * library.
+ * <code>checkGooglePlayServices()</code> that clients can call at an early stage of their
+ * applications to provide a dialog for users if they need to update/activate their Google Play
+ * Services library. To learn more about this library, please read the documentation that is
+ * distributed as part of this library.
  */
 public class DataCastManager extends BaseCastManager
         implements Cast.MessageReceivedCallback {
@@ -81,7 +82,8 @@ public class DataCastManager extends BaseCastManager
     private static final String TAG = LogUtils.makeLogTag(DataCastManager.class);
     private static DataCastManager sInstance;
     private final Set<String> mNamespaceList = new HashSet<String>();
-    protected Set<IDataCastConsumer> mDataConsumers;
+    private final Set<IDataCastConsumer> mDataConsumers =
+            new CopyOnWriteArraySet<IDataCastConsumer>();
 
     /**
      * Initializes the DataCastManager for clients. Before clients can use DataCastManager, they
@@ -100,7 +102,7 @@ public class DataCastManager extends BaseCastManager
             LOGD(TAG, "New instance of DataCastManager is created");
             if (ConnectionResult.SUCCESS != GooglePlayServicesUtil
                     .isGooglePlayServicesAvailable(context)) {
-                String msg = "Couldn't find the appropriate version of Goolge Play Services";
+                String msg = "Couldn't find the appropriate version of Google Play Services";
                 LOGE(TAG, msg);
                 throw new RuntimeException(msg);
             }
@@ -112,7 +114,6 @@ public class DataCastManager extends BaseCastManager
 
     protected DataCastManager(Context context, String applicationId, String... namespaces) {
         super(context, applicationId);
-        mDataConsumers = new HashSet<IDataCastConsumer>();
         if (null != namespaces) {
             for (String namespace : namespaces) {
                 mNamespaceList.add(namespace);
@@ -134,29 +135,6 @@ public class DataCastManager extends BaseCastManager
                     "call initialize() first");
             throw new CastException();
         }
-        return sInstance;
-    }
-
-    /**
-     * Returns the initialized instance of this class. If it is not initialized yet, a
-     * {@link CastException} will be thrown. The {@link Context} that is passed as the argument will
-     * be used to update the context. The main purpose of updating context is to enable the library
-     * to provide {@link Context} related functionalities, e.g. it can create an error dialog if
-     * needed. This method is preferred over the similar one without a context argument.
-     *
-     * @see {@link initialize()}, {@link setContext()}
-     * @param ctx the current Context
-     * @return
-     * @throws CastException
-     */
-    public static DataCastManager getInstance(Context ctx) throws CastException {
-        if (null == sInstance) {
-            LOGE(TAG, "No DataCastManager instance was initialized, you need to " +
-                    "call initialize() first");
-            throw new CastException();
-        }
-        LOGD(TAG, "Updated context to: " + ctx.getClass().getName());
-        sInstance.mContext = ctx;
         return sInstance;
     }
 
@@ -269,13 +247,7 @@ public class DataCastManager extends BaseCastManager
 
     @Override
     protected void onDeviceUnselected() {
-        try {
-            detachDataChannels();
-        } catch (NoConnectionException e) {
-            LOGE(TAG, "Failed to detach data channels", e);
-        } catch (TransientNetworkDisconnectionException e) {
-            LOGE(TAG, "Failed to detach data channels", e);
-        }
+        detachDataChannels();
     }
 
     @Override
@@ -284,7 +256,7 @@ public class DataCastManager extends BaseCastManager
         Builder builder = Cast.CastOptions.builder(
                 mSelectedCastDevice, new CastListener());
         if (isFeatureEnabled(FEATURE_DEBUGGING)) {
-            builder.setDebuggingEnabled();
+            builder.setVerboseLoggingEnabled(true);
         }
         return builder;
     }
@@ -349,12 +321,6 @@ public class DataCastManager extends BaseCastManager
                     // didn't so we deselect the device
                     onDeviceSelected(null);
                     mReconnectionStatus = ReconnectionStatus.INACTIVE;
-                    // uncomment the following if you want to clear session
-                    // persisted data if a reconnection attempt fails
-                    // Utils.saveStringToPreference(mContext,
-                    // PREFS_KEY_SESSION_ID, null);
-                    // Utils.saveStringToPreference(mContext,
-                    // PREFS_KEY_ROUTE_ID, null);
                     return;
                 }
             }
@@ -362,6 +328,7 @@ public class DataCastManager extends BaseCastManager
         // registering namespaces, if any
         try {
             attachDataChannels();
+            mSessionId = sessionId;
             for (IDataCastConsumer consumer : mDataConsumers) {
                 try {
                     consumer.onApplicationConnected(appMetadata, applicationStatus, sessionId,
@@ -407,16 +374,12 @@ public class DataCastManager extends BaseCastManager
      * @throws TransientNetworkDisconnectionException If framework is still trying to recover from a
      * possibly transient loss of network
      */
-    private void detachDataChannels() throws TransientNetworkDisconnectionException,
-            NoConnectionException {
-        checkConnectivity();
-        if (!mNamespaceList.isEmpty()) {
+    private void detachDataChannels() {
+        if (!mNamespaceList.isEmpty() && null != Cast.CastApi && null != mApiClient) {
             for (String namespace : mNamespaceList) {
                 try {
                     Cast.CastApi.removeMessageReceivedCallbacks(mApiClient, namespace);
-                } catch (IllegalStateException e) {
-                    LOGE(TAG, "Failed to add namespace: " + namespace, e);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     LOGE(TAG, "Failed to add namespace: " + namespace, e);
                 }
             }
@@ -433,7 +396,6 @@ public class DataCastManager extends BaseCastManager
                 LOGE(TAG, "onApplicationConnectionFailed(): Failed to inform " + consumer, e);
             }
         }
-
     }
 
     public void onApplicationDisconnected(int errorCode) {
@@ -460,7 +422,6 @@ public class DataCastManager extends BaseCastManager
             appStatus = Cast.CastApi.getApplicationStatus(mApiClient);
             LOGD(TAG, "onApplicationStatusChanged() reached: "
                     + Cast.CastApi.getApplicationStatus(mApiClient));
-
             for (IDataCastConsumer consumer : mDataConsumers) {
                 try {
                     consumer.onApplicationStatusChanged(appStatus);
@@ -483,7 +444,6 @@ public class DataCastManager extends BaseCastManager
                 LOGE(TAG, "onApplicationStopFailed(): Failed to inform " + consumer, e);
             }
         }
-
     }
 
     public void onVolumeChanged() {
@@ -503,7 +463,6 @@ public class DataCastManager extends BaseCastManager
                 LOGE(TAG, "onMessageReceived(): Failed to inform " + consumer, e);
             }
         }
-
     }
 
     public void onMessageSendFailed(Status result) {
@@ -527,10 +486,11 @@ public class DataCastManager extends BaseCastManager
      * @see DataCastConsumerImpl
      * @param listener
      */
-    public synchronized void addDataCastConsumer(IDataCastConsumer listener) {
+    public void addDataCastConsumer(IDataCastConsumer listener) {
         if (null != listener) {
             super.addBaseCastConsumer(listener);
-            boolean result = mDataConsumers.add(listener);
+            boolean result = false;
+            result = mDataConsumers.add(listener);
             if (result) {
                 LOGD(TAG, "Successfully added the new DataCastConsumer listener " + listener);
             } else {
@@ -545,7 +505,7 @@ public class DataCastManager extends BaseCastManager
      *
      * @param listener
      */
-    public synchronized void removeDataCastConsumer(IDataCastConsumer listener) {
+    public void removeDataCastConsumer(IDataCastConsumer listener) {
         if (null != listener) {
             super.removeBaseCastConsumer(listener);
             mDataConsumers.remove(listener);
