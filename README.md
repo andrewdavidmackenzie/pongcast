@@ -1,5 +1,5 @@
 pongcast
-========
+======
 
 I wanted to learn more about Chromecast development (the receiver that runs on the chromecast itself, 
 and the mobile app "controller" and decided that a good way would be to do a simple game. 
@@ -26,5 +26,21 @@ The other is evolving the mobile app into a paddle controller app, and then allo
 and start a game.
 
 Contributing
-=======
+======
 Javascript/CSS-fu to make it all run quicker and smoother on the chromecast is very welcome!
+
+Cloning with git submodules
+======
+The android app uses a git submodule for the CastCompanionLibrary, which I forked from the official one on github,
+and added some config files to.
+
+This was to make it easier to track the original, and have a git controlled version of this library that I could
+share among multiple Chomecast apps if needed.
+
+When you clone the project initially you will get an empty directory for CastCompanionLibrary.
+
+You must run two commands:
+- "git submodule init" to initialize your local configuration file
+- "git submodule update" to fetch all the data from that project and check out the appropriate commit listed in your superproject:
+
+Then you should be able to open the project in IntelliJ and build.
