@@ -29,6 +29,16 @@ Contributing
 ======
 Javascript/CSS-fu to make it all run quicker and smoother on the chromecast is very welcome!
 
+Also, for some reason I have not been able to get the sound reproduction to synchronize with the events, nor be
+reliable - despite using some tricks I found on the web... so help with good sound from JS on Chromecast is also
+much needed.
+
+Folders
+======
+android - the android app to control the game, just a skeleton at the moment.
+CastCompanionLibrary - see the section below, a library for interacting with Chromecast
+receiver - custom chromecast receiver html, javascript, image and sound files
+
 Cloning with git submodules
 ======
 The android app uses a git submodule for the CastCompanionLibrary, which I forked from the official one on github,
