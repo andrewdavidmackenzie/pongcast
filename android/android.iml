@@ -17,9 +17,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="CastCompanionLibrary-android" />
     <orderEntry type="module" module-name="appcompat" />
     <orderEntry type="module" module-name="google-play-services_lib" />
     <orderEntry type="module" module-name="mediarouter" />
+    <orderEntry type="module" module-name="CastCompanionLibrary" />
   </component>
 </module>

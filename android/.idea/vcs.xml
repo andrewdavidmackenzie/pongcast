@@ -5,7 +5,7 @@
     <mapping directory="$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat" vcs="svn" />
     <mapping directory="$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/mediarouter" vcs="svn" />
     <mapping directory="$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/../CastCompanionLibrary" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../CastCompanionLibrary-android" vcs="Git" />
   </component>
 </project>
-
