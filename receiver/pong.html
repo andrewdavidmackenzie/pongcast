@@ -12,7 +12,7 @@
         html, body {
             width: 100%;
             height: 100%;
-            margin: 0px;
+            margin: 0;
         }
 
         canvas {
@@ -73,7 +73,16 @@
     window.outputLine = function outputLine(text) {
         console.log("Debug: " + text);
         window.message.innerHTML += (text + "<br>");
-    }
+    };
+
+    // Wait until this has all loaded before creating the canvas and adding controllers for the game
+    window.onload = function () {
+        var canvas = document.getElementById('court');
+        window.court = new Court(canvas, window.stats);
+        window.court.render();
+
+        KeyboardController(window.court);
+    };
 </script>
 
 <div id="message"></div>

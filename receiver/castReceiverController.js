@@ -1,6 +1,9 @@
 // A subclass of PaddleController, which must implement: updatePaddle = function (court, paddle, ball)
-function CastController() {
-    PaddleController.call();
+function CastController(court) {
+    Player.call();
+
+    this.name = "Chromecast";
+    this.court = court;
 
     cast.receiver.logger.setLevelValue(0);
 
