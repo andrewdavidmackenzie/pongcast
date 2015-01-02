@@ -16,10 +16,8 @@
 
 package net.mackenzie_serres.pongcast;
 
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -46,7 +44,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Main activity to send messages to the receiver.
@@ -59,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
 	private MediaRouter.Callback mMediaRouterCallback;
 	private CastDevice mSelectedDevice;
 	private GoogleApiClient mApiClient;
-	private HelloWorldChannelCallbacks mHelloWorldChannelCallbacks;
+	private PongcastCallbacks mPongcastCallbacks;
 	private boolean mWaitingForReconnect;
 
 	@Override
@@ -71,13 +68,12 @@ public class MainActivity extends ActionBarActivity {
 		actionBar.setBackgroundDrawable(new ColorDrawable(
 				android.R.color.transparent));
 
-		// When the user clicks on the button, use Android voice recognition to
-		// get text
+		// When the user clicks on the button, send a message
 		Button voiceButton = (Button) findViewById(R.id.voiceButton);
 		voiceButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startVoiceRecognitionActivity();
+				sendMessage("Hello");
 			}
 		});
 
@@ -90,36 +86,6 @@ public class MainActivity extends ActionBarActivity {
 
 		// Only create the callback once, on creation
 		mMediaRouterCallback = new MyMediaRouterCallback();
-	}
-
-	/**
-	 * Android voice recognition
-	 */
-	private void startVoiceRecognitionActivity() {
-		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-				RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-				getString(R.string.message_to_cast));
-		startActivityForResult(intent, REQUEST_CODE);
-	}
-
-	/*
-	 * Handle the voice recognition response
-	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int,
-	 * android.content.Intent)
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-			ArrayList<String> matches = data
-					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-			if (matches.size() > 0) {
-				Log.d(TAG, matches.get(0));
-				sendMessage(matches.get(0));
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -145,6 +111,11 @@ public class MainActivity extends ActionBarActivity {
 				MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN);
 	}
 
+	/**
+	 * Add the MediaRoute ("Chromecast") button to the ActionBar at the top of the app
+	 * @param menu - menu to add the menu items to
+	 * @return true if added an item
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -158,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Start the receiver app
+	 * Start the custom receiver on the chromecast
 	 */
 	private void launchReceiver() {
 		try {
@@ -179,8 +150,7 @@ public class MainActivity extends ActionBarActivity {
 			// Connect to Google Play services
 			ConnectionCallbacks mConnectionCallbacks = new ConnectionCallbacks();
 			ConnectionFailedListener mConnectionFailedListener = new ConnectionFailedListener();
-			Cast.CastOptions.Builder apiOptionsBuilder = Cast.CastOptions
-					.builder(mSelectedDevice, mCastListener);
+			Cast.CastOptions.Builder apiOptionsBuilder = Cast.CastOptions.builder(mSelectedDevice, mCastListener);
 
 			mApiClient = new GoogleApiClient.Builder(this)
 					.addApi(Cast.API, apiOptionsBuilder.build())
@@ -189,6 +159,10 @@ public class MainActivity extends ActionBarActivity {
 					.build();
 
 			mApiClient.connect();
+
+			// TODO test sending a message after starting it...
+//			sendMessage("Text for now");
+
 		} catch (Exception e) {
 			Log.e(TAG, "Failed launchReceiver", e);
 		}
@@ -201,12 +175,13 @@ public class MainActivity extends ActionBarActivity {
 		if (mApiClient != null) {
 			try {
 					/*
+					Do not stop the receiver when we disconnect - so the other player can continue if they want
 					Cast.CastApi.stopApplication(mApiClient);
 					*/
-				if (mHelloWorldChannelCallbacks != null) {
+				if (mPongcastCallbacks != null) {
 					Cast.CastApi.removeMessageReceivedCallbacks(mApiClient,
-							mHelloWorldChannelCallbacks.getNamespace());
-					mHelloWorldChannelCallbacks = null;
+							mPongcastCallbacks.getNamespace());
+					mPongcastCallbacks = null;
 				}
 			} catch (IOException e) {
 				Log.e(TAG, "Exception while removing channel", e);
@@ -223,16 +198,16 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Send a text message to the receiver
+	 * Send a message to the receiver
 	 *
 	 * @param message String to send to the cast device
 	 */
 	private void sendMessage(String message) {
 		if (mApiClient != null) {
-			if (mHelloWorldChannelCallbacks != null) {
+			if (mPongcastCallbacks != null) {
 				try {
 					Cast.CastApi.sendMessage(mApiClient,
-							mHelloWorldChannelCallbacks.getNamespace(), message)
+							mPongcastCallbacks.getNamespace(), message)
 							.setResultCallback(new ResultCallback<Status>() {
 								@Override
 								public void onResult(Status result) {
@@ -301,8 +276,8 @@ public class MainActivity extends ActionBarActivity {
 						// Re-create the custom message channel
 						try {
 							Cast.CastApi.setMessageReceivedCallbacks(mApiClient,
-									mHelloWorldChannelCallbacks.getNamespace(),
-									mHelloWorldChannelCallbacks);
+									mPongcastCallbacks.getNamespace(),
+									mPongcastCallbacks);
 						} catch (IOException e) {
 							Log.e(TAG, "Exception while setting message received callbacks", e);
 						}
@@ -342,14 +317,14 @@ public class MainActivity extends ActionBarActivity {
 																+ wasLaunched);
 
 												// Create the custom message channel
-												mHelloWorldChannelCallbacks = new HelloWorldChannelCallbacks();
+												mPongcastCallbacks = new PongcastCallbacks();
 												try {
 													Cast.CastApi
 															.setMessageReceivedCallbacks(
 																	mApiClient,
-																	mHelloWorldChannelCallbacks
+																	mPongcastCallbacks
 																			.getNamespace(),
-																	mHelloWorldChannelCallbacks);
+																	mPongcastCallbacks);
 												} catch (IOException e) {
 													Log.e(TAG,
 															"Exception while creating channel",
@@ -397,7 +372,7 @@ public class MainActivity extends ActionBarActivity {
 	/**
 	 * Custom message channel
 	 */
-	class HelloWorldChannelCallbacks implements MessageReceivedCallback {
+	class PongcastCallbacks implements MessageReceivedCallback {
 		/**
 		 * @return custom namespace
 		 */
