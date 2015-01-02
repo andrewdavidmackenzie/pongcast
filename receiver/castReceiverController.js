@@ -1,5 +1,9 @@
+// A subclass of PaddleController, which must implement: updatePaddle = function (court, paddle, ball)
 function CastController() {
+    PaddleController.call();
+
     cast.receiver.logger.setLevelValue(0);
+
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
 
@@ -15,14 +19,14 @@ function CastController() {
         console.log('Received Sender Connected event: ' + event.data);
         console.log('UA = "' + window.castReceiverManager.getSender(event.data).userAgent + '"');
         console.log("Senders Connected: " + window.castReceiverManager.getSenders().length);
-        outputLine("Welcome " + event.data + "("
+        window.outputLine("Welcome " + event.data + "("
             + window.castReceiverManager.getSenders().length + ")");
     };
 
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function (event) {
         console.log('Received Sender Disconnected event: ' + event.data);
-        outputLine("Goodbye " + event.data);
+        window.outputLine("Goodbye " + event.data);
 
         if (window.castReceiverManager.getSenders().length == 0) {
             window.close();
@@ -51,7 +55,7 @@ function CastController() {
         console.log('Message [' + event.senderId + ']: ' + event.data);
 
         // display the message from the sender
-        outputLine(event.data + "(from " + event.senderId + ")");
+        window.outputLine(event.data + "(from " + event.senderId + ")");
 
         // inform all senders on the CastMessageBus of the incoming message event
         // sender message listener will be invoked
@@ -63,9 +67,11 @@ function CastController() {
     console.log('Receiver Manager started');
 }
 
-// utility function to display the text message in the input field
-function outputLine(text) {
-    console.log("Line: " + text);
-    document.getElementById("message").innerHTML += (text + "<br>");
-    window.castReceiverManager.setApplicationState(window.castReceiverManager.getSenders().length + " connected");
+//
+//     window.castReceiverManager.setApplicationState(window.castReceiverManager.getSenders().length + " connected");
+//
+
+
+// Check what keys are pressed everytime we get asked to update our paddle position
+CastController.prototype.updatePaddle = function (court, paddle, ball) {
 }

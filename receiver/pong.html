@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript" src="stats.min.js"></script>
     <script type="text/javascript" src="http://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script src="pong.js"></script>
     <script src="castReceiverController.js"></script>
+    <script src="keyboardController.js"></script>
+
     <!-- Scale the canvas to fill the screen, independently of the "real" size in pixels for rendering -->
     <style>
         html, body {
@@ -18,85 +21,42 @@
             background: #999999;
         }
 
+        #message {
+            width: 300px;
+            height: 100%;
+            position: absolute;
+            visibility: hidden;
+        }
+
         @font-face {
             font-family: 'Pong';
             src: url('pong.ttf');
         }
     </style>
 
+    <style>
 
+    </style>
 </head>
+
 <body>
-<script src="stats.min.js"></script>
 
 <script>
-    if (true) {
+    // enable this to show refresh rates stats on-screen
+    if (false) {
         window.stats = new Stats();
         window.stats.setMode(0);
         document.body.appendChild(window.stats.domElement);
     }
 
-    // Create a keyboard controller for a paddle
-    function KeyboardController() {
-        PaddleController.call();
-
-        window.keysDown = {};
-
-        window.addEventListener("keydown", function (event) {
-            // Mark this key in the keysDown array as pressed
-            window.keysDown[event.keyCode] = true;
-        });
-
-        window.addEventListener("keyup", function (event) {
-            // remove this key from the keysDown array
-            delete window.keysDown[event.keyCode];
-        });
+    // utility function to display a text message in log and also on-screen
+    window.outputLine = function outputLine(text) {
+        console.log("Debug: " + text);
+        window.message.innerHTML += (text + "<br>");
     }
-
-    /*
-    Check what keys are pressed everytime we get asked to update our paddle position
-     */
-    KeyboardController.prototype.updatePaddle = function (court, paddle, ball) {
-        if (window.keysDown.size > 0) {
-            for (var key in window.keysDown) {
-                var value = Number(key);
-                if (value == 37) { // left arrow
-                    console.log("Keyboard arrow up");
-                    paddle.moveUp();
-                } else if (value == 39) { // right arrow
-                    console.log("Keyboard arrow down");
-                    paddle.moveDown();
-                } else if (value == 32) { // space
-                    console.log("Pause/Play toggle");
-                    court.toggle();
-                }
-            }
-        } else {
-            paddle.stop();
-        }
-    }
-
-    window.onload = function () {
-        // Control court entry
-        window.addEventListener("keydown", function (event) {
-            var value = Number(event.keyCode);
-            if ((value == 16) || (value == 69)) { // 'e' or 'E'
-                // Request to enter court
-                var response = window.court.enter(new Player("Keyboard", court, new KeyboardController()));
-
-                // If I got in then start the game
-                if (response != "Court full") {
-                    window.court.startPlay();
-                }
-            }
-        });
-
-        var canvas = document.getElementById('court');
-        window.court = new Court(canvas, window.stats);
-        window.court.render();
-    };
 </script>
 
+<div id="message"></div>
 <canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!</canvas>
 
 </body>

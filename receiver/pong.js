@@ -1,6 +1,3 @@
-//
-// singleton for get court
-
 //////////////////////////////////// PADDLE ////////////////////////////////
 function Paddle(x, y, width, height, courtHeight, context, soundFileName, paddleColor) {
     this.defaultSpeed = Math.floor((2 * courtHeight) / 100); // 2% of the height
@@ -18,28 +15,28 @@ function Paddle(x, y, width, height, courtHeight, context, soundFileName, paddle
 
 Paddle.prototype.bounce = function () {
     this.bounceSound.play();
-}
+};
 
-Paddle.prototype.delete = function () {
+Paddle.prototype.clear = function () {
     this.context.clearRect(this.x, this.y, this.width, this.height);
-}
+};
 
 Paddle.prototype.draw = function () {
     this.context.fillStyle = this.color;
     this.context.fillRect(this.x, this.y, this.width, this.height);
-}
+};
 
 Paddle.prototype.moveUp = function () {
     this.move(-this.defaultSpeed);
-}
+};
 
 Paddle.prototype.moveDown = function () {
     this.move(this.defaultSpeed);
-}
+};
 
 Paddle.prototype.stop = function () {
     this.speed = 0;
-}
+};
 
 Paddle.prototype.move = function (distance) {
     this.y += distance;
@@ -53,23 +50,16 @@ Paddle.prototype.move = function (distance) {
         this.y = this.maxY;
         this.speed = 0;
     }
-}
+};
 
 //////////////////////////////////// PADDLE CONTROLLER ////////////////////////////////
 function PaddleController() {
 }
+
 PaddleController.prototype.updatePaddle = function (court, paddle, ball) {
-    /*
-     var ballSign = ball.x_speed ? ball.x_speed < 0 ? -1 : 1 : 0;
-     var offset = this.paddle.x - ball.x;
-     var offsetSign = offset ? offset < 0 ? -1 : 1 : 0;
-
-     If coming towards me follow it. Until then tend to center.
-     */
-
     var diff = paddle.y + paddle.halfHeight - ball.y;
     paddle.move(Math.floor(-(diff * 3) / 4));
-}
+};
 
 //////////////////////////////////// PLAYER ////////////////////////////////
 function Player(name, court, controller) {
@@ -80,11 +70,11 @@ function Player(name, court, controller) {
 
 Player.prototype.givePaddle = function (paddle) {
     this.paddle = paddle;
-}
+};
 
 Player.prototype.updatePaddle = function (ball) {
     this.controller.updatePaddle(this.court, this.paddle, ball);
-}
+};
 
 //////////////////////////////////// BALL ////////////////////////////////
 function Ball(court, ballSize, context, courtColor) {
@@ -103,22 +93,20 @@ function Ball(court, ballSize, context, courtColor) {
 Ball.prototype.render = function (color) {
     this.context.fillStyle = color;
     this.context.fillRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
-}
+};
 
 Ball.prototype.bounceWall = function (court) {
     this.y_speed = -this.y_speed;
     court.bounce();
-}
+};
 
 Ball.prototype.bouncePaddle = function (paddle) {
     this.x_speed = -this.x_speed;
     this.y_speed += Math.floor(paddle.speed / 2);
     paddle.bounce();
-}
+};
 
 Ball.prototype.update = function () {
-    // Delete the old one
-//    this.context.clearRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
     this.render(this.courtColor);
 
     // update position according to its speed
@@ -170,11 +158,11 @@ Ball.prototype.update = function () {
     }
 
     return 0;
-}
+};
 
 //////////////////////////////////// GAME ////////////////////////////////
 function Game(court) {
-    console.log("New game on court");
+    window.outputLine("New game created on court");
     this.court = court;
     this.court.game = this;
 
@@ -188,6 +176,7 @@ function Game(court) {
 }
 
 Game.prototype.start = function () {
+    // when requested to start, add players until enough for a game (2)
     while (this.court.numPlayers < 2) {
         this.court.enter(new Player("Computer", this, new PaddleController()));
     }
@@ -196,13 +185,13 @@ Game.prototype.start = function () {
     this.court.players[1].score = 0;
 
     // draw initial scoreboard
-    this.court.scoreboard.render();
+    this.court.scoreboard.render('ffffff');
 
     this.state = "in play";
-}
+};
 
 Game.prototype.point = function (player) {
-    console.log("Point for player: " + player.name);
+    window.outputLine("Point for player: " + player.name);
 
     this.court.scoreboard.pointWon(player);
 
@@ -212,22 +201,23 @@ Game.prototype.point = function (player) {
         // Create a new ball in the center of the court - Moving
         this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor);
     }
-}
+};
 
 Game.prototype.end = function (winner) {
-    console.log("End of game. " + winner.name + " wins");
+    window.outputLine("End of game. " + winner.name + " wins");
     // TODO find this sound then enable
 //    this.gameWon.play();
     this.court.game = null;
     this.court.pause();
-}
+};
 
 //////////////////////////////////// SCOREBOARD ////////////////////////////////
-function ScoreBoard(court) {
+function ScoreBoard(court, textColor) {
     this.court = court;
     this.context = court.context;
-    this.fontHeight = Math.floor((court.height * 10) / 100);
-    this.fontBaseline = 20 + this.fontHeight;
+    this.textColor = textColor;
+    this.fontHeight = Math.floor((court.height * 10) / 100); // 10% of court height
+    this.fontBaseline = 20 + this.fontHeight; // 20 down from the top
     // This should be gotten from font metrics!
     this.fontWidth = 50;
     this.score1X = Math.floor((court.width / 2) - (2 * this.fontWidth));
@@ -239,34 +229,31 @@ ScoreBoard.prototype.pointWon = function (player) {
     // Play point won sound
     this.pointWonSound.play();
 
-    // Delete old score
-    this.render(this.court.courtColor);
+    // clear the scoreboard
+    this.context.clearRect(this.score1X - (2 * this.fontWidth), 20, 8 * this.fontWidth, this.fontHeight +1);
 
     // increment score of that player
     player.score++;
-}
 
-ScoreBoard.prototype.render = function (color) {
-    this.render('#ffffff');
-}
+    // draw new score
+    this.render(this.textColor);
+};
 
 ScoreBoard.prototype.render = function (color) {
     // Set text font
     this.context.font = this.fontHeight + 'px Pong';
-    // Show new scores
+    this.context.color = color;
+    this.context.fillStyle = color;
     this.context.textAlign = 'right';
-    this.context.fillText(this.court.players[0].score, this.score1X, this.fontBaseline);
+    this.context.fillText(this.court.players[0].score.toString(), this.score1X, this.fontBaseline);
     this.context.textAlign = 'left';
-    this.context.fillText(this.court.players[1].score, this.score2X, this.fontBaseline);
-}
+    this.context.fillText(this.court.players[1].score.toString(), this.score2X, this.fontBaseline);
+};
 
 //////////////////////////////////// COURT ////////////////////////////////
 function Court(canvas, stats) {
     this.context = canvas.getContext('2d');
-    this.courtColor = "#999999"
-
-//    this.context.canvas.width = window.innerWidth;
-//    this.context.canvas.height = window.innerHeight;
+    this.courtColor = "#999999";
 
     this.width = canvas.width;
     this.height = canvas.height;
@@ -281,10 +268,10 @@ function Court(canvas, stats) {
     var paddleXOffset = 60;
     var courtMiddleY = Math.floor((this.height - paddleHeight) / 2);
 
-    this.paddles = new Array();
-    this.paddles[0] = new Paddle(paddleXOffset, courtMiddleY, paddleWidth, paddleHeight, this.width, this.context, 'paddle.ogg', "#FFFFFF");
+    this.paddles = new Array(2);
+    this.paddles[0] = new Paddle(paddleXOffset, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, 'paddle.ogg', "#FFFFFF");
     this.paddles[0].draw();
-    this.paddles[1] = new Paddle(this.width - paddleXOffset - paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.width, this.context, 'paddle.ogg', "#FFFFFF");
+    this.paddles[1] = new Paddle(this.width - paddleXOffset - paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, 'paddle.ogg', "#FFFFFF");
     this.paddles[1].draw();
 
     // Create a new ball in the center of the court - not moving
@@ -292,14 +279,14 @@ function Court(canvas, stats) {
     this.ballColor = "#FFFFFF";
     this.ball = new Ball(this, this.ballSize, this.context, this.courtColor);
 
-    this.scoreboard = new ScoreBoard(this);
+    this.scoreboard = new ScoreBoard(this, "#FFFFFF");
 
     this.bounceSound = new Audio('court.ogg');
 
     this.stats = stats;
     this.paused = false;
 
-    this.players = new Array();
+    this.players = new Array(2);
     this.players[0] = null;
     this.players[1] = null;
     this.numPlayers = 0;
@@ -311,13 +298,14 @@ function Court(canvas, stats) {
 
 Court.prototype.bounce = function () {
     this.bounceSound.play();
-}
+};
 
 Court.prototype.enter = function (player) {
     if (this.players[0] == null) {
         this.players[0] = player;
         this.players[0].givePaddle(this.paddles[0]);
         this.numPlayers++;
+        window.outputLine("Player 0 (" + player.name + ") gets left paddle");
         return "LEFT(RIGHT)";
     }
 
@@ -325,21 +313,23 @@ Court.prototype.enter = function (player) {
         this.players[1] = player;
         this.players[1].givePaddle(this.paddles[1]);
         this.numPlayers++;
+        window.outputLine("Player 1 (" + player.name + ") gets right paddle");
         return "RIGHT";
     }
 
+    window.outputLine("Court full");
     return "Court full";
-}
+};
 
 Court.prototype.render = function () {
     this.ball.render(this.ballColor);
     this.paddles[0].draw();
     this.paddles[0].draw();
-}
+};
 
 Court.prototype.update = function () {
-    this.paddles[0].delete();
-    this.paddles[1].delete();
+    this.paddles[0].clear();
+    this.paddles[1].clear();
 
     this.players[0].updatePaddle(this.ball);
     this.players[1].updatePaddle(this.ball);
@@ -359,8 +349,7 @@ Court.prototype.update = function () {
     }
 
     this.render();
-}
-
+};
 
 Court.prototype.startPlay = function () {
     if (this.game == null) {
@@ -371,15 +360,16 @@ Court.prototype.startPlay = function () {
         this.game.start();
     }
 
+    window.outputLine("Starting play");
     this.play();
-}
+};
 
 Court.prototype.play = function () {
     if (this.stats) {
         this.stats.begin();
     }
 
-    // Update the positions of the objects
+    // Update the positions of the objects - not sure why "this.update()" doesn't work
     window.court.update();
 
     if (this.stats) {
@@ -387,49 +377,27 @@ Court.prototype.play = function () {
     }
 
     // reschedule next animation update
-    window.requestAnimFrame(window.court.play);
-}
+    this.animFrame = window.requestAnimationFrame(window.court.play);
+};
 
 Court.prototype.pause = function () {
-    cancelRequestAnimFrame(window.court.play);
-}
+    window.cancelAnimationFrame(this.animFrame);
+};
 
 Court.prototype.toggle = function () {
     if (this.paused) {
-        console.log("Court in play");
+        this.paused = false;
+        window.outputLine("Play restarted");
         this.play();
     } else {
-        console.log("Court paused");
+        this.paused = true;
+        window.outputLine("Play paused");
         this.pause();
     }
-}
+};
 
-window.requestAnimFrame = (function () {
-    return  window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-        function (/* function */ callback, /* DOMElement */ element) {
-            return window.setTimeout(callback, 1000 / 60);
-        };
-})();
-
-window.requestAnimFrame2 = (function () {
-    return function (/* function */ callback, /* DOMElement */ element) {
-        return window.setTimeout(callback, 1000 / 10);
-    };
-})();
-
-window.cancelRequestAnimFrame2 = (function () {
-    return clearTimeout
-})();
-
-window.cancelRequestAnimFrame = (function () {
-    return window.cancelAnimationFrame ||
-        window.webkitCancelRequestAnimationFrame ||
-        window.mozCancelRequestAnimationFrame ||
-        window.oCancelRequestAnimationFrame ||
-        window.msCancelRequestAnimationFrame ||
-        clearTimeout
-})();
+window.onload = function () {
+    var canvas = document.getElementById('court');
+    window.court = new Court(canvas, window.stats);
+    window.court.render();
+};
