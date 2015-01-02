@@ -212,42 +212,28 @@ Game.prototype.end = function (winner) {
 };
 
 //////////////////////////////////// SCOREBOARD ////////////////////////////////
-function ScoreBoard(court, textColor) {
+function ScoreBoard(court, scoreboardElement) {
     this.court = court;
-    this.context = court.context;
-    this.textColor = textColor;
-    this.fontHeight = Math.floor((court.height * 10) / 100); // 10% of court height
-    this.fontBaseline = 20 + this.fontHeight; // 20 down from the top
-    // This should be gotten from font metrics!
-    this.fontWidth = 50;
-    this.score1X = Math.floor((court.width / 2) - (2 * this.fontWidth));
-    this.score2X = Math.floor((court.width / 2) + (2 * this.fontWidth));
     this.pointWonSound = new Audio('point.ogg');
+    this.leftScore = scoreboardElement.getElementsByClassName("left")[0];
+    this.rightScore = scoreboardElement.getElementsByClassName("right")[0];
 }
+
 
 ScoreBoard.prototype.pointWon = function (player) {
     // Play point won sound
     this.pointWonSound.play();
 
-    // clear the scoreboard
-    this.context.clearRect(this.score1X - (2 * this.fontWidth), 20, 8 * this.fontWidth, this.fontHeight +1);
-
     // increment score of that player
     player.score++;
 
     // draw new score
-    this.render(this.textColor);
+    this.render();
 };
 
-ScoreBoard.prototype.render = function (color) {
-    // Set text font
-    this.context.font = this.fontHeight + 'px Pong';
-    this.context.color = color;
-    this.context.fillStyle = color;
-    this.context.textAlign = 'right';
-    this.context.fillText(this.court.players[0].score.toString(), this.score1X, this.fontBaseline);
-    this.context.textAlign = 'left';
-    this.context.fillText(this.court.players[1].score.toString(), this.score2X, this.fontBaseline);
+ScoreBoard.prototype.render = function () {
+    this.leftScore.innerHTML = this.court.players[0].score.toString();
+    this.rightScore.innerHTML = this.court.players[1].score.toString();
 };
 
 //////////////////////////////////// COURT ////////////////////////////////
@@ -279,7 +265,7 @@ function Court(canvas, stats) {
     this.ballColor = "#FFFFFF";
     this.ball = new Ball(this, this.ballSize, this.context, this.courtColor);
 
-    this.scoreboard = new ScoreBoard(this, "#FFFFFF");
+    this.scoreboard = new ScoreBoard(this, document.getElementById("scoreboard"));
 
     this.bounceSound = new Audio('court.ogg');
 
