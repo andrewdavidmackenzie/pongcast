@@ -27,8 +27,62 @@ Scorecard - is drawn on the Court and shows the score of the two Players.
 KeyboardPlayer - subclasses Player to act as a Player, controlled by the keyboard
 ComputerPlayer - subclasses Player to be an automatic player that tries to always return the ball.
 
+##Chromecast Events
+The following is the list of events that can be handled by the chromecast receiver and what I do in each case:
 
-##Interactions
+* Ready
+	+ Set the application state as "Ready for players..."
+
+* SenderConnected
+	+ Have the player enter the court immediately on connection.
+	+ Respond to them if they got a paddle to play with and if so which one
+
+* SenderDisconnected
+	+ Have the player leave the court, forfeiting any game in progress.
+	+ If no-one is left on the court, close the window and end the session.
+
+* VisibilityChanged
+	+ Nothing. Doesn't seem to trigger on my TV when I change input source.
+
+* OnMessage
+	+ Handle it in the game logic.
+	Messages Possible:
+		+ Start play
+		+ Pause play
+		+ Move Paddle
+
+## Court and Game control
+The pong.html file of the receiver finds the canvas element and draws the Court with the two paddles in it
+and prepares the Scoreboard elements.
+
+It then starts one or more of the Controllers (KeyboardController or CastController).
+
+The Court object is ready and and waits for someone to request to enter the court. When someone requests to enter, if
+there is space (2 players max) then they are allowed to enter.
+
+A player requests the Court to start play using "court.startPlay()".
+If there is no Game prepared on the Court, then one is created with a new Ball.
+If there is only one Player on court then a ComputerPlayer is added.
+The scores are reset to zero, and the Scoreboard drawn.
+The Game is then started, and updating is started.
+
+##Player Requests (to the receiver from clients) and possible responses
+- Enter court (Connecting a client to the receiver)
+	-> OK
+	-> Court full
+- Leave the Courts - forfeits the game if in play
+- Start a Game (if they are on court and it's not started already)
+	-> OK
+	-> Already started
+- Pause Play
+- Restart Play
+- Toggle Play
+- Move Paddle (the new position of the paddle will get read on next refresh)
+
+##Other Events
+- Loss of a Player (connection to a client) - forfeits the game if in play
+
+##Objects and calls
 Court
 	Enter(Player)   - request to enter the court, supplying your player object
 		-> If successful, player will get given a paddle via Player.givePaddle(Paddle)

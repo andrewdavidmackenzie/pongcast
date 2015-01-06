@@ -54,8 +54,9 @@ Paddle.prototype.move = function (distance) {
 };
 
 //////////////////////////////////// PLAYER ////////////////////////////////
-function Player(court) {
+function Player(court, name) {
     this.court = court;
+    this.name = name;
 }
 
 Player.prototype.givePaddle = function (paddle) {
@@ -65,13 +66,17 @@ Player.prototype.givePaddle = function (paddle) {
 //////////////////////////////////// COMPUTER PLAYER ////////////////////////////////
 ComputerPlayer.prototype = new Player();
 
-function ComputerPlayer(court) {
-    this.name = "Computer";
+function ComputerPlayer(court, name) {
+    Player.apply(this, court);
+    this.name = name;
 }
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
     this.paddle.move(Math.floor(-(diff * 3) / 4));
+};
+
+ComputerPlayer.prototype.youWin = function () {
 };
 
 //////////////////////////////////// BALL ////////////////////////////////
@@ -160,6 +165,7 @@ Ball.prototype.update = function () {
 
 //////////////////////////////////// GAME ////////////////////////////////
 function Game(court) {
+    window.outputLine("New Game");
     this.court = court;
     this.court.game = this;
     this.pointsToWin = 21;
@@ -167,17 +173,9 @@ function Game(court) {
     // Create a new ball in the center of the court - Moving
     this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor);
 
-    // TODO find a game over sound and load it here
-//    this.gameWon = new Audio('game.ogg');
-
-    this.state = "ready";
-    window.outputLine("Ready for a game");
-}
-
-Game.prototype.start = function () {
-    // when requested to start, add players until enough for a game (2)
+    // add players until enough for a game (2)
     while (this.court.numPlayers < 2) {
-        this.court.enter(new ComputerPlayer(this.court));
+        this.court.enter(new ComputerPlayer(this.court, "Computer"));
     }
 
     this.court.players[0].score = 0;
@@ -185,9 +183,7 @@ Game.prototype.start = function () {
 
     // draw initial scoreboard
     this.court.scoreboard.render();
-
-    this.state = "Game in play";
-};
+}
 
 Game.prototype.point = function (player) {
     window.outputLine("Point for player: " + player.name);
@@ -204,10 +200,13 @@ Game.prototype.point = function (player) {
 
 Game.prototype.end = function (winner) {
     window.outputLine("End of game. '" + winner.name + "' wins");
+    winner.youWon();
     // TODO find this sound then enable
 //    this.gameWon.play();
     this.court.game = null;
-    this.court.pause();
+    this.court.pausePlay();
+
+    // TODO Show game over player X wins message
 };
 
 //////////////////////////////////// SCOREBOARD ////////////////////////////////
@@ -217,7 +216,6 @@ function ScoreBoard(court, scoreboardElement) {
     this.leftScore = scoreboardElement.getElementsByClassName("left")[0];
     this.rightScore = scoreboardElement.getElementsByClassName("right")[0];
 }
-
 
 ScoreBoard.prototype.pointWon = function (player) {
     // Play point won sound
@@ -290,19 +288,44 @@ Court.prototype.enter = function (player) {
         this.players[0] = player;
         this.players[0].givePaddle(this.paddles[0]);
         this.numPlayers++;
-        window.outputLine("Player '" + player.name + "' gets left paddle");
-        return;
+        window.outputLine("Player '" + player.name + "' enters court, gets left paddle");
+        return "PADDLE YES LEFT";
     }
 
     if (this.players[1] == null) {
         this.players[1] = player;
         this.players[1].givePaddle(this.paddles[1]);
         this.numPlayers++;
-        window.outputLine("Player '" + player.name + "' gets right paddle");
+        window.outputLine("Player '" + player.name + "' enters court, gets right paddle");
+        return "PADDLE YES RIGHT";
+    }
+
+    window.outputLine("NO MORE PADDLES");
+    return "PADDLE NONE";
+};
+
+Court.prototype.leave = function (player) {
+    if (player == this.players[0]) {
+        window.outputLine("Player '" + player.name + "' has left the court");
+        player.paddle = null;
+        this.numPlayers--;
+        this.players[0] = null;
+        if (this.game) {
+            this.game.end(this.players[1]);
+        }
         return;
     }
 
-    window.outputLine("Court full");
+    if (player == this.players[1]) {
+        window.outputLine("Player '" + player.name + "' has left the court");
+        player.paddle = null;
+        this.numPlayers--;
+        this.players[1] = null;
+        if (this.game) {
+            this.game.end(this.players[0]);
+        }
+        return;
+    }
 };
 
 Court.prototype.render = function () {
@@ -340,30 +363,37 @@ Court.prototype.startPlay = function () {
         this.game = new Game(this);
     }
 
-    if (this.game.state == "ready") {
-        this.game.start();
-    }
-
     window.outputLine("Starting play");
     this.paused = false;
     this.update();
 };
 
 Court.prototype.pausePlay = function () {
-    this.paused = true
+    this.paused = true;
 };
 
 Court.prototype.restartPlay = function () {
-    this.paused = false
+    this.paused = false;
     this.update();
 };
 
+Court.prototype.togglePlay = function () {
+    if (this.paused) {
+        window.outputLine("Play restarted");
+        this.restartPlay();
+    } else {
+        window.outputLine("Play paused");
+        this.pausePlay();
+    }
+};
+
+// This will be called from window on refresh
 Court.prototype.update = function () {
     if (this.stats) {
         this.stats.begin();
     }
 
-    // draw the objects - not sure why "this.update()" doesn't work
+    // draw the objects
     window.court.draw();
 
     if (this.stats) {
@@ -373,15 +403,5 @@ Court.prototype.update = function () {
     // reschedule next animation update
     if (!window.court.paused) {
         window.requestAnimationFrame(window.court.update);
-    }
-};
-
-Court.prototype.toggle = function () {
-    if (this.paused) {
-        window.outputLine("Play restarted");
-        this.restartPlay();
-    } else {
-        window.outputLine("Play paused");
-        this.pausePlay();
     }
 };

@@ -22,9 +22,11 @@
         }
 
         #message {
-            width: 300px;
+            width: 500px;
             height: 100%;
             position: absolute;
+            padding-left: 50px;
+            padding-top: 50px;
             visibility: hidden;
         }
 
@@ -69,6 +71,10 @@
         document.body.appendChild(window.stats.domElement);
     }
 
+    window.enableDebug = function enableDebug(text) {
+        window.message.style.visibility = "visible";
+    }
+
     // utility function to display a text message in log and also on-screen
     window.outputLine = function outputLine(text) {
         console.log("Debug: " + text);
@@ -81,7 +87,14 @@
         window.court = new Court(canvas, window.stats);
         window.court.render();
 
-        KeyboardController(window.court);
+        var isChromecast = navigator.userAgent.indexOf('CrKey') !== -1;
+
+        if (isChromecast) {
+            CastController(window.court);
+            window.enableDebug();
+        } else {
+            KeyboardController(window.court);
+        }
     };
 </script>
 

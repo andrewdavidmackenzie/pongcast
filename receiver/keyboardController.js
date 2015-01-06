@@ -2,10 +2,16 @@
 
 // TODO avoid use of the window.* and store references in local variables
 function KeyboardController(court) {
+    window.outputLine("KeyboardController starting");
+    window.keyboardPlayer = new KeyboardPlayer(court, "Keyboard");
     window.addEventListener("keydown", function (event) {
         var value = Number(event.keyCode);
         if ((value == 16) || (value == 69)) { // 'e' or 'E'
-            window.court.enter(new KeyboardPlayer(court));
+            window.court.enter(window.keyboardPlayer);
+        }
+
+        if ((value == 23) || (value == 76)) { // 'l' or 'L'
+            window.court.leave(window.keyboardPlayer);
         }
     });
 }
@@ -13,11 +19,9 @@ function KeyboardController(court) {
 KeyboardPlayer.prototype = new Player();
 
 // KeyboardPlayer that controls a paddle using up and down keys on the keyboard
-function KeyboardPlayer(court) {
+function KeyboardPlayer(court, name) {
     Player.apply(this, court);
-
-    this.name = "Keyboard";
-    this.court = court;
+    this.name = name;
 
     window.keysDown = new Array();
 
@@ -40,12 +44,11 @@ function KeyboardPlayer(court) {
         }
 
         if (value == 32) { // space
-            court.toggle();
+            court.togglePlay();
         }
 
         if ((value == 15) || (value == 68)) { // 'd' or 'D'
-            window.message.style.visibility = "visible";
-            window.outputLine("Debug enabled")
+            window.enableDebug();
         }
     });
 
@@ -53,7 +56,7 @@ function KeyboardPlayer(court) {
 }
 
 // Check what keys are pressed everytime we get asked to update our paddle position
-KeyboardPlayer.prototype.updatePaddle = function (ball) {
+KeyboardPlayer.prototype.updatePaddle = function () {
     if (window.keysDown.length > 0) {
         for (var key in window.keysDown) {
             var value = Number(key);
@@ -66,5 +69,8 @@ KeyboardPlayer.prototype.updatePaddle = function (ball) {
     } else {
         this.paddle.stop();
     }
+};
+
+KeyboardPlayer.prototype.youWin = function () {
 };
 
