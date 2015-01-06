@@ -102,8 +102,8 @@
       <file leaf-file-name="pong.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="5768">
-              <caret line="79" column="2" selection-start-line="79" selection-start-column="2" selection-end-line="79" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3894" max-vertical-offset="5866">
+              <caret line="303" column="34" selection-start-line="303" selection-start-column="34" selection-end-line="303" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -127,8 +127,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.633333" vertical-offset="395" max-vertical-offset="1442">
-              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="1470">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,48 +137,48 @@
       <file leaf-file-name="keyboardController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1148">
-              <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="601" max-vertical-offset="1148">
+              <caret line="73" column="49" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="castReceiverController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="castReceiverController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2692307" vertical-offset="348" max-vertical-offset="1330">
-              <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="954" max-vertical-offset="1484">
+              <caret line="24" column="103" selection-start-line="24" selection-start-column="103" selection-end-line="24" selection-end-column="103" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5397" max-vertical-offset="6118">
-              <caret line="400" column="68" selection-start-line="400" selection-start-column="68" selection-end-line="400" selection-end-column="68" />
+            <state vertical-scroll-proportion="1.679198" vertical-offset="4958" max-vertical-offset="6146">
+              <caret line="402" column="61" selection-start-line="402" selection-start-column="61" selection-end-line="402" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#COURT_STATE#0;class#MainActivity#0" expanded="true" />
                 <element signature="class#PADDLE_STATE#0;class#MainActivity#0" expanded="true" />
                 <element signature="class#GAME_STATE#0;class#MainActivity#0" expanded="true" />
-                <element signature="e#3043#3203#0" expanded="true" />
-                <element signature="e#3202#3203#0" expanded="true" />
-                <element signature="e#3513#3587#0" expanded="true" />
-                <element signature="class#5456:5942" expanded="true" />
-                <element signature="e#7924#8309#0" expanded="true" />
-                <element signature="e#8308#8309#0" expanded="true" />
+                <element signature="e#3036#3196#0" expanded="true" />
+                <element signature="e#3195#3196#0" expanded="true" />
+                <element signature="e#3506#3580#0" expanded="true" />
+                <element signature="class#5449:5935" expanded="true" />
+                <element signature="e#7917#8302#0" expanded="true" />
+                <element signature="e#8301#8302#0" expanded="true" />
                 <element signature="class#MyMediaRouterCallback#0;class#MainActivity#0" expanded="true" />
                 <element signature="class#MyLaunchResultCallback#0;class#MainActivity#0" expanded="true" />
                 <element signature="class#ConnectionCallbacks#0;class#MainActivity#0" expanded="true" />
-                <element signature="e#12835#12861#0" expanded="true" />
+                <element signature="e#12828#12854#0" expanded="true" />
                 <element signature="class#ConnectionFailedListener#0;class#MainActivity#0" expanded="true" />
                 <element signature="class#PongcastCallbacks#0;class#MainActivity#0" expanded="true" />
-                <element signature="e#13855#13856#0" expanded="true" />
-                <element signature="e#13876#13905#0" expanded="true" />
-                <element signature="e#13915#13916#0" expanded="true" />
+                <element signature="e#13848#13849#0" expanded="true" />
+                <element signature="e#13869#13898#0" expanded="true" />
+                <element signature="e#13908#13909#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -214,11 +214,11 @@
         <option value="$PROJECT_DIR$/../receiver/pong.html" />
         <option value="$PROJECT_DIR$/res/drawable/voice_button.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/../DESIGN.md" />
-        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/../receiver/pong.js" />
+        <option value="$PROJECT_DIR$/../DESIGN.md" />
         <option value="$PROJECT_DIR$/../receiver/keyboardController.js" />
+        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java" />
+        <option value="$PROJECT_DIR$/../receiver/pong.js" />
         <option value="$PROJECT_DIR$/../receiver/castReceiverController.js" />
       </list>
     </option>
@@ -323,7 +323,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="00a6f382905b32e4" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="091af3a7" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_21_x86" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="preferences.intentionPowerPack" />
@@ -567,12 +567,12 @@
       <workItem from="1420128947809" duration="654000" />
       <workItem from="1420130322429" duration="521000" />
       <workItem from="1420130997200" duration="29816000" />
-      <workItem from="1420543659041" duration="11793000" />
+      <workItem from="1420543659041" duration="14882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110578000" />
+    <option name="totallyTimeSpent" value="113667000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -597,10 +597,10 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.6896552" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24042273" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2628798" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3632761" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4359313" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4359313" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.7427056" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -638,7 +638,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -981,50 +981,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../DESIGN.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.633333" vertical-offset="395" max-vertical-offset="1442">
-          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="5635" max-vertical-offset="13132">
           <caret line="412" column="19" selection-start-line="412" selection-start-column="19" selection-end-line="412" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5397" max-vertical-offset="6118">
-          <caret line="400" column="68" selection-start-line="400" selection-start-column="68" selection-end-line="400" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#COURT_STATE#0;class#MainActivity#0" expanded="true" />
-            <element signature="class#PADDLE_STATE#0;class#MainActivity#0" expanded="true" />
-            <element signature="class#GAME_STATE#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#3043#3203#0" expanded="true" />
-            <element signature="e#3202#3203#0" expanded="true" />
-            <element signature="e#3513#3587#0" expanded="true" />
-            <element signature="class#5456:5942" expanded="true" />
-            <element signature="e#7924#8309#0" expanded="true" />
-            <element signature="e#8308#8309#0" expanded="true" />
-            <element signature="class#MyMediaRouterCallback#0;class#MainActivity#0" expanded="true" />
-            <element signature="class#MyLaunchResultCallback#0;class#MainActivity#0" expanded="true" />
-            <element signature="class#ConnectionCallbacks#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#12835#12861#0" expanded="true" />
-            <element signature="class#ConnectionFailedListener#0;class#MainActivity#0" expanded="true" />
-            <element signature="class#PongcastCallbacks#0;class#MainActivity#0" expanded="true" />
-            <element signature="e#13855#13856#0" expanded="true" />
-            <element signature="e#13876#13905#0" expanded="true" />
-            <element signature="e#13915#13916#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,27 +999,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+    <entry file="file://$PROJECT_DIR$/../DESIGN.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="5768">
-          <caret line="79" column="2" selection-start-line="79" selection-start-column="2" selection-end-line="79" selection-end-column="2" />
+        <state vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="1470">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="545" max-vertical-offset="1148">
-          <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="601" max-vertical-offset="1148">
+          <caret line="73" column="49" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3894" max-vertical-offset="5866">
+          <caret line="303" column="34" selection-start-line="303" selection-start-column="34" selection-end-line="303" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2692307" vertical-offset="348" max-vertical-offset="1330">
-          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="954" max-vertical-offset="1484">
+          <caret line="24" column="103" selection-start-line="24" selection-start-column="103" selection-end-line="24" selection-end-column="103" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.679198" vertical-offset="4958" max-vertical-offset="6146">
+          <caret line="402" column="61" selection-start-line="402" selection-start-column="61" selection-end-line="402" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#COURT_STATE#0;class#MainActivity#0" expanded="true" />
+            <element signature="class#PADDLE_STATE#0;class#MainActivity#0" expanded="true" />
+            <element signature="class#GAME_STATE#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#3036#3196#0" expanded="true" />
+            <element signature="e#3195#3196#0" expanded="true" />
+            <element signature="e#3506#3580#0" expanded="true" />
+            <element signature="class#5449:5935" expanded="true" />
+            <element signature="e#7917#8302#0" expanded="true" />
+            <element signature="e#8301#8302#0" expanded="true" />
+            <element signature="class#MyMediaRouterCallback#0;class#MainActivity#0" expanded="true" />
+            <element signature="class#MyLaunchResultCallback#0;class#MainActivity#0" expanded="true" />
+            <element signature="class#ConnectionCallbacks#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#12828#12854#0" expanded="true" />
+            <element signature="class#ConnectionFailedListener#0;class#MainActivity#0" expanded="true" />
+            <element signature="class#PongcastCallbacks#0;class#MainActivity#0" expanded="true" />
+            <element signature="e#13848#13849#0" expanded="true" />
+            <element signature="e#13869#13898#0" expanded="true" />
+            <element signature="e#13908#13909#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -5,6 +5,8 @@ receiver - this is the app that runs on the chromecast
 android  - this is the client app that a user uses to connect to the chromecast to have their mobile device act
            as a controller.
 
+##References
+https://developers.google.com/cast/docs/reference/
 
 ##Receiver
 The receiver consists of the following Javascript files:

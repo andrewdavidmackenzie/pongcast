@@ -76,7 +76,7 @@ ComputerPlayer.prototype.updatePaddle = function (ball) {
     this.paddle.move(Math.floor(-(diff * 3) / 4));
 };
 
-ComputerPlayer.prototype.youWin = function () {
+ComputerPlayer.prototype.gameOver = function (won) {
 };
 
 //////////////////////////////////// BALL ////////////////////////////////
@@ -185,26 +185,27 @@ function Game(court) {
     this.court.scoreboard.render();
 }
 
-Game.prototype.point = function (player) {
+Game.prototype.point = function (player, opponent) {
     window.outputLine("Point for player: " + player.name);
 
     this.court.scoreboard.pointWon(player);
 
     if (player.score == this.pointsToWin) {
-        this.end(player);
+        this.end(player, opponent);
     } else {
         // Create a new ball in the center of the court - Moving
         this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor);
     }
 };
 
-Game.prototype.end = function (winner) {
+Game.prototype.end = function (winner, looser) {
     window.outputLine("End of game. '" + winner.name + "' wins");
-    winner.youWon();
+    winner.gameOver(true);
+    looser.gameOver(false);
     // TODO find this sound then enable
 //    this.gameWon.play();
-    this.court.game = null;
     this.court.pausePlay();
+    this.court.game = null;
 
     // TODO Show game over player X wins message
 };
@@ -300,30 +301,36 @@ Court.prototype.enter = function (player) {
         return "PADDLE YES RIGHT";
     }
 
-    window.outputLine("NO MORE PADDLES");
+    window.outputLine("PADDLE NONE");
     return "PADDLE NONE";
 };
 
 Court.prototype.leave = function (player) {
     if (player == this.players[0]) {
         window.outputLine("Player '" + player.name + "' has left the court");
+        if (this.game) {
+            this.game.end(this.players[1], this.players[0]);
+        }
+
+        // Reclaim his paddle
         player.paddle = null;
+        // and remove from the court
         this.numPlayers--;
         this.players[0] = null;
-        if (this.game) {
-            this.game.end(this.players[1]);
-        }
         return;
     }
 
     if (player == this.players[1]) {
         window.outputLine("Player '" + player.name + "' has left the court");
+        if (this.game) {
+            this.game.end(this.players[0], this.players[1]);
+        }
+
+        // Reclaim his paddle
         player.paddle = null;
+        // and remove from the court
         this.numPlayers--;
         this.players[1] = null;
-        if (this.game) {
-            this.game.end(this.players[0]);
-        }
         return;
     }
 };
@@ -350,9 +357,9 @@ Court.prototype.draw = function () {
 
     if (result != 0) {
         if (result == -1)
-            this.game.point(this.players[1]);
+            this.game.point(this.players[1], this.players[0]);
         else
-            this.game.point(this.players[0]);
+            this.game.point(this.players[0], this.players[1]);
     }
 
     this.render();

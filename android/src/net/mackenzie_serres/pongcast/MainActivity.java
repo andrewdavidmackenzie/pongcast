@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     // Which paddle do I have
-    private static String paddle = "";
+    private String paddle = "";
 
     // When in court, then you can see the state of play
     private static enum GAME_STATE {
@@ -372,19 +372,21 @@ public class MainActivity extends ActionBarActivity {
         public void onMessageReceived(CastDevice castDevice, String namespace, String message) {
             if (message.startsWith("PADDLE")) {
                 setPaddleState(message);
-            } else if (message.startsWith("PLAY")) {
-                setPlayState(message);
+            } else if (message.startsWith("GAME")) {
+                setGameState(message);
             } else {
-                Log.w(TAG, "Unknown message: " + message);
+                    Log.w(TAG, "Unknown message: " + message);
             }
         }
     }
 
-    private void setPlayState(String message) {
-        if (message.equals("PLAY STARTED")) {
+    private void setGameState(String message) {
+        if (message.startsWith("GAME WON") || message.startsWith("GAME LOST")) {
+            gameState = GAME_STATE.GAME_ENDED;
+        } else if (message.equals("GAME STARTED")) {
             gameState = GAME_STATE.GAME_IN_PLAY;
             startGameButton.setVisibility(View.INVISIBLE);
-        } else if (message.equals("PLAY PAUSED")) {
+        } else if (message.equals("GAME PAUSED")) {
             gameState = GAME_STATE.GAME_PAUSED;
             startGameButton.setVisibility(View.VISIBLE);
         }
@@ -398,8 +400,8 @@ public class MainActivity extends ActionBarActivity {
             if ((courtState != COURT_STATE.IN_COURT) || (gameState != GAME_STATE.GAME_IN_PLAY)) {
                 // enable the button to start the game
                 startGameButton.setVisibility(View.VISIBLE);
-                String paddle = message.split(PADDLE_YES_PREFIX)[0];
-                Toast.makeText(MainActivity.this, "You got paddle " + paddle, Toast.LENGTH_LONG).show();
+                paddle = message.split(PADDLE_YES_PREFIX)[1];
+                Toast.makeText(MainActivity.this, "You got " + paddle + " paddle", Toast.LENGTH_LONG).show();
             }
         } else {
             paddleState = PADDLE_STATE.NO_PADDLE;

@@ -12,7 +12,18 @@ ChromecastPlayer.prototype.updatePaddle = function (ball) {
     // this.paddle.move, moveUp, moveDown, stop
 };
 
-ChromecastPlayer.prototype.youWin = function () {
+ChromecastPlayer.prototype.gameOver = function (won) {
+    // send a message to the player to tell them they won or lost
+    try {
+        var senderChannel = window.messageBus.getCastChannel(this.name);
+        if (won) {
+            senderChannel.send("GAME WON");
+        } else {
+            senderChannel.send("GAME LOST");
+        }
+    } catch(err) {
+        // We might have lost the game because we lost the connection and won't be able to send message
+    }
 };
 
 function CastController(court) {
@@ -65,12 +76,12 @@ function CastController(court) {
         switch (event.data) {
             case "StartPlay":
                 window.court.startPlay();
-                window.messageBus.broadcast("PLAY STARTED");
+                window.messageBus.broadcast("GAME STARTED");
                 break;
 
             case "PausePlay":
                 window.court.pausePlay();
-                window.messageBus.broadcast("PLAY PAUSED");
+                window.messageBus.broadcast("GAME PAUSED");
                 break;
 
             default:

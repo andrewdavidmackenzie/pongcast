@@ -71,6 +71,6 @@ KeyboardPlayer.prototype.updatePaddle = function () {
     }
 };
 
-KeyboardPlayer.prototype.youWin = function () {
+KeyboardPlayer.prototype.gameOver = function (won) {
 };
 
