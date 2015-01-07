@@ -1,10 +1,8 @@
 #Main Components
 The Main components are:
 
-receiver - this is the app that runs on the chromecast. It's a chromecast "custom receiver" written in JS.
-
-android  - this is the client app that a user uses to connect to the chromecast to have their mobile device act
-           as a game controller.
+* receiver - this is the app that runs on the chromecast. It's a chromecast "custom receiver" written in JS.
+* android  - this is the client app that a user uses to connect to the chromecast to have their mobile device act as a game controller.
 
 ##References
 https://developers.google.com/cast/docs/reference/
@@ -56,8 +54,7 @@ and prepares the Scoreboard elements.
 
 It then starts one or more of the Controllers (KeyboardController or CastController).
 
-The Court object is ready and and waits for someone to request to enter the court. When someone requests to enter, if
-there is space (2 players max) then they are allowed to enter.
+The Court object is ready and and waits for someone to request to enter the court. When someone requests to enter, if there is space (2 players max) then they are allowed to enter.
 
 A player requests the Court to start play using "court.startPlay()".
 If there is no Game prepared on the Court, then one is created with a new Ball.
@@ -82,16 +79,19 @@ The Game is then started, and updating is started.
 - Loss of a Player (connection to a client) - forfeits the game if in play
 
 ##Objects and calls
-Court
-	Enter(Player)   - request to enter the court, supplying your player object
-		-> If successful, player will get given a paddle via Player.givePaddle(Paddle)
+* Court
+ - Enter(Player)   - request to enter the court, supplying your player object
+	-> If successful, player will get given a paddle via Player.givePaddle(Paddle)
 
-	Leave(Player) TODO
+ - Leave(Player) - player leaves the court and they will forfeit nany game in progress
 
-Player must implement this method
-	updatePaddle
-		-> In this method it should request to move it's paddle using
-			Paddle.move(distance)
-			Paddle.moveUp()
-			Paddle.moveDown()
-			Paddle.stop()
+* Player must implement these method
+  - updatePaddle
+	-> In this method it should request to move it's paddle using
+		Paddle.move(distance)
+		Paddle.moveUp()
+		Paddle.moveDown()
+		Paddle.stop()
+  - gameOver(won)
+        -> called when the game is over and won is a boolean that tells you whether you won or lost.
+
