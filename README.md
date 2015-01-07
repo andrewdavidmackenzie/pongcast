@@ -35,9 +35,17 @@ much needed.
 
 Folders
 ======
-android - the android app to control the game, just a skeleton at the moment.
-CastCompanionLibrary - see the section below, a library for interacting with Chromecast
-receiver - custom chromecast receiver html, javascript, image and sound files
+* android - the android app to control the game, just a skeleton at the moment.
+* CastCompanionLibrary - see the section below, a library for interacting with Chromecast
+* receiver - custom chromecast receiver html, javascript, image and sound files
+
+Scripts
+======
+deployReceiver.sh - this script just copies the ./receiver folder into my Google Drive folder. This syncs the contents to Google Drive in the cloud, where I have the folder shared publicly. Google Drive is actually quite a good way to host a "statics only" web site. 
+
+Using your own receiver
+=====
+If you want to modify the receiver or develop your own, you will need to setup somethings similar in order to host it so that the chromecast can download it. Then publish your receiver so that the chromecast can download and run it. You will need to modify the receiver identifier in the android code to refer to your receiver.
 
 Cloning with git submodules
 ======
@@ -53,4 +61,4 @@ You must run two commands:
 - "git submodule init" to initialize your local configuration file
 - "git submodule update" to fetch all the data from that project and check out the appropriate commit listed in your superproject:
 
-Then you should be able to open the project in IntelliJ and build.
+Then you should be able to open the project (android folder) in IntelliJ and build.
