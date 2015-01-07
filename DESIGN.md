@@ -1,9 +1,10 @@
 #Main Components
 The Main components are:
 
-receiver - this is the app that runs on the chromecast
+receiver - this is the app that runs on the chromecast. It's a chromecast "custom receiver" written in JS.
+
 android  - this is the client app that a user uses to connect to the chromecast to have their mobile device act
-           as a controller.
+           as a game controller.
 
 ##References
 https://developers.google.com/cast/docs/reference/
