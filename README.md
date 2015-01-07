@@ -43,9 +43,11 @@ Scripts
 ======
 deployReceiver.sh - this script just copies the ./receiver folder into my Google Drive folder. This syncs the contents to Google Drive in the cloud, where I have the folder shared publicly. Google Drive is actually quite a good way to host a "statics only" web site. 
 
-Using your own receiver
+Hosting your own receiver
 =====
 If you want to modify the receiver or develop your own, you will need to setup somethings similar in order to host it so that the chromecast can download it. Then publish your receiver so that the chromecast can download and run it. You will need to modify the receiver identifier in the android code to refer to your receiver.
+
+TODO - when I figure out how to host a static web site (Jekyll?) on github, I'll try and integrate that more here and you won't need to do that....although a downside is that you'd need to push to Master to get changes reflected in chromecast.....or maybe have two a dev receiver, and host here a production one..... TBD
 
 Cloning with git submodules
 ======
