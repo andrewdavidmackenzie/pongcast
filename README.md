@@ -39,15 +39,22 @@ Folders
 * CastCompanionLibrary - see the section below, a library for interacting with Chromecast
 * receiver - custom chromecast receiver html, javascript, image and sound files
 
-Scripts
-======
-deployReceiver.sh - this script just copies the ./receiver folder into my Google Drive folder. This syncs the contents to Google Drive in the cloud, where I have the folder shared publicly. Google Drive is actually quite a good way to host a "statics only" web site. 
-
 Hosting your own receiver
 =====
-If you want to modify the receiver or develop your own, you will need to setup somethings similar in order to host it so that the chromecast can download it. Then publish your receiver so that the chromecast can download and run it. You will need to modify the receiver identifier in the android code to refer to your receiver.
+Until now I have just been hosting a version of the custom receiver code from a folder in my Google Drive in the cloud, which I have the folder shared publicly. Google Drive is actually quite a good way to host a "statics only" web site.
 
-TODO - when I figure out how to host a static web site (Jekyll?) on github, I'll try and integrate that more here and you won't need to do that....although a downside is that you'd need to push to Master to get changes reflected in chromecast.....or maybe have two a dev receiver, and host here a production one..... TBD
+Recently I have created a "gh-pages" branch on this repo and posted the contents of the ./receiver folder there, effectively hosting the latest version of the custom receiver code on that branch (which also works in your browser with the keyboard controller!) here on git! 
+
+You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
+
+If you fork this repo, you will also get this branch and you should get a hosted version of the game under <your-username>.github.io/pongcast/pong.html
+You will need to modify the receiver identifier in the android code to refer to the URL where you host you receiver.
+
+TODO - modify the code to use the github hosted one for production, and keep using my Google Drive version for development - testing changes before pushing them to github.
+
+Scripts
+======
+deployReceiver.sh - this script just copies the ./receiver folder contents into my Google Drive folder.
 
 Cloning with git submodules
 ======
