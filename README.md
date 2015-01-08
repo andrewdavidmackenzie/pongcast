@@ -45,6 +45,7 @@ Until now I have just been hosting a version of the custom receiver code from a 
 Recently I have created a "gh-pages" branch on this repo and posted the contents of the ./receiver folder there, effectively hosting the latest version of the custom receiver code on that branch (which also works in your browser with the keyboard controller!) here on git! 
 
 You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
+
 See Keyboard Controll below.
 
 If you fork this repo, you will also get this branch and you should get a hosted version of the game under "your-username".github.io/pongcast/pong.html
@@ -54,10 +55,10 @@ TODO - modify the code to use the github hosted one for production, and keep usi
 
 Keyboard Control
 =====
-Use 'e' to Enter the court.
-Use 's' to Start a game once you are in the court.
-Use up and down keys on keyboard to control the paddle.
-Use spacebar to pause/restart the game.
+* Use 'e' to Enter the court.
+* Use 's' to Start a game once you are in the court.
+* Use up and down keys on keyboard to control the paddle.
+* Use spacebar to pause/restart the game.
 
 Scripts
 ======
