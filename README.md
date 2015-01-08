@@ -13,20 +13,19 @@ taking me right back to the first ever video game I player.
 
 Status
 ======
-I have mostly worked on the Javascript custom receiver so far. I did it in a way I could run it on my chrome browser
-on my development computer and control the paddles with the keyboard....and later work more on controlling it from
-the android app.
+* pong.html and JavaScript to create the court and load the game logic (pong.js) and depending on where it's running start a keyboardController or a ChromecastController.
+* Core game logic and graphics, this includes a very simple "Computer" player you can play against.
+* A keyboard controller that you can use to control a player when the game is running in your browser. Useful for development.
+* A chromecast "custom receiver" in JavaScript that acts as the Chromecast controller for the game and which creates ChromePlayers. This allows multiple players to enter the court to play by using the mobile app on their mobile as a game controller, which they connect to the chromecast.
+* Android mobile app ("chromecast sender".
+  - At the moment this can just connect to the chromecast to enter the court and has a button to start the game.
+  - Paddle control still needs to be done.
 
-The android app is at the moment an almost unmodified chromecast sample app that just starts the custom receiver.
+Areas Needing work
+=====
+Finish basic paddle control via the Android app ("sender") and ChromecastController ("receiver").
 
-Despite using some CSS scaling tricks, the update rate on the chromecast is still too slow, and it doesn't work smoothly, 
-so that's one area of work.
-
-The other is evolving the mobile app into a paddle controller app, and then allowing one or two of them to connect 
-and start a game.
-
-Contributing
-======
+Despite using some CSS scaling tricks, the update rate on the chromecast is still too slow, and it doesn't work smoothly, so that's one area of work.
 Javascript/CSS-fu to make it all run quicker and smoother on the chromecast is very welcome!
 
 Also, for some reason I have not been able to get the sound reproduction to synchronize with the events, nor be
