@@ -47,7 +47,7 @@ Recently I have created a "gh-pages" branch on this repo and posted the contents
 
 You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
-If you fork this repo, you will also get this branch and you should get a hosted version of the game under <your-username>.github.io/pongcast/pong.html
+If you fork this repo, you will also get this branch and you should get a hosted version of the game under "your-username".github.io/pongcast/pong.html
 You will need to modify the receiver identifier in the android code to refer to the URL where you host you receiver.
 
 TODO - modify the code to use the github hosted one for production, and keep using my Google Drive version for development - testing changes before pushing them to github.
