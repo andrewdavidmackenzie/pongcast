@@ -1,3 +1,4 @@
 gen
 out
-
+build
+.gradle
