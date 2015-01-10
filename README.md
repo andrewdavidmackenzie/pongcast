@@ -1,4 +1,4 @@
-pongcast
+pongcast [![travis-ci](https://travis-ci.org/andrewdavidmackenzie/pongcast.png?branch=master)](https://travis-ci.org/andrewdavidmackenzie/pongcast)
 ======
 
 I wanted to learn more about Chromecast development (the receiver that runs on the chromecast itself, 
