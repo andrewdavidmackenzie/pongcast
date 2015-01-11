@@ -1,8 +1,8 @@
 //////////////////////////////////// PADDLE ////////////////////////////////
-function Paddle(name, x, y, width, height, courtHeight, context, soundFileName, paddleColor) {
-    this.name = name;
+function Paddle(x, frontX, y, width, height, courtHeight, context, paddleColor) {
     this.defaultSpeed = Math.floor((2 * courtHeight) / 100); // 2% of the height
     this.x = x;
+    this.frontX = frontX;
     this.y = y;
     this.width = width;
     this.height = height;
@@ -10,7 +10,7 @@ function Paddle(name, x, y, width, height, courtHeight, context, soundFileName, 
     this.context = context;
     this.speed = 0;
     this.maxY = courtHeight - this.height;
-    this.bounceSound = new Audio(soundFileName);
+    this.bounceSound = new Audio("paddle.ogg");
     this.color = paddleColor;
 }
 
@@ -114,20 +114,22 @@ Ball.prototype.bouncePaddle = function (paddle) {
 };
 
 Ball.prototype.update = function () {
+    var oldX = this.x;
+
     // update position according to its speed
     this.x += this.x_speed;
     this.y += this.y_speed;
 
+    // check for hitting the top wall
     var top_y = this.y - this.halfBallSize;
-    // If hits the top wall
     if (top_y <= 0) {
         this.y = this.halfBallSize;
         this.bounceWall(this.court);
         return 0;
     }
 
+    // check for hitting bottom wall
     var bottom_y = this.y + this.halfBallSize;
-    // if hits bottom wall
     if (bottom_y >= this.court.height) {
         this.y = this.court.height - this.halfBallSize;
         this.bounceWall(this.court);
@@ -135,27 +137,27 @@ Ball.prototype.update = function () {
     }
 
     if (this.x_speed < 0) { // Going left
-        if ((this.x < this.court.halfWidth)) { // In left half of the court?
-            // if leaves the court at the left
+        if ((this.x <= this.court.paddles[0].frontX)) {
+            // Check for exiting court left - using the middle of the ball to calculate that
             if (this.x < 0) {
                 return -1;
             }
 
-            if ((this.x <= this.court.paddles[0].x + this.court.paddles[0].width) &&
-                (bottom_y > this.court.paddles[0].y) &&
+            // was in front off, and now touching or behind paddle
+            if ((oldX > this.court.paddles[0].frontX) && (bottom_y > this.court.paddles[0].y) &&
                 (top_y < (this.court.paddles[0].y + this.court.paddles[0].height))) {
                 this.bouncePaddle(this.court.paddles[0]);
             }
         }
     } else { // Going right
-        if ((this.x > this.court.halfWidth)) {
+        if ((this.x > this.court.paddles[1].frontX)) {
             // if leaves the court at the right
             if (this.x > this.court.width) {
                 return 1;
             }
 
-            if ((this.x >= this.court.paddles[1].x) &&
-                (bottom_y > this.court.paddles[1].y) &&
+            // was in front off, and now touching or behind paddle
+            if ((oldX < this.court.paddles[1].frontX) && (bottom_y > this.court.paddles[1].y) &&
                 (top_y < (this.court.paddles[1].y + this.court.paddles[1].height))) {
                 this.bouncePaddle(this.court.paddles[1]);
             }
@@ -255,9 +257,10 @@ function Court(canvas, stats) {
     var courtMiddleY = Math.floor((this.height - paddleHeight) / 2);
 
     this.paddles = new Array(2);
-    this.paddles[0] = new Paddle("left", paddleXOffset, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, 'paddle.ogg', "#FFFFFF");
+    this.paddles[0] = new Paddle(paddleXOffset, paddleXOffset + paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, "#FFFFFF");
     this.paddles[0].draw();
-    this.paddles[1] = new Paddle("right", this.width - paddleXOffset - paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, 'paddle.ogg', "#FFFFFF");
+    var front = this.width - paddleXOffset - paddleWidth;
+    this.paddles[1] = new Paddle(front, front, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, "#FFFFFF");
     this.paddles[1].draw();
 
     // Create a new ball in the center of the court - not moving
