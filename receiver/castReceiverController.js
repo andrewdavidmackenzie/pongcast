@@ -1,15 +1,29 @@
-// A subclass of PaddleController, which must implement: updatePaddle = function (court, paddle, ball)
+// A subclass of PaddleController, which must implement:
+// updatePaddle(court, paddle, ball)
+// gameOver(won)
 ChromecastPlayer.prototype = new Player();
 
-// KeyboardPlayer that controls a paddle using up and down keys on the keyboard
+// ChromecastPlayer that controls a paddle using up and down keys on the keyboard
 function ChromecastPlayer(court, name) {
     Player.apply(this, court);
     this.name = name;
+    this.updownCount = 0;
 }
 
-// Check what keys are pressed everytime we get asked to update our paddle position
-ChromecastPlayer.prototype.updatePaddle = function (ball) {
-    // this.paddle.move, moveUp, moveDown, stop
+/*
+This is called on each update of the screen. Move the paddle corresponding to the number of requests we got
+to move up/down from the sender since the last update
+ */
+ChromecastPlayer.prototype.updatePaddle = function () {
+    while (this.updownCount > 0) {
+        this.paddle.moveUp();
+        this.updownCount--;
+    }
+
+    while (this.updownCount < 0) {
+        this.paddle.moveDown();
+        this.updownCount++;
+    }
 };
 
 ChromecastPlayer.prototype.gameOver = function (won) {
@@ -84,6 +98,14 @@ function CastController(court) {
                 window.messageBus.broadcast("GAME PAUSED");
                 break;
 
+            case "MoveUp":
+                window.players[event.senderId].updownCount++;
+                break;
+
+            case "MoveDown":
+                window.players[event.senderId].updownCount--;
+                break;
+
             default:
                 break;
         }
@@ -93,8 +115,3 @@ function CastController(court) {
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Court is ready"});
 }
-
-// A method to set application state
-CastController.prototype.setState = function (state) {
-    window.castReceiverManager.setApplicationState(state);
-};

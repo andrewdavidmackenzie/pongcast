@@ -1,5 +1,6 @@
 package net.mackenzie_serres.pongcast;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.android.gms.cast.ApplicationMetadata;
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.Cast.ApplicationConnectionResult;
 import com.google.android.gms.cast.Cast.MessageReceivedCallback;
@@ -41,13 +41,16 @@ public class MainActivity extends ActionBarActivity {
     private PongcastCallbacks mPongcastCallbacks;
     private boolean mWaitingForReconnect;
     private Button startGameButton;
+    private View paddleControls;
+    private Button upButton, downButton;
 
     private static final String START_GAME_MESSAGE = "StartPlay";
     private static final String PAUSE_PLAY_MESSAGE = "PausePlay";
+    private static final String PADDLE_UP_MESSAGE = "MoveUp";
+    private static final String PADDLE_DOWN_MESSAGE = "MoveDown";
 
-    // You maybe in our out of the court
     private static enum COURT_STATE {
-        UNKNOWN, CREATING_COURT, OUT_OF_COURT, IN_COURT
+        UNKNOWN, CREATING, READY, I_AM_IN
     }
 
     // When in court, you may or may not have a paddle
@@ -55,7 +58,6 @@ public class MainActivity extends ActionBarActivity {
         NO_PADDLE, HAS_PADDLE
     }
 
-    // Which paddle do I have
     private String paddle = "";
 
     // When in court, then you can see the state of play
@@ -75,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(android.R.color.transparent));
 
-
         // When the user clicks on the button, send a message to start the game
         startGameButton = (Button) findViewById(R.id.playButton);
         startGameButton.setOnClickListener(new OnClickListener() {
@@ -84,18 +85,37 @@ public class MainActivity extends ActionBarActivity {
                 sendMessage(START_GAME_MESSAGE);
             }
         });
+
+        paddleControls = findViewById(R.id.paddleControl);
+        upButton = (Button) paddleControls.findViewById(R.id.upButton);
+        upButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage(PADDLE_UP_MESSAGE);
+            }
+        });
+
+        downButton = (Button) paddleControls.findViewById(R.id.downButton);
+        downButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage(PADDLE_DOWN_MESSAGE);
+            }
+        });
+
         setCourtState(COURT_STATE.UNKNOWN);
 
         // Configure Cast device discovery
         mMediaRouter = MediaRouter.getInstance(getApplicationContext());
         mMediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
-                        CastMediaControlIntent.categoryForCast(getResources()
-                                .getString(R.string.app_id))).build();
+                CastMediaControlIntent.categoryForCast(getResources()
+                        .getString(R.string.app_id))).build();
 
         // Only create the callback once, on creation
         mMediaRouterCallback = new MyMediaRouterCallback();
     }
 
+    // TODO Avoid Pause/Resume on first rotation
     @Override
     protected void onResume() {
         super.onResume();
@@ -108,6 +128,11 @@ public class MainActivity extends ActionBarActivity {
     public void onDestroy() {
         teardown();
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+
     }
 
     @Override
@@ -150,13 +175,10 @@ public class MainActivity extends ActionBarActivity {
             Cast.Listener mCastListener = new Cast.Listener() {
                 @Override
                 public void onApplicationStatusChanged() {
-                    Log.d(TAG, "application status has changed");
-                    // TODO need to request the status? Not passed in here :-(
                 }
 
                 @Override
                 public void onApplicationDisconnected(int errorCode) {
-                    Log.d(TAG, "application has stopped");
                     teardown();
                 }
             };
@@ -198,7 +220,7 @@ public class MainActivity extends ActionBarActivity {
             mApiClient = null;
         }
 
-        setCourtState(COURT_STATE.OUT_OF_COURT);
+        setCourtState(COURT_STATE.UNKNOWN);
 
         mSelectedDevice = null;
         mWaitingForReconnect = false;
@@ -263,23 +285,18 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onResult(ApplicationConnectionResult result) {
             Status status = result.getStatus();
-            Log.d(TAG, "ApplicationConnectionResultCallback.onResult: statusCode" + status.getStatusCode());
             if (status.isSuccess()) {
-                ApplicationMetadata applicationMetadata = result.getApplicationMetadata();
-                String sessionId = result.getSessionId();
-                String applicationStatus = result.getApplicationStatus();
-                boolean wasLaunched = result.getWasLaunched();
-                Log.d(TAG, "application name: " + applicationMetadata.getName() + ", status: " + applicationStatus
-                                + ", sessionId: " + sessionId + ", wasLaunched: " + wasLaunched);
+                // Court now exists
+                setCourtState(COURT_STATE.READY);
 
-                // Court now exists but not in yet!!s
-                setCourtState(COURT_STATE.OUT_OF_COURT);
-
-                // Create the custom message channel
+                // Create the custom message channel to talk to the receiver
                 mPongcastCallbacks = new PongcastCallbacks();
                 try {
                     Cast.CastApi.setMessageReceivedCallbacks(mApiClient, mPongcastCallbacks.getNamespace(),
                             mPongcastCallbacks);
+
+                    // Got into the court!
+                    setCourtState(COURT_STATE.I_AM_IN);
                 } catch (IOException e) {
                     Log.e(TAG, "Exception while creating channel", e);
                 }
@@ -319,14 +336,14 @@ public class MainActivity extends ActionBarActivity {
                                     mPongcastCallbacks);
 
                             // Got into the court!
-                            setCourtState(COURT_STATE.IN_COURT);
+                            setCourtState(COURT_STATE.I_AM_IN);
                         } catch (IOException e) {
                             Log.e(TAG, "Exception while setting message received callbacks", e);
                         }
                     }
                 } else {
                     // Launch the receiver app - creating the court to play in!!
-                    setCourtState(COURT_STATE.CREATING_COURT);
+                    setCourtState(COURT_STATE.CREATING);
                     Cast.CastApi.launchApplication(mApiClient, getString(R.string.app_id), false)
                             .setResultCallback(new MyLaunchResultCallback());
                 }
@@ -371,37 +388,46 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onMessageReceived(CastDevice castDevice, String namespace, String message) {
             if (message.startsWith("PADDLE")) {
-                setPaddleState(message);
+                parsePaddleMessage(message);
             } else if (message.startsWith("GAME")) {
-                setGameState(message);
+                parseGameMessage(message);
             } else {
-                    Log.w(TAG, "Unknown message: " + message);
+                Log.w(TAG, "Unknown message: " + message);
             }
         }
     }
 
-    private void setGameState(String message) {
+    /**
+     * Parse a message from the Receiver about the game
+     * @param message - from the receiver
+     */
+    private void parseGameMessage(String message) {
+        Log.i(TAG, "Game Message: " + message);
         if (message.startsWith("GAME WON") || message.startsWith("GAME LOST")) {
-            gameState = GAME_STATE.GAME_ENDED;
+            setGameState(GAME_STATE.GAME_ENDED);
         } else if (message.equals("GAME STARTED")) {
-            gameState = GAME_STATE.GAME_IN_PLAY;
-            startGameButton.setVisibility(View.INVISIBLE);
+            setGameState(GAME_STATE.GAME_IN_PLAY);
         } else if (message.equals("GAME PAUSED")) {
-            gameState = GAME_STATE.GAME_PAUSED;
-            startGameButton.setVisibility(View.VISIBLE);
+            setGameState(GAME_STATE.GAME_PAUSED);
+        } else {
+            setGameState(GAME_STATE.NO_GAME);
         }
     }
 
-    private void setPaddleState(String message) {
+    /**
+     * Parse messages that affect the paddle and make appropriate changes
+     * @param message - from receiver to parse
+     */
+    private void parsePaddleMessage(String message) {
+        Log.i(TAG, "Paddle Message: " + message);
         final String PADDLE_YES_PREFIX = "PADDLE YES";
         if (message.startsWith(PADDLE_YES_PREFIX)) {
             paddleState = PADDLE_STATE.HAS_PADDLE;
 
-            if ((courtState != COURT_STATE.IN_COURT) || (gameState != GAME_STATE.GAME_IN_PLAY)) {
-                // enable the button to start the game
-                startGameButton.setVisibility(View.VISIBLE);
+            if ((courtState != COURT_STATE.I_AM_IN) || (gameState != GAME_STATE.GAME_IN_PLAY)) {
                 paddle = message.split(PADDLE_YES_PREFIX)[1];
                 Toast.makeText(MainActivity.this, "You got " + paddle + " paddle", Toast.LENGTH_LONG).show();
+                setGameState(GAME_STATE.GAME_READY_TO_START);
             }
         } else {
             paddleState = PADDLE_STATE.NO_PADDLE;
@@ -409,24 +435,58 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Keep track of the game state and make the appropriate changes to views on changes in it
+     *
+     * @param newGameState - the new state
+     */
+    private void setGameState(GAME_STATE newGameState) {
+        this.gameState = newGameState;
+
+        switch (newGameState) {
+            case GAME_ENDED:
+                startGameButton.setVisibility(View.VISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                break;
+
+            case GAME_IN_PLAY:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.VISIBLE);
+                break;
+
+            case GAME_PAUSED:
+                startGameButton.setVisibility(View.VISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                break;
+
+            case NO_GAME:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                break;
+
+            case GAME_READY_TO_START:
+                startGameButton.setVisibility(View.VISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+    /**
+     * Keep track of changes in the state of the court and make the appropriate changes to other states and views
+     * when it changes.
+     *
+     * @param newCourtState - the new state
+     */
     private void setCourtState(COURT_STATE newCourtState) {
         this.courtState = newCourtState;
+        Log.i(TAG, "Court State set to " + newCourtState.toString());
 
         switch (newCourtState) {
             case UNKNOWN:
-                startGameButton.setVisibility(View.INVISIBLE);
-                break;
-
-            case CREATING_COURT:
-                startGameButton.setVisibility(View.INVISIBLE);
-                break;
-
-            case OUT_OF_COURT:
-                startGameButton.setVisibility(View.INVISIBLE);
-                break;
-
-            case IN_COURT:
-                startGameButton.setVisibility(View.VISIBLE);
+            case CREATING:
+            case READY:
+            case I_AM_IN:
+                setGameState(GAME_STATE.NO_GAME);
                 break;
         }
     }

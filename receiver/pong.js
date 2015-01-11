@@ -365,6 +365,7 @@ Court.prototype.draw = function () {
     this.render();
 };
 
+// TODO Control game state here
 Court.prototype.startPlay = function () {
     if (this.game == null) {
         this.game = new Game(this);
@@ -375,15 +376,18 @@ Court.prototype.startPlay = function () {
     this.update();
 };
 
+// TODO Control game state here
 Court.prototype.pausePlay = function () {
     this.paused = true;
 };
 
+// TODO Control game state here
 Court.prototype.restartPlay = function () {
     this.paused = false;
     this.update();
 };
 
+// TODO Control game state here
 Court.prototype.togglePlay = function () {
     if (this.paused) {
         window.outputLine("Play restarted");
