@@ -73,7 +73,7 @@ function ComputerPlayer(court, name) {
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(Math.floor(-(diff * 3) / 4));
+    this.paddle.move(Math.floor(-(diff * 1) / 4));
 };
 
 ComputerPlayer.prototype.gameOver = function (won) {
@@ -89,11 +89,15 @@ function Ball(court, ballSize, context, courtColor) {
     this.courtColor = courtColor;
     this.x = Math.floor(this.court.width / 2);
     this.y = Math.floor(this.court.height / 2);
-    this.y_speed = 0;
+    this.y_speed = 1.0;
     this.x_speed = this.defaultSpeed;
 }
 
-Ball.prototype.render = function (color) {
+Ball.prototype.clear = function() {
+    this.context.clearRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
+};
+
+Ball.prototype.draw = function (color) {
     this.context.fillStyle = color;
     this.context.fillRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
 };
@@ -110,8 +114,6 @@ Ball.prototype.bouncePaddle = function (paddle) {
 };
 
 Ball.prototype.update = function () {
-    this.render(this.courtColor);
-
     // update position according to its speed
     this.x += this.x_speed;
     this.y += this.y_speed;
@@ -182,7 +184,7 @@ function Game(court) {
     this.court.players[1].score = 0;
 
     // draw initial scoreboard
-    this.court.scoreboard.render();
+    this.court.scoreboard.draw();
 }
 
 Game.prototype.point = function (player, opponent) {
@@ -226,10 +228,10 @@ ScoreBoard.prototype.pointWon = function (player) {
     player.score++;
 
     // draw new score
-    this.render();
+    this.draw();
 };
 
-ScoreBoard.prototype.render = function () {
+ScoreBoard.prototype.draw = function () {
     this.leftScore.innerHTML = this.court.players[0].score.toString();
     this.rightScore.innerHTML = this.court.players[1].score.toString();
 };
@@ -335,22 +337,25 @@ Court.prototype.leave = function (player) {
     }
 };
 
-Court.prototype.render = function () {
-    this.ball.render(this.ballColor);
-    this.paddles[0].draw();
-    this.paddles[0].draw();
-};
-
 Court.prototype.draw = function () {
+    // delete paddles at old positions
     this.paddles[0].clear();
     this.paddles[1].clear();
 
-    this.players[0].updatePaddle(this.ball);
-    this.players[1].updatePaddle(this.ball);
+    // update paddle positions
+    if (this.players[0]) {
+        this.players[0].updatePaddle(this.ball);
+    }
+    if (this.players[1]) {
+        this.players[1].updatePaddle(this.ball);
+    }
 
     // draw paddles at new positions
     this.paddles[0].draw();
     this.paddles[1].draw();
+
+    // Delete the ball at its old position
+    this.ball.clear();
 
     // Update the ball position and detect if it has exited one end of the court or another
     var result = this.ball.update();
@@ -362,7 +367,8 @@ Court.prototype.draw = function () {
             this.game.point(this.players[0], this.players[1]);
     }
 
-    this.render();
+    // Draw the ball at the new position
+    this.ball.draw(this.ballColor);
 };
 
 // TODO Control game state here

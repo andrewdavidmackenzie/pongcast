@@ -85,7 +85,7 @@
     window.onload = function () {
         var canvas = document.getElementById('court');
         window.court = new Court(canvas, window.stats);
-        window.court.render();
+        window.court.draw();
 
         var isChromecast = navigator.userAgent.indexOf('CrKey') !== -1;
 

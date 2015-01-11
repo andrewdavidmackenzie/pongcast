@@ -92,18 +92,18 @@
       <file leaf-file-name="pong.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.130435" vertical-offset="1184" max-vertical-offset="1582">
-              <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+            <state vertical-scroll-proportion="-6.869565" vertical-offset="1060" max-vertical-offset="1582">
+              <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pong.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pong.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3951" max-vertical-offset="5922">
-              <caret line="282" column="5" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="5" />
+            <state vertical-scroll-proportion="-0.6461864" vertical-offset="1355" max-vertical-offset="6006">
+              <caret line="75" column="42" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -125,7 +125,7 @@
       <file leaf-file-name="keyboardController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="601" max-vertical-offset="1148">
+            <state vertical-scroll-proportion="0.0" vertical-offset="587" max-vertical-offset="1148">
               <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
               <folding />
             </state>
@@ -135,7 +135,7 @@
       <file leaf-file-name="castReceiverController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="959" max-vertical-offset="1722">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1085" max-vertical-offset="1722">
               <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -176,10 +176,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4741573" vertical-offset="1623" max-vertical-offset="2352">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1623" max-vertical-offset="2352">
               <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
               <folding>
                 <element signature="class#GAME_EVENT#0;class#GameController#0" expanded="true" />
@@ -257,7 +257,6 @@
         <option value="$PROJECT_DIR$/../receiver/keyboardController.js" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/../receiver/pong.html" />
-        <option value="$PROJECT_DIR$/../receiver/pong.js" />
         <option value="$PROJECT_DIR$/../receiver/castReceiverController.js" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/../DESIGN.md" />
@@ -265,6 +264,7 @@
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/GameControllerView.java" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/GameController.java" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/ChromecastInteractor.java" />
+        <option value="$PROJECT_DIR$/../receiver/pong.js" />
       </list>
     </option>
   </component>
@@ -449,6 +449,16 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pongcast" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="receiver" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -748,12 +758,12 @@
       <workItem from="1420128947809" duration="654000" />
       <workItem from="1420130322429" duration="521000" />
       <workItem from="1420130997200" duration="29816000" />
-      <workItem from="1420543659041" duration="40182000" />
+      <workItem from="1420543659041" duration="42437000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138967000" />
+    <option name="totallyTimeSpent" value="141222000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -782,7 +792,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4002642" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3632761" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37516513" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30383092" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.7427056" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1132,32 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.130435" vertical-offset="1184" max-vertical-offset="1582">
-          <caret line="93" column="16" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="601" max-vertical-offset="1148">
-          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1253" max-vertical-offset="1722">
-          <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73015875" vertical-offset="42" max-vertical-offset="574">
@@ -1165,14 +1149,6 @@
           <folding>
             <element signature="e#945#963#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3951" max-vertical-offset="5922">
-          <caret line="282" column="5" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1284,7 +1260,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4741573" vertical-offset="1623" max-vertical-offset="2352">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1623" max-vertical-offset="2352">
           <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding>
             <element signature="class#GAME_EVENT#0;class#GameController#0" expanded="true" />
@@ -1292,6 +1268,40 @@
             <element signature="e#2662#2663#0" expanded="true" />
             <element signature="e#2696#2697#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1253" max-vertical-offset="1722">
+          <caret line="101" column="61" selection-start-line="101" selection-start-column="61" selection-end-line="101" selection-end-column="61" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="601" max-vertical-offset="1148">
+          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.869565" vertical-offset="1060" max-vertical-offset="1582">
+          <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6461864" vertical-offset="1355" max-vertical-offset="6006">
+          <caret line="75" column="42" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
