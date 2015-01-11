@@ -19,10 +19,10 @@ The receiver consists of the following Javascript files:
 * Paddle - represents the Players "bat" and can be moved up and down. The Ball bounces of it.
 * Ball- the ball moves about the Court, bouncing of top and bottom walls and the bat, at a speed determined by impacts.
 * Scorecard - is drawn on the Court and shows the score of the two Players.
-
-* KeyboardPlayer - subclasses Player to act as a Player, controlled by the keyboard
-* ChromecastPlayer - subclasses Player to allow a chromecast sender (i.e. a mobile device) to Control a player
-* ComputerPlayer - subclasses Player to be an automatic player that tries to always return the ball.
+* Player
+	* KeyboardPlayer - subclasses Player to act as a Player, controlled by the keyboard
+	* ChromecastPlayer - subclasses Player to allow a chromecast sender (i.e. a mobile device) to Control a player
+	* ComputerPlayer - subclasses Player to be an automatic player that tries to always return the ball.
 
 ##Chromecast Events
 The following is the list of events that can be handled by the chromecast receiver and what I do in each case:
