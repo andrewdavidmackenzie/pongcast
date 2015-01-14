@@ -16,6 +16,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import net.mackenzie_serres.pongcast.GameController.GAME_EVENT;
 
 import java.io.IOException;
 
@@ -146,7 +147,7 @@ public class ChromecastInteractor {
         @Override
         public void onRouteSelected(MediaRouter router, MediaRouter.RouteInfo info) {
             Log.d(TAG, "onRouteSelected");
-            gameController.event(GameController.GAME_EVENT.CONNECTED);
+            gameController.event(GAME_EVENT.CONNECTED);
 
             // Handle the user route selection.
             mSelectedDevice = CastDevice.getFromBundle(info.getExtras());
@@ -205,7 +206,7 @@ public class ChromecastInteractor {
             mApiClient = null;
         }
 
-        gameController.event(GameController.GAME_EVENT.DISCONNECTED);
+        gameController.event(GAME_EVENT.DISCONNECTED);
 
         mSelectedDevice = null;
         mWaitingForReconnect = false;
@@ -221,7 +222,7 @@ public class ChromecastInteractor {
 
             if (mApiClient == null) {
                 // We got disconnected while this runnable was pending execution.
-                gameController.event(GameController.GAME_EVENT.DISCONNECTED);
+                gameController.event(GAME_EVENT.DISCONNECTED);
                 return;
             }
 
@@ -231,15 +232,15 @@ public class ChromecastInteractor {
                 // Check if the receiver app is still running
                 if ((connectionHint != null) && connectionHint.getBoolean(Cast.EXTRA_APP_NO_LONGER_RUNNING)) {
                     Log.d(TAG, "App is no longer running");
-                    gameController.event(GameController.GAME_EVENT.COURT_DESTROYED);
+                    gameController.event(GAME_EVENT.COURT_DESTROYED);
                     disconnect();
                 } else {
-                    gameController.event(GameController.GAME_EVENT.COURT_EXISTS);
+                    gameController.event(GAME_EVENT.COURT_EXISTS);
                     createCastMessageChannel();
                 }
             } else {
                 // We are connected to the chromecast
-                gameController.event(GameController.GAME_EVENT.CONNECTED);
+                gameController.event(GAME_EVENT.CONNECTED);
 
                 try {
                     // try and launch the receiver
@@ -255,7 +256,7 @@ public class ChromecastInteractor {
         public void onConnectionSuspended(int cause) {
             Log.d(TAG, "onConnectionSuspended");
             // TODO Maybe a connection lost event - as it can be recovered, and not the same as being totally lost
-            gameController.event(GameController.GAME_EVENT.DISCONNECTED);
+            gameController.event(GAME_EVENT.DISCONNECTED);
             mWaitingForReconnect = true;
         }
     }
@@ -269,6 +270,8 @@ public class ChromecastInteractor {
             Log.e(TAG, "onConnectionFailed ");
             // TODO maybe separate disconnect() into its differen tlayers for GPS, Chromecast, etc?
             disconnect();
+
+            // TODO can we do something to retry?
         }
     }
 
@@ -288,7 +291,7 @@ public class ChromecastInteractor {
         public void onResult(Cast.ApplicationConnectionResult result) {
             Status status = result.getStatus();
             if (status.isSuccess()) {
-                gameController.event(GameController.GAME_EVENT.COURT_EXISTS);
+                gameController.event(GAME_EVENT.COURT_EXISTS);
 
                 createCastMessageChannel();
             } else {
@@ -318,7 +321,7 @@ public class ChromecastInteractor {
             Cast.CastApi.setMessageReceivedCallbacks(mApiClient, mPongcastCallbacks.getNamespace(), mPongcastCallbacks);
 
             // Got into the court!
-            gameController.event(GameController.GAME_EVENT.COURT_ACCEPTED_ME);
+            gameController.event(GAME_EVENT.COURT_ACCEPTED_ME);
         } catch (IOException e) {
             // TODO what to do here when I can't get a channel and hence on court?
             // TODO delay and then try again? Put something on UI to ask user to try again?
@@ -360,9 +363,9 @@ public class ChromecastInteractor {
     private void parsePaddleMessage(String message) {
         Log.i(TAG, "Paddle Message: " + message);
         if (message.startsWith(PADDLE_YES_PREFIX)) {
-            gameController.event(GameController.GAME_EVENT.GOT_PADDLE, message.split(PADDLE_YES_PREFIX)[1]);
+            gameController.event(GAME_EVENT.GOT_PADDLE, message.split(PADDLE_YES_PREFIX)[1]);
         } else {
-            gameController.event(GameController.GAME_EVENT.NO_PADDLE);
+            gameController.event(GAME_EVENT.NO_PADDLE);
         }
     }
 
@@ -374,11 +377,11 @@ public class ChromecastInteractor {
     private void parseGameMessage(String message) {
         Log.i(TAG, "Game Message: " + message);
         if (message.startsWith("GAME WON") || message.startsWith("GAME LOST")) {
-            gameController.event(GameController.GAME_EVENT.GAME_WON_LOST, message);
+            gameController.event(GAME_EVENT.GAME_WON_LOST, message);
         } else if (message.equals("GAME STARTED")) {
-            gameController.event(GameController.GAME_EVENT.GAME_STARTED);
+            gameController.event(GAME_EVENT.GAME_STARTED);
         } else if (message.equals("GAME PAUSED")) {
-            gameController.event(GameController.GAME_EVENT.GAME_PAUSED);
+            gameController.event(GAME_EVENT.GAME_PAUSED);
         }
     }
 

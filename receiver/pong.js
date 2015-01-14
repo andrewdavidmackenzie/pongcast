@@ -73,7 +73,7 @@ function ComputerPlayer(court, name) {
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(Math.floor(-(diff * 1) / 4));
+    this.paddle.move(Math.floor(-diff / 4));
 };
 
 ComputerPlayer.prototype.gameOver = function (won) {
@@ -93,7 +93,7 @@ function Ball(court, ballSize, context, courtColor) {
     this.x_speed = this.defaultSpeed;
 }
 
-Ball.prototype.clear = function() {
+Ball.prototype.clear = function () {
     this.context.clearRect(this.x - this.halfBallSize, this.y - this.halfBallSize, this.ballSize, this.ballSize);
 };
 
@@ -137,6 +137,7 @@ Ball.prototype.update = function () {
     }
 
     if (this.x_speed < 0) { // Going left
+        // touching or behind paddle
         if ((this.x <= this.court.paddles[0].frontX)) {
             // Check for exiting court left - using the middle of the ball to calculate that
             if (this.x < 0) {
@@ -150,6 +151,7 @@ Ball.prototype.update = function () {
             }
         }
     } else { // Going right
+        // touching or behind paddle
         if ((this.x > this.court.paddles[1].frontX)) {
             // if leaves the court at the right
             if (this.x > this.court.width) {
@@ -206,12 +208,14 @@ Game.prototype.end = function (winner, looser) {
     window.outputLine("End of game. '" + winner.name + "' wins");
     winner.gameOver(true);
     looser.gameOver(false);
+
     // TODO find this sound then enable
 //    this.gameWon.play();
+
     this.court.pausePlay();
     this.court.game = null;
 
-    // TODO Show game over player X wins message
+    window.message("GAME OVER");
 };
 
 //////////////////////////////////// SCOREBOARD ////////////////////////////////
@@ -239,13 +243,12 @@ ScoreBoard.prototype.draw = function () {
 };
 
 //////////////////////////////////// COURT ////////////////////////////////
-function Court(canvas, stats) {
+function Court(canvas) {
     this.context = canvas.getContext('2d');
     this.courtColor = "#999999";
 
     this.width = canvas.width;
     this.height = canvas.height;
-    this.halfWidth = Math.floor(this.width / 2);
 
     // Draw court initially
     this.context.fillStyle = this.courtColor;
@@ -258,10 +261,8 @@ function Court(canvas, stats) {
 
     this.paddles = new Array(2);
     this.paddles[0] = new Paddle(paddleXOffset, paddleXOffset + paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, "#FFFFFF");
-    this.paddles[0].draw();
     var front = this.width - paddleXOffset - paddleWidth;
     this.paddles[1] = new Paddle(front, front, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context, "#FFFFFF");
-    this.paddles[1].draw();
 
     // Create a new ball in the center of the court - not moving
     this.ballSize = 10;
@@ -272,7 +273,6 @@ function Court(canvas, stats) {
 
     this.bounceSound = new Audio('court.ogg');
 
-    this.stats = stats;
     this.paused = false;
 
     this.players = new Array(2);
@@ -281,81 +281,90 @@ function Court(canvas, stats) {
     this.numPlayers = 0;
     this.game = null;
 
+    this.courtMessage();
+
     // Install into the global window object
     window.court = this;
 }
+
+Court.prototype.courtMessage = function () {
+    if (this.numPlayers > 0) {
+        window.message("PRESS S TO START");
+    } else {
+        window.message(this.enterMessage);
+    }
+};
 
 Court.prototype.bounce = function () {
     this.bounceSound.play();
 };
 
 Court.prototype.enter = function (player) {
+    var response;
+
     if (this.players[0] == null) {
         this.players[0] = player;
         this.players[0].givePaddle(this.paddles[0]);
+        this.paddles[0].draw();
         this.numPlayers++;
         window.outputLine("Player '" + player.name + "' enters court, gets left paddle");
-        return "PADDLE YES LEFT";
-    }
-
-    if (this.players[1] == null) {
+        response = "PADDLE YES LEFT";
+    } else if (this.players[1] == null) {
         this.players[1] = player;
         this.players[1].givePaddle(this.paddles[1]);
+        this.paddles[1].draw();
         this.numPlayers++;
         window.outputLine("Player '" + player.name + "' enters court, gets right paddle");
-        return "PADDLE YES RIGHT";
+        response = "PADDLE YES RIGHT";
+    } else {
+        window.outputLine("PADDLE NONE");
+        response = "PADDLE NONE";
     }
 
-    window.outputLine("PADDLE NONE");
-    return "PADDLE NONE";
+    this.courtMessage();
+    return response;
 };
 
-Court.prototype.leave = function (player) {
-    if (player == this.players[0]) {
-        window.outputLine("Player '" + player.name + "' has left the court");
-        if (this.game) {
-            this.game.end(this.players[1], this.players[0]);
-        }
+Court.prototype.leave = function (looser) {
+    window.outputLine("Player '" + looser.name + "' has left the court");
 
-        // Reclaim his paddle
-        player.paddle = null;
-        // and remove from the court
-        this.numPlayers--;
+    if (looser == this.players[0]) {
+        winner = this.players[1];
         this.players[0] = null;
-        return;
-    }
-
-    if (player == this.players[1]) {
-        window.outputLine("Player '" + player.name + "' has left the court");
-        if (this.game) {
-            this.game.end(this.players[0], this.players[1]);
-        }
-
-        // Reclaim his paddle
-        player.paddle = null;
-        // and remove from the court
-        this.numPlayers--;
+    } else {
+        winner = this.players[0];
         this.players[1] = null;
-        return;
     }
+
+    if (this.game) {
+        this.game.end(winner, looser);
+    } else {
+        window.message(this.enterMessage);
+    }
+
+    // and remove from the court
+    this.numPlayers--;
+
+    this.ball.clear();
+
+    // Reclaim his paddle
+    looser.paddle.clear();
+    looser.paddle = null;
 };
 
 Court.prototype.draw = function () {
-    // delete paddles at old positions
-    this.paddles[0].clear();
-    this.paddles[1].clear();
-
     // update paddle positions
     if (this.players[0]) {
+        this.paddles[0].clear();
         this.players[0].updatePaddle(this.ball);
-    }
-    if (this.players[1]) {
-        this.players[1].updatePaddle(this.ball);
+        this.paddles[0].draw();
     }
 
-    // draw paddles at new positions
-    this.paddles[0].draw();
-    this.paddles[1].draw();
+    if (this.players[1]) {
+        this.paddles[1].clear();
+        this.players[1].updatePaddle(this.ball);
+        this.paddles[1].draw();
+    }
 
     // Delete the ball at its old position
     this.ball.clear();
@@ -380,6 +389,8 @@ Court.prototype.startPlay = function () {
         this.game = new Game(this);
     }
 
+    window.message("");
+
     window.outputLine("Starting play");
     this.paused = false;
     this.update();
@@ -388,40 +399,34 @@ Court.prototype.startPlay = function () {
 // TODO Control game state here
 Court.prototype.pausePlay = function () {
     this.paused = true;
+    window.outputLine("Play paused");
+    window.message("PAUSED. SPACE TO RESTART");
 };
 
 // TODO Control game state here
 Court.prototype.restartPlay = function () {
     this.paused = false;
+    window.message("");
+    window.outputLine("Play restarted");
     this.update();
 };
 
 // TODO Control game state here
 Court.prototype.togglePlay = function () {
+    // TODO control Game Over state
     if (this.paused) {
-        window.outputLine("Play restarted");
         this.restartPlay();
     } else {
-        window.outputLine("Play paused");
         this.pausePlay();
     }
 };
 
 // This will be called from window on refresh
 Court.prototype.update = function () {
-    if (this.stats) {
-        this.stats.begin();
-    }
-
-    // draw the objects
-    window.court.draw();
-
-    if (this.stats) {
-        this.stats.end();
-    }
-
-    // reschedule next animation update
     if (!window.court.paused) {
+        window.court.draw();
+
+        // reschedule next animation update
         window.requestAnimationFrame(window.court.update);
     }
 };

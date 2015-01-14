@@ -84,7 +84,7 @@ public class GameController {
      * @param newCourtState - the new state
      */
     private void setCourtState(COURT_STATE newCourtState) {
-        Log.i(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
+        Log.d(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
         this.courtState = newCourtState;
 
         gameView.setViewGameState(this.courtState);
@@ -139,9 +139,7 @@ public class GameController {
                 break;
 
             case GAME_STARTED:
-                if ((courtState == COURT_STATE.READY_FOR_GAME) || (courtState == COURT_STATE.GAME_PAUSED)){
-                    setCourtState(COURT_STATE.GAME_IN_PLAY);
-                }
+                setCourtState(COURT_STATE.GAME_IN_PLAY);
                 break;
 
             case GAME_PAUSED:

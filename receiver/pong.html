@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="stats.min.js"></script>
     <script type="text/javascript" src="http://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script src="pong.js"></script>
     <script src="castReceiverController.js"></script>
@@ -13,15 +12,18 @@
             width: 100%;
             height: 100%;
             margin: 0;
+            padding: 0;
         }
 
         canvas {
             width: 100%;
             height: 100%;
+            margin: 0;
+            padding: 0;
             background: #999999;
         }
 
-        #message {
+        #debug {
             width: 500px;
             height: 100%;
             position: absolute;
@@ -36,6 +38,17 @@
             text-align: center;
             position: absolute;
             margin-top: 20px;
+            font: 50px Pong;
+            color: #ffffff;
+        }
+
+        #messageboard {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            vertical-align: bottom;
+            position: fixed;
+            bottom: 20px;
             font: 50px Pong;
             color: #ffffff;
         }
@@ -55,53 +68,49 @@
             src: url('pong.ttf');
         }
     </style>
-
-    <style>
-
-    </style>
 </head>
 
 <body>
 
 <script>
-    // enable this to show refresh rates stats on-screen
-    if (false) {
-        window.stats = new Stats();
-        window.stats.setMode(0);
-        document.body.appendChild(window.stats.domElement);
-    }
-
     window.enableDebug = function enableDebug(text) {
-        window.message.style.visibility = "visible";
+        window.debug.style.visibility = "visible";
     }
 
     // utility function to display a text message in log and also on-screen
     window.outputLine = function outputLine(text) {
         console.log("Debug: " + text);
-        window.message.innerHTML += (text + "<br>");
+        window.debug.innerHTML += (text + "<br>");
+    };
+
+    window.message = function message(text) {
+        window.messageboard.innerHTML = (text);
     };
 
     // Wait until this has all loaded before creating the canvas and adding controllers for the game
     window.onload = function () {
         var canvas = document.getElementById('court');
-        window.court = new Court(canvas, window.stats);
+        window.court = new Court(canvas);
         window.court.draw();
 
         var isChromecast = navigator.userAgent.indexOf('CrKey') !== -1;
 
         if (isChromecast) {
-            CastController(window.court);
+            CastController();
         } else {
-            KeyboardController(window.court);
+            KeyboardController();
         }
+
+        window.court.courtMessage();
     };
 </script>
 
-<div id="message"></div>
+<div id="debug"></div>
 <div id="scoreboard">
     <span class="left"></span>
     <span class="right"></span>
 </div>
+<div id="messageboard"></div>
 <canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!</canvas>
 
 </body>

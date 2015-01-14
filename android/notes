@@ -1,0 +1,13 @@
+disconnect doesn't redraw app without the start button
+
+CC controller draw player when enters and undraws when leave
+
+need to reset content view on rotate?
+
+second paddle can't be controlled
+
+display a play pasued message
+
+display a gome over / winner message
+
+don't allow a start when game running

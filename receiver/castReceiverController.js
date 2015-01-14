@@ -1,46 +1,4 @@
-// A subclass of PaddleController, which must implement:
-// updatePaddle(court, paddle, ball)
-// gameOver(won)
-ChromecastPlayer.prototype = new Player();
-
-// ChromecastPlayer that controls a paddle using up and down keys on the keyboard
-function ChromecastPlayer(court, name) {
-    Player.apply(this, court);
-    this.name = name;
-    this.updownCount = 0;
-}
-
-/*
-This is called on each update of the screen. Move the paddle corresponding to the number of requests we got
-to move up/down from the sender since the last update
- */
-ChromecastPlayer.prototype.updatePaddle = function () {
-    while (this.updownCount > 0) {
-        this.paddle.moveUp();
-        this.updownCount--;
-    }
-
-    while (this.updownCount < 0) {
-        this.paddle.moveDown();
-        this.updownCount++;
-    }
-};
-
-ChromecastPlayer.prototype.gameOver = function (won) {
-    // send a message to the player to tell them they won or lost
-    try {
-        var senderChannel = window.messageBus.getCastChannel(this.name);
-        if (won) {
-            senderChannel.send("GAME WON");
-        } else {
-            senderChannel.send("GAME LOST");
-        }
-    } catch(err) {
-        // We might have lost the game because we lost the connection and won't be able to send message
-    }
-};
-
-function CastController(court) {
+function CastController() {
     cast.receiver.logger.setLevelValue(0);
 
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
@@ -112,6 +70,50 @@ function CastController(court) {
 
     };
 
+    window.court.enterMessage = "CONNECT TO CHROMECAST";
+
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Court is ready"});
 }
+
+// A subclass of PaddleController, which must implement:
+// updatePaddle(court, paddle, ball)
+// gameOver(won)
+ChromecastPlayer.prototype = new Player();
+
+// ChromecastPlayer that controls a paddle using up and down keys on the keyboard
+function ChromecastPlayer(court, name) {
+    Player.apply(this, court);
+    this.name = name;
+    this.updownCount = 0;
+}
+
+/*
+This is called on each update of the screen. Move the paddle corresponding to the number of requests we got
+to move up/down from the sender since the last update
+ */
+ChromecastPlayer.prototype.updatePaddle = function () {
+    while (this.updownCount > 0) {
+        this.paddle.moveUp();
+        this.updownCount--;
+    }
+
+    while (this.updownCount < 0) {
+        this.paddle.moveDown();
+        this.updownCount++;
+    }
+};
+
+ChromecastPlayer.prototype.gameOver = function (won) {
+    // send a message to the player to tell them they won or lost
+    try {
+        var senderChannel = window.messageBus.getCastChannel(this.name);
+        if (won) {
+            senderChannel.send("GAME WON");
+        } else {
+            senderChannel.send("GAME LOST");
+        }
+    } catch(err) {
+        // We might have lost the game because we lost the connection and won't be able to send message
+    }
+};

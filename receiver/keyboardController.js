@@ -1,19 +1,10 @@
 // Keyboard Controller - can introduce a new KeyboardPlayer into the court on pressing "e" or "E" for "Enter"
 
 // TODO avoid use of the window.* and store references in local variables
-function KeyboardController(court) {
+function KeyboardController() {
     window.outputLine("KeyboardController starting");
-    window.keyboardPlayer = new KeyboardPlayer(court, "Keyboard");
-    window.addEventListener("keydown", function (event) {
-        var value = Number(event.keyCode);
-        if ((value == 16) || (value == 69)) { // 'e' or 'E'
-            window.court.enter(window.keyboardPlayer);
-        }
-
-        if ((value == 23) || (value == 76)) { // 'l' or 'L'
-            window.court.leave(window.keyboardPlayer);
-        }
-    });
+    window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
+    window.court.enterMessage = "PRESS E TO ENTER";
 }
 
 KeyboardPlayer.prototype = new Player();
@@ -49,6 +40,14 @@ function KeyboardPlayer(court, name) {
 
         if ((value == 15) || (value == 68)) { // 'd' or 'D'
             window.enableDebug();
+        }
+
+        if ((value == 16) || (value == 69)) { // 'e' or 'E'
+            window.court.enter(window.keyboardPlayer);
+        }
+
+        if ((value == 23) || (value == 76)) { // 'l' or 'L'
+            window.court.leave(window.keyboardPlayer);
         }
     });
 
