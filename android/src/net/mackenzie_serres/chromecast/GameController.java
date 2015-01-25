@@ -1,11 +1,9 @@
 package net.mackenzie_serres.chromecast;
 
-import net.mackenzie_serres.chromecast.ChromecastInteractor;
-
 /**
  * Interface definition that GameControllers must implement in order to be passed events and messages from
  * ChromecastInteractor
- *
+ * <p/>
  * User: andrew
  * Date: 25/01/15
  * Time: 19:46
@@ -13,9 +11,9 @@ import net.mackenzie_serres.chromecast.ChromecastInteractor;
  * Copyright Andrew Mackenzie, 2013
  */
 public interface GameController {
-    public void setChromecastInteractor(ChromecastInteractor chromecastInteractor);
+    public void setChromecastInteractor(final ChromecastInteractor chromecastInteractor);
 
-    public void event(ChromecastInteractor.CHROMECAST_EVENT event);
+    public void event(final ChromecastInteractor.CHROMECAST_EVENT event);
 
     public void message(final String message);
 }

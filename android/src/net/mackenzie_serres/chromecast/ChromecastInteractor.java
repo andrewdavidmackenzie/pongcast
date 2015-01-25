@@ -61,8 +61,8 @@ public class ChromecastInteractor {
      * @param activity       - the Activity running the Game
      * @param gameController - the controller that is managing the game logic
      */
-    public ChromecastInteractor(Activity activity, final String receiverAppId, final String nameSpace,
-                                MediaRouteSelector mediaRouteSelector, GameController gameController) {
+    public ChromecastInteractor(final Activity activity, final String receiverAppId, final String nameSpace,
+                                final MediaRouteSelector mediaRouteSelector, final GameController gameController) {
         this.activity = activity;
         this.receiverAppId = receiverAppId;
         this.nameSpace = nameSpace;

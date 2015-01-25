@@ -1,26 +1,37 @@
 package net.mackenzie_serres.pongcast;
 
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.MediaRouteActionProvider;
+import android.support.v7.media.MediaRouteSelector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.google.android.gms.cast.CastMediaControlIntent;
 
 /**
+ * This class provides view functionality for the controller of the game, such as joining, leaving,
+ * moving paddles etc - but not a view of the game itself.
+ *
  * User: andrew
  * Date: 11/01/15
  * Time: 02:50
  * <p/>
  * Copyright Andrew Mackenzie, 2013
  */
-public class GameControllerView {
-    private Button startGameButton;
-    private View paddleControls;
-    private ActionBarActivity activity;
+public class PongControllerView {
+    // IMMUTABLES
+    private final MediaRouteSelector mediaRouteSelector;
+    private final Button startGameButton;
+    private final View paddleControls;
+    private final ActionBarActivity activity;
 
-    public GameControllerView(final ActionBarActivity activity, final PongController pongController) {
-        Button upButton, downButton;
-
+    public PongControllerView(final ActionBarActivity activity,
+                              final String receiverAppId,
+                              final PongController pongController) {
         this.activity = activity;
         activity.setContentView(R.layout.activity_main);
 
@@ -36,6 +47,7 @@ public class GameControllerView {
         });
 
         paddleControls = activity.findViewById(R.id.paddleControl);
+        Button upButton, downButton;
         upButton = (Button) paddleControls.findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +65,30 @@ public class GameControllerView {
         });
 
         pongController.setGameView(this);
+
+        this.mediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
+                CastMediaControlIntent.categoryForCast(receiverAppId)).build();
+    }
+
+    /**
+     * Accessor for media route selector in UI
+     * @return the media route selector for the chromecast
+     */
+    public MediaRouteSelector getMediaSelector() {
+        return mediaRouteSelector;
+    }
+
+    /**
+     * Sets the selector for the chromecast device into an action in a Menu
+     *
+     * @param menu to add the action to
+     */
+    public void setMediaRouteSelector(final Menu menu) {
+        MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item);
+        MediaRouteActionProvider mediaRouteActionProvider =
+                (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
+        // Set the MediaRouteActionProvider selector for device discovery.
+        mediaRouteActionProvider.setRouteSelector(mediaRouteSelector);
     }
 
     /**
@@ -60,9 +96,11 @@ public class GameControllerView {
      *
      * @param courtState to use to change the views on screen
      */
-    public void setViewGameState(PongController.COURT_STATE courtState) {
+    public void setViewGameState(final PongController.COURT_STATE courtState) {
         switch (courtState) {
             case UNKNOWN:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
                 break;
 
             case CREATING_COURT:
