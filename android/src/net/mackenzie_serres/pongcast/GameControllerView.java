@@ -18,7 +18,7 @@ public class GameControllerView {
     private View paddleControls;
     private ActionBarActivity activity;
 
-    public GameControllerView(final ActionBarActivity activity, final GameController gameController) {
+    public GameControllerView(final ActionBarActivity activity, final PongController pongController) {
         Button upButton, downButton;
 
         this.activity = activity;
@@ -31,7 +31,7 @@ public class GameControllerView {
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameController.startGame();
+                pongController.startGame();
             }
         });
 
@@ -40,7 +40,7 @@ public class GameControllerView {
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameController.paddleUp();
+                pongController.paddleUp();
             }
         });
 
@@ -48,11 +48,11 @@ public class GameControllerView {
         downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameController.paddleDown();
+                pongController.paddleDown();
             }
         });
 
-        gameController.setGameView(this);
+        pongController.setGameView(this);
     }
 
     /**
@@ -60,7 +60,7 @@ public class GameControllerView {
      *
      * @param courtState to use to change the views on screen
      */
-    public void setViewGameState(GameController.COURT_STATE courtState) {
+    public void setViewGameState(PongController.COURT_STATE courtState) {
         switch (courtState) {
             case UNKNOWN:
                 break;

@@ -71,6 +71,7 @@ function CastController() {
     };
 
     window.court.enterMessage = "CONNECT TO CHROMECAST";
+    window.court.startMessage = "CLICK PLAY ICON";
 
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Court is ready"});

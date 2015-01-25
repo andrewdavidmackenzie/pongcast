@@ -5,6 +5,7 @@ function KeyboardController() {
     window.outputLine("KeyboardController starting");
     window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
     window.court.enterMessage = "PRESS E TO ENTER";
+    window.court.startMessage = "PRESS S TO START";
 }
 
 KeyboardPlayer.prototype = new Player();
