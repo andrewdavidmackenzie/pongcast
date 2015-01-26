@@ -1,6 +1,6 @@
 //////////////////////////////////// PADDLE ////////////////////////////////
 function Paddle(x, frontX, y, width, height, courtHeight, context, paddleColor) {
-    this.defaultSpeed = Math.floor((2 * courtHeight) / 100); // 2% of the height
+    this.defaultSpeed = Math.floor((1 * courtHeight) / 100); // 2% of the height
     this.x = x;
     this.frontX = frontX;
     this.y = y;
@@ -26,16 +26,7 @@ Paddle.prototype.clear = function () {
 };
 
 Paddle.prototype.draw = function () {
-    this.context.fillStyle = this.color;
     this.context.fillRect(this.x, this.y, this.width, this.height);
-};
-
-Paddle.prototype.moveUp = function () {
-    this.move(-this.defaultSpeed);
-};
-
-Paddle.prototype.moveDown = function () {
-    this.move(this.defaultSpeed);
 };
 
 Paddle.prototype.move = function (distance) {
@@ -69,19 +60,20 @@ function ComputerPlayer(court, name) {
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
     var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    this.paddle.move(Math.floor(-diff / 4));
+    return Math.floor(-diff / 4);
 };
 
 ComputerPlayer.prototype.gameOver = function (won) {
 };
 
 //////////////////////////////////// BALL ////////////////////////////////
-function Ball(court, ballSize, context, courtColor) {
+function Ball(court, ballSize, context, courtColor, ballColor) {
     this.court = court;
     this.ballSize = ballSize;
     this.halfBallSize = Math.floor(ballSize / 2);
     this.context = context;
     this.courtColor = courtColor;
+    this.ballColor = ballColor;
     this.x = this.court.width / 2;
     this.y = this.court.height / 2;
     this.y_speed = 0.5;
@@ -178,16 +170,15 @@ Ball.prototype.update = function () {
 };
 
 Ball.prototype.clear = function () {
-    this.context.clearRect( Math.floor(this.x) - this.halfBallSize,
-                            Math.floor(this.y) - this.halfBallSize,
-                            this.ballSize, this.ballSize);
+    this.context.clearRect(Math.floor(this.x) - this.halfBallSize,
+        Math.floor(this.y) - this.halfBallSize,
+        this.ballSize, this.ballSize);
 };
 
-Ball.prototype.draw = function (color) {
-    this.context.fillStyle = color;
-    this.context.fillRect(  Math.floor(this.x) - this.halfBallSize,
-                            Math.floor(this.y) - this.halfBallSize,
-                            this.ballSize, this.ballSize);
+Ball.prototype.draw = function () {
+    this.context.fillRect(Math.floor(this.x) - this.halfBallSize,
+        Math.floor(this.y) - this.halfBallSize,
+        this.ballSize, this.ballSize);
 };
 
 //////////////////////////////////// GAME ////////////////////////////////
@@ -198,7 +189,7 @@ function Game(court) {
     this.pointsToWin = 21;
 
     // Create a new ball in the center of the court - Moving
-    this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor);
+    this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor, this.court.ballColor);
 
     // add players until enough for a game (2)
     while (this.court.numPlayers < 2) {
@@ -221,7 +212,7 @@ Game.prototype.point = function (player, opponent) {
         this.end(player, opponent);
     } else {
         // Create a new ball in the center of the court - Moving
-        this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor);
+        this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor, this.court.ballColor);
     }
 };
 
@@ -274,6 +265,8 @@ function Court(canvas) {
     // Draw court initially
     this.context.fillStyle = this.courtColor;
     this.context.fillRect(0, 0, this.width, this.height);
+    // set the fill for ball and paddles from now on
+    this.context.fillStyle = "#FFFFFF";
 
     var paddleWidth = 10;
     var paddleHeight = 50;
@@ -288,7 +281,6 @@ function Court(canvas) {
     // Create a new ball in the center of the court - not moving
     this.ballSize = 10;
     this.ballColor = "#FFFFFF";
-    this.ball = new Ball(this, this.ballSize, this.context, this.courtColor);
 
     this.scoreboard = new ScoreBoard(this, document.getElementById("scoreboard"));
 
@@ -375,32 +367,40 @@ Court.prototype.leave = function (looser) {
 Court.prototype.draw = function () {
     // update paddle positions
     if (this.players[0]) {
-        this.paddles[0].clear();
-        this.players[0].updatePaddle(this.ball);
-        this.paddles[0].draw();
+        var move = this.players[0].updatePaddle(this.ball);
+        if (move != 0) {
+            this.paddles[0].clear();
+            this.paddles[0].move(move);
+        }
     }
 
     if (this.players[1]) {
-        this.paddles[1].clear();
-        this.players[1].updatePaddle(this.ball);
+        var move = this.players[1].updatePaddle(this.ball);
+        if (move != 0) {
+            this.paddles[1].clear();
+            this.paddles[1].move(move);
+        }
+    }
+
+    if (this.ball) {
+        this.ball.clear();
+
+        // Update the ball position and detect if it has exited one end of the court or another
+        var result = this.ball.update();
+
+        if (result != 0) {
+            if (result == -1)
+                this.game.point(this.players[1], this.players[0]);
+            else
+                this.game.point(this.players[0], this.players[1]);
+        }
+
+        // Draw the ball at the new position
+        this.ball.draw();
+        // Draw them after the ball may have deleted a part of them
+        this.paddles[0].draw();
         this.paddles[1].draw();
     }
-
-    // Delete the ball at its old position
-    this.ball.clear();
-
-    // Update the ball position and detect if it has exited one end of the court or another
-    var result = this.ball.update();
-
-    if (result != 0) {
-        if (result == -1)
-            this.game.point(this.players[1], this.players[0]);
-        else
-            this.game.point(this.players[0], this.players[1]);
-    }
-
-    // Draw the ball at the new position
-    this.ball.draw(this.ballColor);
 };
 
 // TODO Control game state here

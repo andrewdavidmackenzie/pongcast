@@ -61,14 +61,13 @@ KeyboardPlayer.prototype.updatePaddle = function () {
         for (var key in window.keysDown) {
             var value = Number(key);
             if (value == 38) { // up arrow
-                this.paddle.moveUp();
+                return -this.paddle.defaultSpeed;
             } else if (value == 40) { // down arrow
-                this.paddle.moveDown();
+                return this.paddle.defaultSpeed;
             }
         }
-    } else {
-        this.paddle.stop();
     }
+    return 0;
 };
 
 KeyboardPlayer.prototype.gameOver = function (won) {

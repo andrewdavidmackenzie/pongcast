@@ -1,5 +1,5 @@
 function CastController() {
-    cast.receiver.logger.setLevelValue(0);
+    cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.WARNING);
 
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
 
@@ -90,19 +90,13 @@ function ChromecastPlayer(court, name) {
 }
 
 /*
-This is called on each update of the screen. Move the paddle corresponding to the number of requests we got
-to move up/down from the sender since the last update
+ This is called on each update of the screen. Move the paddle corresponding to the number of requests we got
+ to move up/down from the sender since the last update
  */
 ChromecastPlayer.prototype.updatePaddle = function () {
-    while (this.updownCount > 0) {
-        this.paddle.moveUp();
-        this.updownCount--;
-    }
-
-    while (this.updownCount < 0) {
-        this.paddle.moveDown();
-        this.updownCount++;
-    }
+    var movement = -(this.paddle.defaultSpeed * this.updownCount);
+    this.updownCount = 0;
+    return movement;
 };
 
 ChromecastPlayer.prototype.gameOver = function (won) {
@@ -114,7 +108,7 @@ ChromecastPlayer.prototype.gameOver = function (won) {
         } else {
             senderChannel.send("GAME LOST");
         }
-    } catch(err) {
+    } catch (err) {
         // We might have lost the game because we lost the connection and won't be able to send message
     }
 };

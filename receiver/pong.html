@@ -73,14 +73,17 @@
 <body>
 
 <script>
-    window.enableDebug = function enableDebug(text) {
+    window.enableDebug = function enableDebug() {
+        window.debug = true;
         window.debug.style.visibility = "visible";
     }
 
     // utility function to display a text message in log and also on-screen
     window.outputLine = function outputLine(text) {
-        console.log("Debug: " + text);
-        window.debug.innerHTML += (text + "<br>");
+        if (window.debug) {
+            console.log("Debug: " + text);
+            window.debug.innerHTML += (text + "<br>");
+        }
     };
 
     window.message = function message(text) {
