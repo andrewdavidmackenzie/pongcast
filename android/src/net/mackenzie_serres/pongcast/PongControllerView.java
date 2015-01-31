@@ -50,7 +50,7 @@ public class PongControllerView {
         paddleControls = activity.findViewById(R.id.paddleControl);
         Button upButton, downButton;
         upButton = (Button) paddleControls.findViewById(R.id.upButton);
-        upButton.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
+        upButton.setOnTouchListener(new RepeatListener(300, 80, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pongController.paddleUp();
@@ -58,7 +58,7 @@ public class PongControllerView {
         }));
 
         downButton = (Button) paddleControls.findViewById(R.id.downButton);
-        downButton.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
+        downButton.setOnTouchListener(new RepeatListener(300, 80, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pongController.paddleDown();
