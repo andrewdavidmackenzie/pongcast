@@ -35,8 +35,9 @@ function CastController() {
 
         // when the last man leaves - switch out the lights
         if (window.castReceiverManager.getSenders().length == 0) {
-            // TODO set a timer before ending
-            window.close();
+            setTimeout(function() {
+                window.close();
+            }, 3000);
         }
     };
 
