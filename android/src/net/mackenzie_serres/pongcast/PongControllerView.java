@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.gms.cast.CastMediaControlIntent;
+import net.mackenzie_serres.chromecast.RepeatListener;
 
 /**
  * This class provides view functionality for the controller of the game, such as joining, leaving,
@@ -49,20 +50,20 @@ public class PongControllerView {
         paddleControls = activity.findViewById(R.id.paddleControl);
         Button upButton, downButton;
         upButton = (Button) paddleControls.findViewById(R.id.upButton);
-        upButton.setOnClickListener(new View.OnClickListener() {
+        upButton.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 pongController.paddleUp();
             }
-        });
+        }));
 
         downButton = (Button) paddleControls.findViewById(R.id.downButton);
-        downButton.setOnClickListener(new View.OnClickListener() {
+        downButton.setOnTouchListener(new RepeatListener(400, 100, new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 pongController.paddleDown();
             }
-        });
+        }));
 
         pongController.setGameView(this);
 
