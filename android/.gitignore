@@ -2,3 +2,5 @@ gen
 out
 build
 .gradle
+*.apk
+proguard_logs
