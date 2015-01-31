@@ -129,9 +129,9 @@ public class ChromecastInteractor {
                     .build();
 
             mApiClient.connect();
-            // the onConnected() callback should be called when the connect() call succeeds
+            // the onConnected() callback will be called when the connect() call succeeds
+            // or onConnectionFailed() if fails.
         } catch (Exception e) {
-            // TODO Add event for creation failed
             Log.e(TAG, "Failed to connect", e);
         }
     }

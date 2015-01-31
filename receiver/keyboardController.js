@@ -1,6 +1,5 @@
 // Keyboard Controller - can introduce a new KeyboardPlayer into the court on pressing "e" or "E" for "Enter"
 
-// TODO avoid use of the window.* and store references in local variables
 function KeyboardController() {
     window.outputLine("KeyboardController starting");
     window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
