@@ -4,12 +4,15 @@ pongcast [![travis-ci](https://travis-ci.org/andrewdavidmackenzie/pongcast.png?b
 I wanted to learn more about Chromecast development (the receiver that runs on the chromecast itself, 
 and the mobile app "controller" and decided that a good way would be to do a simple game. 
 
-Most of the first apps for chromecast I was seeing were video streaming and the like, 
-so I thought a multi-player game with two controllers connecting and playing together on the shared
+Most of the first apps for chromecast I was seeing were video streaming and the like, but I wanted to do something multi-person, where more than once person interacted with the chromecast at the same time, and the experience was shared between people on the shared screen - your TV.
+
+So I thought a multi-player game with two controllers connecting and playing together on the shared
 TV screen would be good.
 
 In homage to Pong (which met some birthday near the time and was in the news) I decided to make it pong on chromecast,
 taking me right back to the first ever video game I player.
+
+Try out a version on your browser [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
 Status
 ======
