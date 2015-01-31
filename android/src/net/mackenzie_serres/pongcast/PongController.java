@@ -21,7 +21,7 @@ import net.mackenzie_serres.chromecast.GameController;
 public class PongController implements GameController {
     // ENUMS
     public static enum COURT_STATE {
-        UNKNOWN, CREATING_COURT, COURT_READY, ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
+        UNKNOWN, FOUND_WAITING, CREATING_COURT, ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
     }
 
     public static enum GAME_EVENT {
@@ -38,11 +38,12 @@ public class PongController implements GameController {
 
     // MUTABLES
     // Set initial states
-    private COURT_STATE courtState = COURT_STATE.UNKNOWN;
+    private COURT_STATE courtState;
     private ChromecastInteractor chromecast;
     private PongControllerView gameView;
 
     public PongController() {
+        setCourtState(COURT_STATE.UNKNOWN);
     }
 
     public void setGameView(PongControllerView gameView) {
@@ -102,6 +103,11 @@ public class PongController implements GameController {
         Log.d(TAG, "Chromecast event: " + event.toString());
         // TODO proper state machine
         switch (event) {
+            case CONNECTING:
+            case CONNECTION_SUSPENDED:
+                setCourtState(COURT_STATE.FOUND_WAITING);
+                break;
+
             case CONNECTED:
                 setCourtState(COURT_STATE.CREATING_COURT);
                 break;
@@ -110,16 +116,8 @@ public class PongController implements GameController {
                 setCourtState(COURT_STATE.UNKNOWN);
                 break;
 
-            case RECEIVER_RUNNING:
-                setCourtState(COURT_STATE.COURT_READY);
-                break;
-
-            case RECEIVER_CONNECTED:
+            case READY:
                 setCourtState(COURT_STATE.ON_COURT);
-                break;
-
-            case RECEIVER_DEAD:
-                setCourtState(COURT_STATE.UNKNOWN);
                 break;
         }
     }

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.cast.CastMediaControlIntent;
 import net.mackenzie_serres.chromecast.RepeatListener;
@@ -27,6 +28,7 @@ public class PongControllerView {
     // IMMUTABLES
     private final MediaRouteSelector mediaRouteSelector;
     private final Button startGameButton;
+    private final TextView messageView;
     private final View paddleControls;
     private final ActionBarActivity activity;
 
@@ -46,6 +48,8 @@ public class PongControllerView {
                 pongController.startGame();
             }
         });
+
+        messageView = (TextView)activity.findViewById(R.id.messageView);
 
         paddleControls = activity.findViewById(R.id.paddleControl);
         Button upButton, downButton;
@@ -102,35 +106,53 @@ public class PongControllerView {
             case UNKNOWN:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.selectRoute);
+                break;
+
+            case FOUND_WAITING:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.waiting);
                 break;
 
             case CREATING_COURT:
-                break;
-
-            case COURT_READY:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.preparing);
                 break;
 
             case ON_COURT:
-                break;
-
-            case GAME_OVER:
-                startGameButton.setVisibility(View.VISIBLE);
-                paddleControls.setVisibility(View.INVISIBLE);
-                break;
-
-            case GAME_IN_PLAY:
                 startGameButton.setVisibility(View.INVISIBLE);
-                paddleControls.setVisibility(View.VISIBLE);
-                break;
-
-            case GAME_PAUSED:
-                startGameButton.setVisibility(View.VISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.onCourt);
                 break;
 
             case READY_FOR_GAME:
                 startGameButton.setVisibility(View.VISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.INVISIBLE);
+                break;
+
+            case GAME_OVER:
+                startGameButton.setVisibility(View.VISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.INVISIBLE);
+                break;
+
+            case GAME_IN_PLAY:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.VISIBLE);
+                messageView.setVisibility(View.INVISIBLE);
+                break;
+
+            case GAME_PAUSED:
+                startGameButton.setVisibility(View.VISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.INVISIBLE);
                 break;
         }
     }

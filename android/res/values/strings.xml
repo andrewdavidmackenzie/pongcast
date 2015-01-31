@@ -6,7 +6,10 @@
 	<!-- This must match the one defined in the receiver.html -->
     <string name="namespace">urn:x-cast:net.mackenzie_serres.pongcast</string>
     <string name="action_settings">Settings</string>
-    <string name="message_to_cast">Message to Cast&#8230;</string>
     <string name="media_route_menu_title">Play on&#8230;</string>
+    <string name="preparing">Preparing court...</string>
+    <string name="waiting">Waiting to get on court...</string>
+    <string name="selectRoute">Select a Chromecast</string>
+    <string name="onCourt">Got in!</string>
 
 </resources>
