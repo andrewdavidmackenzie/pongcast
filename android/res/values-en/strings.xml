@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Just leave one string, so we have en "EN" Language entry - go with default translations for the rest -->
+	<string name="onCourt">Got in!</string>
+	<string name="preparing">Preparing court…</string>
+	<string name="selectRoute">Select a Chromecast</string>
+	<string name="waiting">Waiting to get on court…</string>
+	<string name="media_route_menu_title">Play on&#8230;</string>
+
+</resources>

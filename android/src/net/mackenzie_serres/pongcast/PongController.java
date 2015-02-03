@@ -1,5 +1,6 @@
 package net.mackenzie_serres.pongcast;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 import net.mackenzie_serres.chromecast.ChromecastInteractor;
 import net.mackenzie_serres.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
@@ -38,7 +39,7 @@ public class PongController implements GameController {
 
     // MUTABLES
     // Set initial states
-    private COURT_STATE courtState;
+    private COURT_STATE courtState = COURT_STATE.UNKNOWN;
     private ChromecastInteractor chromecast;
     private PongControllerView gameView;
 
@@ -143,7 +144,7 @@ public class PongController implements GameController {
      *
      * @param newCourtState - the new state
      */
-    private void setCourtState(final COURT_STATE newCourtState) {
+    private void setCourtState(@NonNull final COURT_STATE newCourtState) {
         Log.d(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
         this.courtState = newCourtState;
 

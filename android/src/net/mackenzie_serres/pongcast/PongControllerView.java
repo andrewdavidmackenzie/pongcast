@@ -162,6 +162,8 @@ public class PongControllerView {
      * @param message to display
      */
     public void message(final String message) {
-        Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+        if (message != null) {
+            Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+        }
     }
 }
