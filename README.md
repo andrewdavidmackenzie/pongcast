@@ -9,25 +9,15 @@ Most of the first apps for chromecast I was seeing were video streaming and the 
 So I thought a multi-player game with two controllers connecting and playing together on the shared
 TV screen would be good.
 
-In homage to Pong (which met some birthday near the time and was in the news) I decided to make it pong on chromecast,
-taking me right back to the first ever video game I player.
+In homage to Pong (which met some birthday near the time and was in the news) I decided to make it pong on chromecast, taking me right back to the first video game I ever played.
 
 Try out a version on your browser [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
-Status
-======
-* pong.html and JavaScript to create the court and load the game logic (pong.js) and depending on where it's running start a keyboardController or a ChromecastController.
-* Core game logic and graphics, this includes a very simple "Computer" player you can play against.
-* A keyboard controller that you can use to control a player when the game is running in your browser. Useful for development.
-* A chromecast "custom receiver" in JavaScript that acts as the Chromecast controller for the game and which creates ChromePlayers. This allows multiple players to enter the court to play by using the mobile app on their mobile as a game controller, which they connect to the chromecast.
-* Android mobile app ("chromecast sender".
-  - At the moment this can just connect to the chromecast to enter the court and has a button to start the game.
-  - Paddle control still needs to be done.
+[Get the Android "Sender" app](https://play.google.com/store/apps/details?id=net.mackenzie_serres.pongcast) on Google Play Store. 
+- Version 1.0.2 fixes some crashes on start-up, sorry folks!
 
 Areas Needing work
 =====
-Finish basic paddle control via the Android app ("sender") and ChromecastController ("receiver").
-
 Despite using some CSS scaling tricks, the update rate on the chromecast is still too slow, and it doesn't work smoothly, so that's one area of work.
 Javascript/CSS-fu to make it all run quicker and smoother on the chromecast is very welcome!
 
@@ -49,7 +39,7 @@ Recently I have created a "gh-pages" branch on this repo and posted the contents
 
 You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
-See Keyboard Controll below.
+See Keyboard Control below.
 
 If you fork this repo, you will also get this branch and you should get a hosted version of the game under "your-username".github.io/pongcast/pong.html
 You will need to modify the receiver identifier in the android code to refer to the URL where you host you receiver.
@@ -62,6 +52,7 @@ Keyboard Control
 * Use 's' to Start a game once you are in the court.
 * Use up and down keys on keyboard to control the paddle.
 * Use spacebar to pause/restart the game.
+* Use 'l' to leave the court and end the game
 
 Scripts
 ======
