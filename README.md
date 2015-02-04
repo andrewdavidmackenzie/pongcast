@@ -25,6 +25,8 @@ Also, for some reason I have not been able to get the sound reproduction to sync
 reliable - despite using some tricks I found on the web... so help with good sound from JS on Chromecast is also
 much needed.
 
+[GitHub Issues](https://github.com/andrewdavidmackenzie/pongcast/issues)
+
 Folders
 ======
 * android - the android app to control the game, just a skeleton at the moment.
