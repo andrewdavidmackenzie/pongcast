@@ -1,39 +1,48 @@
 function CastController() {
+    //noinspection JSUnresolvedVariable,JSUnresolvedFunction
     cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.WARNING);
 
+    //noinspection JSUnresolvedVariable,JSUnresolvedFunction
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
 
     // create a CastMessageBus to handle messages for a custom namespace
+    //noinspection JSUnresolvedVariable,JSUnresolvedFunction
     window.messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:net.mackenzie_serres.pongcast');
 
     // handler for the 'ready' event
-    castReceiverManager.onReady = function (event) {
+    castReceiverManager.onReady = function () {
+        //noinspection JSUnresolvedVariable,JSUnresolvedFunction
         window.castReceiverManager.setApplicationState("Ready for players...");
     };
 
     // handler for 'senderconnected' event - this player can then enter the court
     castReceiverManager.onSenderConnected = function (event) {
+        //noinspection JSUnresolvedVariable
         var name = event.senderId;
         console.log("Player Connected: " + name);
+        //noinspection JSUnresolvedFunction
         console.log("Players Connected: " + window.castReceiverManager.getSenders().length);
 
         // Keep track of all people connected, indexing them by unique name
         var player = new ChromecastPlayer(window.court, name);
-        window.players = new Array();
+        window.players = [];
         window.players[name] = player;
 
         // have the player enter the court
         var response = window.court.enter(player);
         // send a message to the player to tell them if they got a paddle and which one
+        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
         var senderChannel = window.messageBus.getCastChannel(event.senderId);
         senderChannel.send(response);
     };
 
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function (event) {
+        //noinspection JSUnresolvedVariable
         window.court.leave(window.players[event.senderId]);
 
         // when the last man leaves - switch out the lights
+        //noinspection JSUnresolvedFunction
         if (window.castReceiverManager.getSenders().length == 0) {
             setTimeout(function() {
                 window.close();
@@ -43,25 +52,30 @@ function CastController() {
 
     // handler for incoming messages on the message bus
     window.messageBus.onMessage = function (event) {
+        //noinspection JSUnresolvedVariable
         console.log('Message [' + event.senderId + ']: ' + event.data);
 
         // handle message
         switch (event.data) {
             case "StartPlay":
                 window.court.startPlay();
+                //noinspection JSUnresolvedFunction
                 window.messageBus.broadcast("GAME STARTED");
                 break;
 
             case "PausePlay":
                 window.court.pausePlay();
+                //noinspection JSUnresolvedFunction
                 window.messageBus.broadcast("GAME PAUSED");
                 break;
 
             case "MoveUp":
+                //noinspection JSUnresolvedVariable
                 window.players[event.senderId].updownCount++;
                 break;
 
             case "MoveDown":
+                //noinspection JSUnresolvedVariable
                 window.players[event.senderId].updownCount--;
                 break;
 
@@ -104,6 +118,7 @@ ChromecastPlayer.prototype.updatePaddle = function () {
 ChromecastPlayer.prototype.gameOver = function (won) {
     // send a message to the player to tell them they won or lost
     try {
+        //noinspection JSUnresolvedFunction
         var senderChannel = window.messageBus.getCastChannel(this.name);
         if (won) {
             senderChannel.send("GAME WON");

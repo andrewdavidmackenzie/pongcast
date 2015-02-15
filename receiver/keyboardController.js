@@ -15,7 +15,7 @@ function KeyboardPlayer(court, name) {
     Player.apply(this, court);
     this.name = name;
 
-    window.keysDown = new Array();
+    window.keysDown = [];
 
     window.addEventListener("keydown", function (event) {
         // Mark this key in the keysDown array as pressed
