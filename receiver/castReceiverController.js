@@ -14,8 +14,8 @@ function CastController() {
     // handler for 'senderconnected' event - this player can then enter the court
     castReceiverManager.onSenderConnected = function (event) {
         var name = event.senderId;
-        window.outputLine("Player Connected: " + name);
-        window.outputLine("Players Connected: " + window.castReceiverManager.getSenders().length);
+        console.log("Player Connected: " + name);
+        console.log("Players Connected: " + window.castReceiverManager.getSenders().length);
 
         // Keep track of all people connected, indexing them by unique name
         var player = new ChromecastPlayer(window.court, name);
@@ -43,7 +43,7 @@ function CastController() {
 
     // handler for incoming messages on the message bus
     window.messageBus.onMessage = function (event) {
-        window.outputLine('Message [' + event.senderId + ']: ' + event.data);
+        console.log('Message [' + event.senderId + ']: ' + event.data);
 
         // handle message
         switch (event.data) {
@@ -73,6 +73,7 @@ function CastController() {
 
     window.court.enterMessage = "CONNECT TO CHROMECAST";
     window.court.startMessage = "CLICK PLAY ICON";
+    window.court.pausedMessage = "CLICK PLAY TO RESTART";
 
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Court is ready"});

@@ -10,7 +10,3 @@ chromecast channel to controller apps that connect there.
 castReceiverController.js
 =====
 This provides a number of functions to communicate over the channel between the chromecast and controlling apps.
-
-stats.min.js
-=====
-stats.min.js - this is a minified JS code for displaying refresh frame rate stats on-screen.

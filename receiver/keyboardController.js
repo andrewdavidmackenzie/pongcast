@@ -1,10 +1,11 @@
 // Keyboard Controller - can introduce a new KeyboardPlayer into the court on pressing "e" or "E" for "Enter"
 
 function KeyboardController() {
-    window.outputLine("KeyboardController starting");
+    console.log("KeyboardController starting");
     window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
     window.court.enterMessage = "PRESS E TO ENTER";
     window.court.startMessage = "PRESS S TO START";
+    window.court.pausedMessage = "PRESS SPACE TO RESTART";
 }
 
 KeyboardPlayer.prototype = new Player();
@@ -51,7 +52,7 @@ function KeyboardPlayer(court, name) {
         }
     });
 
-    window.outputLine("Keyboard Player ready");
+    console.log("Keyboard Player ready");
 }
 
 // Check what keys are pressed everytime we get asked to update our paddle position

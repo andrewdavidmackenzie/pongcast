@@ -183,7 +183,7 @@ Ball.prototype.draw = function () {
 
 //////////////////////////////////// GAME ////////////////////////////////
 function Game(court) {
-    window.outputLine("New Game");
+    console.log("New Game");
     this.court = court;
     this.court.game = this;
     this.pointsToWin = 21;
@@ -204,7 +204,7 @@ function Game(court) {
 }
 
 Game.prototype.point = function (player, opponent) {
-    window.outputLine("Point for player: " + player.name);
+    console.log("Point for player: " + player.name);
 
     this.court.scoreboard.pointWon(player);
 
@@ -217,7 +217,7 @@ Game.prototype.point = function (player, opponent) {
 };
 
 Game.prototype.end = function (winner, looser) {
-    window.outputLine("End of game. '" + winner.name + "' wins");
+    console.log("End of game. '" + winner.name + "' wins");
     winner.gameOver(true);
     looser.gameOver(false);
 
@@ -319,17 +319,17 @@ Court.prototype.enter = function (player) {
         this.players[0].givePaddle(this.paddles[0]);
         this.paddles[0].draw();
         this.numPlayers++;
-        window.outputLine("Player '" + player.name + "' enters court, gets left paddle");
+        console.log("Player '" + player.name + "' enters court, gets left paddle");
         response = "PADDLE YES LEFT";
     } else if (this.players[1] == null) {
         this.players[1] = player;
         this.players[1].givePaddle(this.paddles[1]);
         this.paddles[1].draw();
         this.numPlayers++;
-        window.outputLine("Player '" + player.name + "' enters court, gets right paddle");
+        console.log("Player '" + player.name + "' enters court, gets right paddle");
         response = "PADDLE YES RIGHT";
     } else {
-        window.outputLine("PADDLE NONE");
+        console.log("PADDLE NONE");
         response = "PADDLE NONE";
     }
 
@@ -338,7 +338,7 @@ Court.prototype.enter = function (player) {
 };
 
 Court.prototype.leave = function (looser) {
-    window.outputLine("Player '" + looser.name + "' has left the court");
+    console.log("Player '" + looser.name + "' has left the court");
 
     if (looser == this.players[0]) {
         winner = this.players[1];
@@ -382,6 +382,10 @@ Court.prototype.draw = function () {
         }
     }
 
+    if (window.debug > 1) {
+        console.log('    to move paddle took ' + (performance.now() - window.start) + ' ms');
+    }
+
     if (this.ball) {
         this.ball.clear();
 
@@ -397,9 +401,16 @@ Court.prototype.draw = function () {
 
         // Draw the ball at the new position
         this.ball.draw();
+        if (window.debug > 1) {
+            console.log('    to draw ball took ' + (performance.now() - window.start) + ' ms');
+        }
+
         // Draw them after the ball may have deleted a part of them
         this.paddles[0].draw();
         this.paddles[1].draw();
+        if (window.debug > 1) {
+            console.log('    to draw paddles took ' + (performance.now() - window.start) + ' ms');
+        }
     }
 };
 
@@ -411,7 +422,7 @@ Court.prototype.startPlay = function () {
 
     window.message("");
 
-    window.outputLine("Starting play");
+    console.log("Starting play");
     this.paused = false;
     this.update();
 };
@@ -419,15 +430,15 @@ Court.prototype.startPlay = function () {
 // TODO Control game state here
 Court.prototype.pausePlay = function () {
     this.paused = true;
-    window.outputLine("Play paused");
-    window.message("PAUSED. SPACE TO RESTART");
+    console.log("Play paused");
+    window.message(window.court.pausedMessage);
 };
 
 // TODO Control game state here
 Court.prototype.restartPlay = function () {
     this.paused = false;
     window.message("");
-    window.outputLine("Play restarted");
+    console.log("Play restarted");
     this.update();
 };
 
@@ -444,9 +455,27 @@ Court.prototype.togglePlay = function () {
 // This will be called from window on refresh
 Court.prototype.update = function () {
     if (!window.court.paused) {
-        window.court.draw();
+        if (window.debug) {
+            console.log('time since last update ' + (performance.now() - window.start) + ' ms');
+        }
+        window.start = performance.now();
+
+        window.court.draw(); // my drawing routing
+
+        var end = performance.now();
+        if (window.debug) {
+            console.log('to exit court.draw() took ' + (end - window.start) + ' ms');
+        }
 
         // reschedule next animation update
         window.requestAnimationFrame(window.court.update);
     }
+};
+
+window.enableDebug = function enableDebug() {
+    window.debug = 1;
+};
+
+window.enableStats = function enableStats() {
+    window.stats = true;
 };

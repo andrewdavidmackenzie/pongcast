@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="http://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script src="timestamp.js"></script>
     <script src="pong.js"></script>
     <script src="castReceiverController.js"></script>
     <script src="keyboardController.js"></script>
@@ -22,15 +23,6 @@
             margin: 0;
             padding: 0;
             background: #999999;
-        }
-
-        #debug {
-            width: 500px;
-            height: 100%;
-            position: absolute;
-            padding-left: 50px;
-            padding-top: 50px;
-            visibility: hidden;
         }
 
         #scoreboard {
@@ -74,19 +66,6 @@
 <body>
 
 <script>
-    window.enableDebug = function enableDebug() {
-        window.debug = true;
-        window.debug.style.visibility = "visible";
-    };
-
-    // utility function to display a text message in log and also on-screen
-    window.outputLine = function outputLine(text) {
-        if (window.debug) {
-            console.log("Debug: " + text);
-            window.debug.innerHTML += (text + "<br>");
-        }
-    };
-
     window.message = function message(text) {
         window.messageboard.innerHTML = (text);
     };
@@ -112,11 +91,13 @@
         };
 
         window.court.courtMessage();
+
+        console.log("Version: 1.1.0");
+        console.log("Timestamp: " + window.timestamp);
     };
 </script>
 
 <canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!</canvas>
-<div id="debug"></div>
 <div id="scoreboard">
     <span class="left"></span>
     <span class="right"></span>
