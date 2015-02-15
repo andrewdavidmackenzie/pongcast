@@ -35,7 +35,7 @@ public class ChromecastInteractor {
     }
 
     // CONSTANTS
-    private static final String TAG = ChromecastInteractor.class.getSimpleName();
+    private static final String TAG = "ChromecastInteractor";
 
     // IMMUTABLES
     private final Activity activity;

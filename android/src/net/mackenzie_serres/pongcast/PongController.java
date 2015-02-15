@@ -1,6 +1,7 @@
 package net.mackenzie_serres.pongcast;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import net.mackenzie_serres.chromecast.ChromecastInteractor;
 import net.mackenzie_serres.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
@@ -26,11 +27,11 @@ public class PongController implements GameController {
     }
 
     public static enum GAME_EVENT {
-        GOT_PADDLE, NO_PADDLE, GAME_STARTED, GAME_PAUSED, GAME_WON_LOST
+        APP_STARTED, GOT_PADDLE, NO_PADDLE, GAME_STARTED, GAME_PAUSED, GAME_WON_LOST
     }
 
     // CONSTANTS
-    private static final String TAG = PongController.class.getSimpleName();
+    private static final String TAG = "PongController";
     private static final String START_GAME_MESSAGE = "StartPlay";
     private static final String PAUSE_PLAY_MESSAGE = "PausePlay";
     private static final String PADDLE_UP_MESSAGE = "MoveUp";
@@ -44,7 +45,7 @@ public class PongController implements GameController {
     private PongControllerView gameView;
 
     public PongController() {
-        setCourtState(COURT_STATE.UNKNOWN);
+        event(GAME_EVENT.APP_STARTED);
     }
 
     public void setGameView(PongControllerView gameView) {
@@ -128,7 +129,7 @@ public class PongController implements GameController {
      * @param message from chromecast to parse
      */
     @Override
-    public void message(final String message) {
+    public void message(@NonNull final String message) {
         if (message.startsWith("PADDLE")) {
             parsePaddleMessage(message);
         } else if (message.startsWith("GAME")) {
@@ -145,11 +146,26 @@ public class PongController implements GameController {
      * @param newCourtState - the new state
      */
     private void setCourtState(@NonNull final COURT_STATE newCourtState) {
+        setCourtState(newCourtState, null);
+    }
+
+    /**
+     * Keep track of changes in the state of the court and make the appropriate changes to other states and views
+     * when it changes.
+     *
+     * @param newCourtState - the new state
+     * @param message to display in the view
+     */
+    private void setCourtState(@NonNull final COURT_STATE newCourtState, final String message) {
         Log.d(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
         this.courtState = newCourtState;
 
         if (gameView != null) {
             gameView.setViewGameState(this.courtState);
+
+            if (message != null) {
+                gameView.message(message);
+            }
         }
     }
 
@@ -158,7 +174,7 @@ public class PongController implements GameController {
      *
      * @param event GAME_EVENT to process
      */
-    private void event(final GAME_EVENT event) {
+    private void event(@NonNull final GAME_EVENT event) {
         event(event, null);
     }
 
@@ -168,10 +184,14 @@ public class PongController implements GameController {
      * @param event GAME_EVENT to process
      * @param message options message string with event
      */
-    private void event(final GAME_EVENT event, String message) {
+    private void event(@NonNull final GAME_EVENT event, @Nullable String message) {
         Log.d(TAG, "Game event: " + event.toString());
         // TODO proper state machine
         switch (event) {
+            case APP_STARTED:
+                setCourtState(COURT_STATE.UNKNOWN);
+                break;
+
             case GAME_STARTED:
                 setCourtState(COURT_STATE.GAME_IN_PLAY);
                 break;
@@ -184,18 +204,18 @@ public class PongController implements GameController {
 
             case GAME_WON_LOST:
                 if (courtState == COURT_STATE.GAME_IN_PLAY) {
-                    gameView.message(message);
-                    setCourtState(COURT_STATE.GAME_OVER);
+                    setCourtState(COURT_STATE.GAME_OVER, message);
                 }
                 break;
 
             case GOT_PADDLE:
-                gameView.message("You got " + message.split(PADDLE_YES_PREFIX)[1] + " paddle");
-                setCourtState(COURT_STATE.READY_FOR_GAME);
+                if (message != null) {
+                    setCourtState(COURT_STATE.READY_FOR_GAME, "You got " + message.split(PADDLE_YES_PREFIX)[1] + " paddle");
+                }
                 break;
 
             case NO_PADDLE:
-                gameView.message("Sorry, no paddle for you!");
+                setCourtState(COURT_STATE.ON_COURT, "Sorry, no paddle for you!");
                 break;
 
             default:
