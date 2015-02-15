@@ -7,6 +7,7 @@
     <string name="namespace" translatable="false">urn:x-cast:net.mackenzie_serres.pongcast</string>
 
 	<!-- Translatable strings below -->
+	<string name="language">Default</string>
     <string name="media_route_menu_title">Play on&#8230;</string>
     <string name="preparing">Preparing court…</string>
     <string name="waiting">Waiting to get on court…</string>

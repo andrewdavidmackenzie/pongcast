@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<!-- Just leave one string, so we have en "EN" Language entry - go with default translations for the rest -->
+	<string name="language">en</string>
 	<string name="onCourt">Got in!</string>
 	<string name="preparing">Preparing court…</string>
 	<string name="selectRoute">Select a Chromecast</string>

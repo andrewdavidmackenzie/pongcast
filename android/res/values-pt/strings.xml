@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<string name="language">pt</string>
 	<string name="media_route_menu_title">Jugar en&#8230;</string>
 	<string name="preparing">Preparando la pista…</string>
 	<string name="waiting">Esperando poder entrar en la pista…</string>
