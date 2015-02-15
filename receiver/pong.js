@@ -337,10 +337,11 @@ Court.prototype.enter = function (player) {
     return response;
 };
 
-Court.prototype.leave = function (looser) {
-    console.log("Player '" + looser.name + "' has left the court");
+Court.prototype.leave = function (leaver) {
+    var winner;
+    console.log("Player '" + leaver.name + "' has left the court");
 
-    if (looser == this.players[0]) {
+    if (leaver == this.players[0]) {
         winner = this.players[1];
         this.players[0] = null;
     } else {
@@ -349,7 +350,7 @@ Court.prototype.leave = function (looser) {
     }
 
     if (this.game) {
-        this.game.end(winner, looser);
+        this.game.end(winner, leaver);
     } else {
         window.message(this.enterMessage);
     }
@@ -357,11 +358,13 @@ Court.prototype.leave = function (looser) {
     // and remove from the court
     this.numPlayers--;
 
-    this.ball.clear();
+    if (this.ball) {
+        this.ball.clear();
+    }
 
     // Reclaim his paddle
-    looser.paddle.clear();
-    looser.paddle = null;
+    leaver.paddle.clear();
+    leaver.paddle = null;
 };
 
 Court.prototype.draw = function () {
