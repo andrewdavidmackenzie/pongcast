@@ -35,18 +35,17 @@ Folders
 
 Hosting your own receiver
 =====
-Until now I have just been hosting a version of the custom receiver code from a folder in my Google Drive in the cloud, which I have the folder shared publicly. Google Drive is actually quite a good way to host a "statics only" web site.
-
-Recently I have created a "gh-pages" branch on this repo and posted the contents of the ./receiver folder there, effectively hosting the latest version of the custom receiver code on that branch (which also works in your browser with the keyboard controller!) here on git! 
+I have moved to hosting my production version of the receiver from GitHub Pages.
 
 You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
-See Keyboard Control below.
+I was previously hosting the receiver on Google Drive, but they have stopped allowing you to publish html pages from drive (the previously published one still worked).
+Also, it looks like they were blocking my .mp3 audio files - probably to stop people sharing soing via Google Drive folders.
+
+See Keyboard Control below for using the browser version.
 
 If you fork this repo, you will also get this branch and you should get a hosted version of the game under "your-username".github.io/pongcast/pong.html
 You will need to modify the receiver identifier in the android code to refer to the URL where you host you receiver.
-
-TODO - modify the code to use the github hosted one for production, and keep using my Google Drive version for development - testing changes before pushing them to github.
 
 Keyboard Control
 =====
@@ -55,10 +54,6 @@ Keyboard Control
 * Use up and down keys on keyboard to control the paddle.
 * Use spacebar to pause/restart the game.
 * Use 'l' to leave the court and end the game
-
-Scripts
-======
-deployReceiver.sh - this script just copies the ./receiver folder contents into my Google Drive folder.
 
 Cloning with git submodules
 ======

@@ -16,7 +16,7 @@
   <component name="AndroidLayouts">
     <shared>
       <config>
-        <locale>es</locale>
+        <locale>pt-rBR</locale>
       </config>
     </shared>
     <layouts>
@@ -34,10 +34,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="934b33c7-f5f4-4567-90f1-332221113ecc" name="Default" comment="Fixed problem with vertical scrolling of court when up/down keys used">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../deployReceiver.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../receiver/timestamp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../receiver/timestamp_template.js" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/android.iml" afterPath="$PROJECT_DIR$/pongcast.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../receiver/out.mp3" afterPath="$PROJECT_DIR$/../receiver/wall.mp3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CastCompanionLibrary" afterPath="$PROJECT_DIR$/../CastCompanionLibrary" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/down.png" afterPath="$PROJECT_DIR$/res/drawable/down.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/feature-graphic.png" afterPath="$PROJECT_DIR$/../art/feature-graphic.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/res/drawable-xxxhdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon1280x1280.png" afterPath="$PROJECT_DIR$/../art/pongcasticon1280x1280.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon128x128.png" afterPath="$PROJECT_DIR$/../art/pongcasticon128x128.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon144x144.png" afterPath="$PROJECT_DIR$/../art/pongcasticon144x144.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon192x192.png" afterPath="$PROJECT_DIR$/../art/pongcasticon192x192.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon256x256.png" afterPath="$PROJECT_DIR$/../art/pongcasticon256x256.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon48x48.png" afterPath="$PROJECT_DIR$/../art/pongcasticon48x48.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon512x512.png" afterPath="$PROJECT_DIR$/../art/pongcasticon512x512.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon72x72.png" afterPath="$PROJECT_DIR$/../art/pongcasticon72x72.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/pongcasticon96x96.png" afterPath="$PROJECT_DIR$/../art/pongcasticon96x96.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/screenshot-chromecast.png" afterPath="$PROJECT_DIR$/../art/screenshot-chromecast.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/screenshot-nexus-4.png" afterPath="$PROJECT_DIR$/../art/screenshot-nexus-4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../art/screenshot-nexus-7.png" afterPath="$PROJECT_DIR$/../art/screenshot-nexus-7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/up.png" afterPath="$PROJECT_DIR$/res/drawable/up.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CastCompanionLibrary/CastCompanionLibrary.iml" afterPath="$PROJECT_DIR$/../CastCompanionLibrary/CastCompanionLibrary.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../README.md" afterPath="$PROJECT_DIR$/../README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../receiver/pong.html" afterPath="$PROJECT_DIR$/../receiver/pong.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../receiver/pong.js" afterPath="$PROJECT_DIR$/../receiver/pong.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CastCompanionLibrary/project.properties" afterPath="$PROJECT_DIR$/../CastCompanionLibrary/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pongcast.iws" />
@@ -53,6 +83,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="Commander">
+    <leftPanel />
+    <rightPanel />
+    <splitter proportion="0.5" />
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -96,8 +131,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -105,79 +140,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="keyboardController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="1120">
-              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.1352657" vertical-offset="0" max-vertical-offset="574">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pong.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+      <file leaf-file-name="LogUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/utils/LogUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5510" max-vertical-offset="6398">
-              <caret line="405" column="3" selection-start-line="405" selection-start-column="3" selection-end-line="405" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PongController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.0932784" vertical-offset="406" max-vertical-offset="3276">
-              <caret line="146" column="40" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
-              <folding>
-                <element signature="e#1686#1687#0" expanded="true" />
-                <element signature="e#1736#1737#0" expanded="true" />
-                <element signature="e#1796#1797#0" expanded="true" />
-                <element signature="e#1836#1837#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="112" max-vertical-offset="924">
-              <caret line="8" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.96" vertical-offset="0" max-vertical-offset="364">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="980">
-              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notes" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/notes">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="378">
-              <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1204">
+              <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -844,9 +821,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/BUILD.md" />
-        <option value="$PROJECT_DIR$/../README.md" />
         <option value="$PROJECT_DIR$/../deploy" />
-        <option value="$PROJECT_DIR$/../receiver/README.md" />
         <option value="$PROJECT_DIR$/../COMMANDS.md" />
         <option value="$PROJECT_DIR$/../receiver/keyboardPlayer.js" />
         <option value="$PROJECT_DIR$/res/drawable/voice_button.xml" />
@@ -857,22 +832,27 @@
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/GameControllerView.java" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/GameController.java" />
-        <option value="$PROJECT_DIR$/../receiver/pong.js" />
         <option value="$PROJECT_DIR$/notes" />
-        <option value="$PROJECT_DIR$/../receiver/pong.html" />
         <option value="$PROJECT_DIR$/proguard-android.txt" />
-        <option value="$PROJECT_DIR$/../receiver/keyboardController.js" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/RepeatListener.java" />
-        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/ChromecastInteractor.java" />
         <option value="$PROJECT_DIR$/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/../receiver/castReceiverController.js" />
         <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongControllerView.java" />
-        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongController.java" />
+        <option value="$PROJECT_DIR$/../receiver/timestamp_template.js" />
+        <option value="$PROJECT_DIR$/../deployReceiver.sh" />
+        <option value="$PROJECT_DIR$/../receiver/README.md" />
         <option value="$PROJECT_DIR$/res/values-en/strings.xml" />
         <option value="$PROJECT_DIR$/res/values-es/strings.xml" />
+        <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongController.java" />
+        <option value="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/ChromecastInteractor.java" />
+        <option value="$PROJECT_DIR$/res/values-pt/strings.xml" />
+        <option value="$PROJECT_DIR$/../receiver/castReceiverController.js" />
+        <option value="$PROJECT_DIR$/../receiver/keyboardController.js" />
+        <option value="$PROJECT_DIR$/../README.md" />
+        <option value="$PROJECT_DIR$/../receiver/pong.html" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/../receiver/pong.js" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
@@ -906,8 +886,8 @@
       <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
-      <autoscrollToSource ProjectPane="false" />
-      <autoscrollFromSource ProjectPane="true" />
+      <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="false" />
       <sortByType />
     </navigator>
     <panes>
@@ -941,46 +921,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pongcast" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mackenzie_serres" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pongcast" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pongcast" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mackenzie_serres" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
@@ -994,7 +934,7 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../art" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pongcast-receiver" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3574409" />
@@ -1006,8 +946,8 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="ExportedModule" value="android" />
-    <property name="ExportedApkPath" value="$PROJECT_DIR$/android.apk" />
+    <property name="ExportedModule" value="pongcast" />
+    <property name="ExportedApkPath" value="$PROJECT_DIR$/pongcast.apk" />
     <property name="AndroidRunProguardForReleaseBuild" value="true" />
     <property name="AndroidProguardConfigPaths" value="$PROJECT_DIR$/proguard-android.txt" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
@@ -1037,6 +977,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/res/values-pt" />
       <recent name="$PROJECT_DIR$/res/values-en" />
       <recent name="$PROJECT_DIR$/res/values-es" />
     </key>
@@ -1220,7 +1161,7 @@
       <method />
     </configuration>
     <configuration default="false" name="pongcast" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="android" />
+      <module name="pongcast" />
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
@@ -1241,8 +1182,31 @@
       <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
     </configuration>
-    <list size="1">
+    <configuration default="false" name="benchcast" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="android" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
+      <method />
+    </configuration>
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Android Application.pongcast" />
+      <item index="1" class="java.lang.String" itemvalue="Android Application.benchcast" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1295,7 +1259,10 @@
       <workItem from="1422724894924" duration="11876000" />
       <workItem from="1422789474402" duration="163000" />
       <workItem from="1422824394011" duration="3207000" />
-      <workItem from="1422989823789" duration="4739000" />
+      <workItem from="1422989823789" duration="4923000" />
+      <workItem from="1423933764758" duration="37792000" />
+      <workItem from="1424353376447" duration="56597000" />
+      <workItem from="1425237062875" duration="358000" />
     </task>
     <task id="LOCAL-00001" summary="Added xxxhdpi launcher icon">
       <created>1422830792568</created>
@@ -1307,7 +1274,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196177000" />
+    <option name="totallyTimeSpent" value="291108000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1346,27 +1313,27 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42536327" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23390558" sideWeight="0.6068796" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="19" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26680973" sideWeight="0.6068796" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26023778" sideWeight="0.52582496" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="18" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.65782493" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.6896552" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37516513" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23390558" sideWeight="0.3906634" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30779392" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15191546" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41611624" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3659181" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24892704" sideWeight="0.7427056" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19081779" sideWeight="0.6710875" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13870542" sideWeight="0.52582496" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891247" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21003963" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37516513" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.6896552" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28005284" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26923078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="CafeBabe" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
@@ -1411,127 +1378,23 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1284" max-vertical-offset="3836">
-          <caret line="109" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1806">
-          <caret line="97" column="54" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1899" max-vertical-offset="3570">
-          <caret line="163" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="224">
-          <caret line="0" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.826087" vertical-offset="188" max-vertical-offset="756">
-          <caret line="23" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/stats.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="126">
-          <caret line="3" column="1109" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/lib.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33217993" vertical-offset="89814" max-vertical-offset="128422">
-          <caret line="6442" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/README.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="530">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6860">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#13493#13628#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib/res/values/version.xml">
+    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/res/layout/cast_activity.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="454">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/mediarouter/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="588">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1177" max-vertical-offset="1876">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/res/values-v21/styles_base.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33259913" vertical-offset="885" max-vertical-offset="2814">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BUILD.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
+      <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2317597" vertical-offset="0" max-vertical-offset="910">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6239168" vertical-offset="38336" max-vertical-offset="67214">
-          <caret line="2764" column="42" selection-start-line="2764" selection-start-column="42" selection-end-line="2764" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33275563" vertical-offset="17224" max-vertical-offset="32942">
-          <caret line="1244" column="35" selection-start-line="1244" selection-start-column="35" selection-end-line="1244" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3583181" vertical-offset="0" max-vertical-offset="547">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4369287" vertical-offset="307" max-vertical-offset="854">
-          <caret line="39" column="77" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
-        </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
@@ -1578,39 +1441,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../DESIGN.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="1442">
           <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
         </state>
       </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android.iml">
+    <entry file="file://$PROJECT_DIR$/pongcast.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.01920439" vertical-offset="0" max-vertical-offset="729">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/cast/BaseCastManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1920439" vertical-offset="0" max-vertical-offset="15176">
-          <caret line="73" column="22" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/notification/VideoCastNotificationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20713305" vertical-offset="3027" max-vertical-offset="5404">
-          <caret line="318" column="60" selection-start-line="318" selection-start-column="60" selection-end-line="318" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png">
@@ -1618,40 +1462,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4132948" vertical-offset="963" max-vertical-offset="1848">
-          <caret line="79" column="6" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notes">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
           <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1120">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/RepeatListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0487804" vertical-offset="387" max-vertical-offset="1092">
-          <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4117647" vertical-offset="0" max-vertical-offset="442">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1678,21 +1492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/ChromecastInteractor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30337077" vertical-offset="1713" max-vertical-offset="4704">
-          <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60686016" vertical-offset="316" max-vertical-offset="1680">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/gen/com/google/sample/castcompanionlibrary/R.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09602195" vertical-offset="0" max-vertical-offset="729">
@@ -1700,51 +1499,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongControllerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.90879476" vertical-offset="1416" max-vertical-offset="2086">
-          <caret line="166" column="9" selection-start-line="166" selection-start-column="9" selection-end-line="166" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5510" max-vertical-offset="6398">
-          <caret line="405" column="3" selection-start-line="405" selection-start-column="3" selection-end-line="405" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="980">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proguard-android.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24425288" vertical-offset="223" max-vertical-offset="952">
           <caret line="22" column="57" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-en/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1508079" vertical-offset="0" max-vertical-offset="557">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values-es/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17594256" vertical-offset="0" max-vertical-offset="557">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1752,7 +1510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14112903" vertical-offset="0" max-vertical-offset="496">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1760,47 +1517,259 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14112903" vertical-offset="0" max-vertical-offset="496">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-en/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11382114" vertical-offset="0" max-vertical-offset="492">
+          <caret line="4" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-es/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.085365854" vertical-offset="0" max-vertical-offset="492">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4028777" vertical-offset="0" max-vertical-offset="980">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/RepeatListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32733813" vertical-offset="0" max-vertical-offset="994">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37769786" vertical-offset="0" max-vertical-offset="556">
+          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/ChromecastInteractor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327032" vertical-offset="174" max-vertical-offset="4130">
+          <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-xxxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26615968" vertical-offset="0" max-vertical-offset="938">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-pt/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="924">
-          <caret line="8" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.23728813" vertical-offset="0" max-vertical-offset="531">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/castReceiverController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30215827" vertical-offset="0" max-vertical-offset="1904">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/cast/BaseCastManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327338" vertical-offset="6871" max-vertical-offset="15246">
+          <caret line="587" column="29" selection-start-line="587" selection-start-column="29" selection-end-line="587" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../benchcast/android/benchcast.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="556">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/res/values/authenticator_ui_strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63374484" vertical-offset="0" max-vertical-offset="729">
+          <caret line="33" column="34" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4238683" vertical-offset="377" max-vertical-offset="1106">
+          <caret line="49" column="51" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/src/com/bcntouch/common/Authenticator/Accounts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4238683" vertical-offset="839" max-vertical-offset="1568">
+          <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/src/com/bcntouch/common/Authenticator/AuthenticationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34567901" vertical-offset="0" max-vertical-offset="729">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/src/com/bcntouch/common/Authenticator/AuthenticatorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93732196" vertical-offset="0" max-vertical-offset="10472">
+          <caret line="106" column="7" selection-start-line="106" selection-start-column="7" selection-end-line="106" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/src/com/bcntouch/common/Authenticator/AccountConfirmer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.28806585" vertical-offset="210" max-vertical-offset="2954">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../TouchActive/android/BCNTouchCommon/src/com/bcntouch/common/Authenticator/Authenticator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2307693" vertical-offset="830" max-vertical-offset="2436">
+          <caret line="153" column="50" selection-start-line="153" selection-start-column="25" selection-end-line="153" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31048387" vertical-offset="0" max-vertical-offset="496">
+          <caret line="11" column="84" selection-start-line="11" selection-start-column="84" selection-end-line="11" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77620965" vertical-offset="385" max-vertical-offset="1092">
+          <caret line="55" column="45" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="45" />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.96" vertical-offset="0" max-vertical-offset="364">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23863636" vertical-offset="0" max-vertical-offset="704">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11290322" vertical-offset="0" max-vertical-offset="574">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.3371105" vertical-offset="0" max-vertical-offset="1610">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0932784" vertical-offset="406" max-vertical-offset="3276">
-          <caret line="146" column="40" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.27572018" vertical-offset="1101" max-vertical-offset="3458">
+          <caret line="106" column="24" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/keyboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6159122" vertical-offset="405" max-vertical-offset="1134">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/notification/VideoCastNotificationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33816424" vertical-offset="0" max-vertical-offset="5824">
+          <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../receiver/pong.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.9292035" vertical-offset="6110" max-vertical-offset="6860">
+          <caret line="245" column="37" selection-start-line="245" selection-start-column="37" selection-end-line="245" selection-end-column="37" />
           <folding>
-            <element signature="e#1686#1687#0" expanded="true" />
-            <element signature="e#1736#1737#0" expanded="true" />
-            <element signature="e#1796#1797#0" expanded="true" />
-            <element signature="e#1836#1837#0" expanded="true" />
+            <element signature="e#13493#13628#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/res/layout/cast_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1587678" vertical-offset="1177" max-vertical-offset="1876">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../CastCompanionLibrary/src/com/google/sample/castcompanionlibrary/utils/LogUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1204">
+          <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongControllerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="226" max-vertical-offset="2086">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1352657" vertical-offset="0" max-vertical-offset="574">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1849,7 +1818,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.3574409" />
               </list>
             </option>
           </splitter-proportions>
@@ -1857,12 +1826,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>android</last-edited>
+          <last-edited>mediarouter</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.3574409" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

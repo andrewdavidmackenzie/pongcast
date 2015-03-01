@@ -2,7 +2,6 @@
 <html>
 <head>
     <script type="text/javascript" src="https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
-    <script src="timestamp.js"></script>
     <script src="pong.js"></script>
     <script src="castReceiverController.js"></script>
     <script src="keyboardController.js"></script>
@@ -92,8 +91,8 @@
 
         window.court.courtMessage();
 
-        console.log("Version: 1.1.0");
-        console.log("Timestamp: " + window.timestamp);
+        window.audio = document.getElementById('audio');
+        console.log("Version: 1.1.1");
     };
 </script>
 
@@ -103,6 +102,9 @@
     <span class="right"></span>
 </div>
 <div id="messageboard"></div>
+
+<audio id='audio' src="wall.mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>

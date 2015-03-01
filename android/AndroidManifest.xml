@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.mackenzie_serres.pongcast"
-    android:versionCode="101020"
-    android:versionName="1.1.2" >
+    android:versionCode="001002004"
+    android:versionName="01.02.04" >
 
     <uses-sdk
         android:minSdkVersion="9"

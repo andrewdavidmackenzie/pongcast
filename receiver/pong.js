@@ -17,8 +17,8 @@ function Paddle(x, frontX, y, width, height, courtHeight, context) {
 
 Paddle.prototype.bounce = function () {
     //noinspection JSUnresolvedFunction
-    var bounce = new Audio("paddle.mp3");
-    bounce.play();
+    window.audio.src = "paddle.mp3";
+    window.audio.play();
 };
 
 Paddle.prototype.clear = function () {
@@ -240,8 +240,8 @@ function ScoreBoard(court, scoreboardElement) {
 ScoreBoard.prototype.pointWon = function (player) {
     // Play point won sound
     //noinspection JSUnresolvedFunction
-    var pointWon = new Audio('point.mp3');
-    pointWon.play();
+    window.audio.src = "point.mp3";
+    window.audio.play();
 
     // increment score of that player
     player.score++;
@@ -309,8 +309,8 @@ Court.prototype.courtMessage = function () {
 
 Court.prototype.bounce = function () {
     //noinspection JSUnresolvedFunction
-    var out = new Audio('out.mp3');
-    out.play();
+    window.audio.src = "wall.mp3";
+    window.audio.play();
 };
 
 Court.prototype.enter = function (player) {
