@@ -11,7 +11,9 @@
     <string name="media_route_menu_title">Play on&#8230;</string>
     <string name="preparing">Preparing court…</string>
     <string name="waiting">Waiting to get on court…</string>
-    <string name="selectRoute">Select a Chromecast</string>
+	<string name="noRoute">No Chromecasts found</string>
+    <string name="selectRoute">Select a Chromecast to play on</string>
+	<string name="enableWifi">You must enable WiFi to find Chromecast devices</string>
     <string name="onCourt">Got in!</string>
 
 	<string name="action_settings">Settings</string>

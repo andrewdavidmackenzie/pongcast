@@ -103,7 +103,21 @@ public class PongControllerView {
      */
     public void setViewGameState(final PongController.COURT_STATE courtState) {
         switch (courtState) {
-            case UNKNOWN:
+            case NO_WIFI:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.enableWifi);
+                break;
+
+            case NO_AVAILABLE_COURT:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.noRoute);
+                break;
+
+            case READY_FOR_SELECTION:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
@@ -117,7 +131,7 @@ public class PongControllerView {
                 messageView.setText(R.string.waiting);
                 break;
 
-            case CREATING_COURT:
+            case PREPARING_COURT:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);

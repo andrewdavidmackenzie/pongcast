@@ -23,11 +23,12 @@ import net.mackenzie_serres.chromecast.GameController;
 public class PongController implements GameController {
     // ENUMS
     public static enum COURT_STATE {
-        UNKNOWN, FOUND_WAITING, CREATING_COURT, ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
+        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, READY_FOR_SELECTION, FOUND_WAITING, PREPARING_COURT,
+        ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
     }
 
     public static enum GAME_EVENT {
-        APP_STARTED, GOT_PADDLE, NO_PADDLE, GAME_STARTED, GAME_PAUSED, GAME_WON_LOST
+        GOT_PADDLE, NO_PADDLE, GAME_STARTED, GAME_PAUSED, GAME_WON_LOST
     }
 
     // CONSTANTS
@@ -39,13 +40,11 @@ public class PongController implements GameController {
     private static final String PADDLE_YES_PREFIX = "PADDLE YES";
 
     // MUTABLES
-    // Set initial states
-    private COURT_STATE courtState = COURT_STATE.UNKNOWN;
+    private COURT_STATE courtState = COURT_STATE.INITIAL;
     private ChromecastInteractor chromecast;
     private PongControllerView gameView;
 
     public PongController() {
-        event(GAME_EVENT.APP_STARTED);
     }
 
     public void setGameView(PongControllerView gameView) {
@@ -105,20 +104,28 @@ public class PongController implements GameController {
         Log.d(TAG, "Chromecast event: " + event.toString());
         // TODO proper state machine
         switch (event) {
+            case NO_WIFI:
+                setCourtState(COURT_STATE.NO_WIFI);
+                break;
+
+            case NO_ROUTE_AVAILABLE:
+                setCourtState(COURT_STATE.NO_AVAILABLE_COURT);
+                break;
+
+            case ROUTE_AVAILABLE:
+                setCourtState(COURT_STATE.READY_FOR_SELECTION);
+                break;
+
             case CONNECTING:
             case CONNECTION_SUSPENDED:
                 setCourtState(COURT_STATE.FOUND_WAITING);
                 break;
 
             case CONNECTED:
-                setCourtState(COURT_STATE.CREATING_COURT);
+                setCourtState(COURT_STATE.PREPARING_COURT);
                 break;
 
-            case DISCONNECTED:
-                setCourtState(COURT_STATE.UNKNOWN);
-                break;
-
-            case READY:
+            case RECEIVER_READY:
                 setCourtState(COURT_STATE.ON_COURT);
                 break;
         }
@@ -188,10 +195,6 @@ public class PongController implements GameController {
         Log.d(TAG, "Game event: " + event.toString());
         // TODO proper state machine
         switch (event) {
-            case APP_STARTED:
-                setCourtState(COURT_STATE.UNKNOWN);
-                break;
-
             case GAME_STARTED:
                 setCourtState(COURT_STATE.GAME_IN_PLAY);
                 break;

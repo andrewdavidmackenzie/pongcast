@@ -1,5 +1,7 @@
 package net.mackenzie_serres.chromecast;
 
+import android.support.annotation.NonNull;
+
 /**
  * Interface definition that GameControllers must implement in order to be passed events and messages from
  * ChromecastInteractor
@@ -11,9 +13,9 @@ package net.mackenzie_serres.chromecast;
  * Copyright Andrew Mackenzie, 2013
  */
 public interface GameController {
-    public void setChromecastInteractor(final ChromecastInteractor chromecastInteractor);
+    public void setChromecastInteractor(@NonNull final ChromecastInteractor chromecastInteractor);
 
-    public void event(final ChromecastInteractor.CHROMECAST_EVENT event);
+    public void event(@NonNull final ChromecastInteractor.CHROMECAST_EVENT event);
 
-    public void message(final String message);
+    public void message(@NonNull final String message);
 }
