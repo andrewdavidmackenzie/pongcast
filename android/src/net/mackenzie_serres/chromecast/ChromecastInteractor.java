@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -46,12 +47,12 @@ public class ChromecastInteractor {
     private static final String TAG = "ChromecastInteractor";
 
     // IMMUTABLES
-    private final Activity activity;
     private final String receiverAppId;
     private final String nameSpace;
     private final GameController gameController;
     private final MediaRouter mediaRouter;
     private final MediaRouteSelector mediaRouteSelector;
+    private final Activity activity;
 
     // INITIALIZED IMMUTABLES
     private final CastMessageCallbacks castMessageCallbacks = new CastMessageCallbacks();
@@ -59,18 +60,17 @@ public class ChromecastInteractor {
     private final MediaRouter.Callback mediaRouterCallback = new MyMediaRouterCallback();
     private final CastListener castListener = new CastListener();
     private final ConnectionFailedListener connectionFailedListener = new ConnectionFailedListener();
+    private final WiFiChangeReceiver wiFiChangeReceiver = new WiFiChangeReceiver();
+    private final IntentFilter wifiChangeIntentFilter = new IntentFilter("android.net.wifi.WIFI_STATE_CHANGED");
 
     // MUTABLES
     private boolean waitingForReconnect;
     private GoogleApiClient apiClient;
 
-    /**
-     * A broadcast receievr to track the status of the Wifi of the device so we can warn users that they need
-     * to activate it to be able to find Chromecast devices on the network to connect to.
-     */
-    public class WiFiChangeReceiver extends BroadcastReceiver {
+    private class WiFiChangeReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.i(TAG, "Wifi state change");
             checkRouteAvailable();
         }
     }
@@ -79,23 +79,23 @@ public class ChromecastInteractor {
      * This class is responsible for interacting with the chromecast device, and sending and receiving messages.
      * <p/>
      * When messages are received it will parse them and then update the game accordingly.
-     *
-     * @param activity       - the Activity running the Game
-     * @param gameController - the controller that is managing the game logic
      */
-    public ChromecastInteractor(@NonNull final Activity activity, @NonNull final String receiverAppId,
-                                @NonNull final String nameSpace, @NonNull final MediaRouteSelector mediaRouteSelector,
-                                @NonNull final GameController gameController) {
-        this.activity = activity;
+    public ChromecastInteractor(@NonNull final Activity a, @NonNull final String receiverAppId,
+                                @NonNull final String nameSpace, @NonNull final MediaRouteSelector mrs,
+                                @NonNull final GameController gc) {
+        activity = a;
         this.receiverAppId = receiverAppId;
         this.nameSpace = nameSpace;
-        this.mediaRouteSelector = mediaRouteSelector;
-        this.gameController = gameController;
+        mediaRouteSelector = mrs;
+        gameController = gc;
 
         // Configure Cast device discovery
         mediaRouter = MediaRouter.getInstance(activity.getApplicationContext());
 
         gameController.setChromecastInteractor(this);
+
+        // install the broadcast receiver to listen for wifi changes
+        this.activity.registerReceiver(wiFiChangeReceiver, wifiChangeIntentFilter);
     }
 
     /**
@@ -105,6 +105,7 @@ public class ChromecastInteractor {
      * reinstall the callback for route changes
      */
     public void resume() {
+        // Check wifi and route status
         checkRouteAvailable();
 
         // Start media router discovery
@@ -135,18 +136,18 @@ public class ChromecastInteractor {
 
         if (wifi.isConnectedOrConnecting()) {
             // See if a route is available
-            boolean routeAvailable = mediaRouter.isRouteAvailable(ChromecastInteractor.this.mediaRouteSelector,
+            boolean routeAvailable = this.mediaRouter.isRouteAvailable(this.mediaRouteSelector,
                     MediaRouter.AVAILABILITY_FLAG_REQUIRE_MATCH);
             Log.i(TAG, "Route Available:" + routeAvailable);
 
             if (routeAvailable) {
-                gameController.event(CHROMECAST_EVENT.ROUTE_AVAILABLE);
+                this.gameController.event(CHROMECAST_EVENT.ROUTE_AVAILABLE);
             } else {
-                gameController.event(CHROMECAST_EVENT.NO_ROUTE_AVAILABLE);
+                this.gameController.event(CHROMECAST_EVENT.NO_ROUTE_AVAILABLE);
             }
         } else {
             Log.i(TAG, "WiFi is switched off");
-            gameController.event(CHROMECAST_EVENT.NO_WIFI);
+            this.gameController.event(CHROMECAST_EVENT.NO_WIFI);
         }
     }
 

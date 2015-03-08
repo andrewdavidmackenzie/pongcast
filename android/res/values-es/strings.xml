@@ -5,7 +5,7 @@
 	<string name="media_route_menu_title">Jugar en&#8230;</string>
 	<string name="preparing">Preparando la pista…</string>
 	<string name="waiting">Esperando poder entrar en la pista…</string>
-	<string name="noRoute">No se ha encontrado ningún Chromecast</string>
+	<string name="noRoute">No se ha encontrado ningún Chromecast, asegúrate que está encendida</string>
 	<string name="selectRoute">Selecciónar una Chromecast en que jugar</string>
 	<string name="enableWifi">Habilitar WiFi para encontrar dispositivos Chromecast</string>
 	<string name="onCourt">¡Has podido entrar!</string>

@@ -117,14 +117,14 @@ public class PongControllerView {
                 messageView.setText(R.string.noRoute);
                 break;
 
-            case READY_FOR_SELECTION:
+            case COURT_AVAILABLE:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.selectRoute);
                 break;
 
-            case FOUND_WAITING:
+            case WAITING_TO_ENTER_COURT:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);

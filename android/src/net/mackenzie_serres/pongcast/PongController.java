@@ -23,7 +23,7 @@ import net.mackenzie_serres.chromecast.GameController;
 public class PongController implements GameController {
     // ENUMS
     public static enum COURT_STATE {
-        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, READY_FOR_SELECTION, FOUND_WAITING, PREPARING_COURT,
+        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, COURT_AVAILABLE, WAITING_TO_ENTER_COURT, PREPARING_COURT,
         ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
     }
 
@@ -113,12 +113,12 @@ public class PongController implements GameController {
                 break;
 
             case ROUTE_AVAILABLE:
-                setCourtState(COURT_STATE.READY_FOR_SELECTION);
+                setCourtState(COURT_STATE.COURT_AVAILABLE);
                 break;
 
             case CONNECTING:
             case CONNECTION_SUSPENDED:
-                setCourtState(COURT_STATE.FOUND_WAITING);
+                setCourtState(COURT_STATE.WAITING_TO_ENTER_COURT);
                 break;
 
             case CONNECTED:
