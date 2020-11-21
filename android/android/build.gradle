@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "net.mackenzie_serres.pongcast"
+        minSdkVersion 14
+        targetSdkVersion 30
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    annotationProcessor 'androidx.annotation:annotation:1.1.0'
+    implementation project(':castCompanionLibrary')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}

@@ -28,88 +28,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c34f81f-d6ab-472e-af3e-47c92030fa0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/import-summary.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/android_support_v7_mediarouter.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_play_services.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/google_play_services1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/libs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BUILD.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/module_android.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pongcast.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pongcast.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pongcast.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proguard-android.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/01.02.04/dump.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/01.02.04/mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/01.02.04/seeds.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/01.02.04/usage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.0.2/dump.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.0.2/mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.0.2/seeds.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.0.2/usage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.0/dump.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.0/mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.0/seeds.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.0/usage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.1/dump.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.1/mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.1/seeds.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.1/usage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.2/dump.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.2/mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.2/seeds.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.1.2/usage.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable/down.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/drawable/up.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/menu/main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values-en/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values-es/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values-pt/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values-v11/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values-v14/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values/dimens.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/ChromecastInteractor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/chromecast/RepeatListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/mackenzie_serres/pongcast/PongControllerView.java" beforeDir="false" />
-    </list>
+    <list default="true" id="3c34f81f-d6ab-472e-af3e-47c92030fa0f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -240,6 +159,14 @@
       <option name="presentableId" value="Default" />
       <updated>1605295497093</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update to newer compatibility libraries and get running on newer Android">
+      <created>1605988722948</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1605988722948</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -252,6 +179,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update to newer compatibility libraries and get running on newer Android" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update to newer compatibility libraries and get running on newer Android" />
   </component>
   <component name="WindowStateProjectService">
     <state x="196" y="188" width="1129" height="595" key="#PSD" timestamp="1605390223664">
@@ -270,25 +201,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="401" y="48" key="#pongcast/0.0.1440.900@0.0.1440.900" timestamp="1605988385548" />
-    <state width="1396" height="332" key="GridCell.Tab.0.bottom" timestamp="1605988035017">
+    <state width="1396" height="332" key="GridCell.Tab.0.bottom" timestamp="1605988651577">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1396" height="332" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1605988035017" />
+    <state width="1396" height="332" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1605988651577" />
     <state width="1356" height="300" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605393667706" />
-    <state width="1396" height="332" key="GridCell.Tab.0.center" timestamp="1605988035014">
+    <state width="1396" height="332" key="GridCell.Tab.0.center" timestamp="1605988651575">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1396" height="332" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1605988035014" />
+    <state width="1396" height="332" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1605988651575" />
     <state width="1356" height="300" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1605393667705" />
-    <state width="1396" height="332" key="GridCell.Tab.0.left" timestamp="1605988035013">
+    <state width="1396" height="332" key="GridCell.Tab.0.left" timestamp="1605988651573">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1396" height="332" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1605988035013" />
+    <state width="1396" height="332" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1605988651573" />
     <state width="1356" height="300" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1605393667704" />
-    <state width="1396" height="332" key="GridCell.Tab.0.right" timestamp="1605988035016">
+    <state width="1396" height="332" key="GridCell.Tab.0.right" timestamp="1605988651576">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1396" height="332" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605988035016" />
+    <state width="1396" height="332" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605988651576" />
     <state width="1356" height="300" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1605393667705" />
     <state width="1396" height="274" key="GridCell.Tab.1.bottom" timestamp="1605985207539">
       <screen x="0" y="0" width="1440" height="900" />
@@ -306,10 +237,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1396" height="274" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1605985207536" />
-    <state x="399" y="86" width="615" height="755" key="find.popup" timestamp="1605987518256">
+    <state x="399" y="86" width="615" height="755" key="find.popup" timestamp="1605988641745">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="399" y="86" width="615" height="755" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1605987518256" />
+    <state x="399" y="86" width="615" height="755" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1605988641745" />
     <state x="399" y="107" width="615" height="735" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1605297740840" />
     <state x="310" y="333" key="psd.add.library.dependency.panel.dimension" timestamp="1605298407317">
       <screen x="0" y="23" width="1440" height="877" />

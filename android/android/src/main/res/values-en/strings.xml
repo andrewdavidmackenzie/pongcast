@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="language">en</string>
+	<string name="onCourt">Got in!</string>
+	<string name="preparing">Preparing court…</string>
+	<string name="noRoute">No Chromecasts found, make sure it is powered on</string>
+	<string name="selectRoute">Select a Chromecast to play on</string>
+	<string name="enableWifi">You must enable WiFi to find Chromecast devices</string>
+	<string name="waiting">Waiting to get on court…</string>
+	<string name="media_route_menu_title">Play on&#8230;</string>
+
+</resources>
