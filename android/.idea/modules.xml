@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../CastCompanionLibrary/CastCompanionLibrary.iml" filepath="$PROJECT_DIR$/../CastCompanionLibrary/CastCompanionLibrary.iml" />
-      <module fileurl="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/appcompat.iml" filepath="$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/appcompat/appcompat.iml" />
-      <module fileurl="file://$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" filepath="$USER_HOME$/android-sdk-mac_x86/extras/google/google_play_services/libproject/google-play-services_lib/google-play-services_lib.iml" />
-      <module fileurl="file://$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/mediarouter/mediarouter.iml" filepath="$USER_HOME$/android-sdk-mac_x86/extras/android/support/v7/mediarouter/mediarouter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pongcast.iml" filepath="$PROJECT_DIR$/pongcast.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../receiver/receiver.iml" filepath="$PROJECT_DIR$/../receiver/receiver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/android.android.iml" filepath="$PROJECT_DIR$/.idea/modules/android/android.android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/castCompanionLibrary/android.castCompanionLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/castCompanionLibrary/android.castCompanionLibrary.iml" />
     </modules>
   </component>
 </project>
