@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.mackenzie_serres.pongcast"
+          package="net.mackenzie_serres.pongcast2"
           android:versionCode="002000000"
           android:versionName="02.00.00">
 
