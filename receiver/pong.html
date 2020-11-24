@@ -85,12 +85,6 @@
             KeyboardController();
         }
 
-        canvas.onclick = function() {
-            if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
-                canvas.webkitRequestFullscreen()
-            }
-        };
-
         window.court.courtMessage();
 
         window.audio = document.getElementById('audio');
