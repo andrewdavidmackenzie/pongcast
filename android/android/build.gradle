@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "net.mackenzie_serres.pongcast"
+        applicationId "net.mackenzie.pongcast"
         minSdkVersion 14
         targetSdkVersion 30
         multiDexEnabled true

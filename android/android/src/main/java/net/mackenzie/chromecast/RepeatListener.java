@@ -1,4 +1,4 @@
-package net.mackenzie_serres.chromecast;
+package net.mackenzie.chromecast;
 
 import android.os.Handler;
 import android.view.MotionEvent;

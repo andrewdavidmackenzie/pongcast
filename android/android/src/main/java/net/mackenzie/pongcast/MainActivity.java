@@ -1,9 +1,9 @@
-package net.mackenzie_serres.pongcast;
+package net.mackenzie.pongcast;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
-import net.mackenzie_serres.chromecast.ChromecastInteractor;
+import net.mackenzie.chromecast.ChromecastInteractor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

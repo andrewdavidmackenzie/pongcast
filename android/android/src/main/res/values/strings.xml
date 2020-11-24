@@ -4,7 +4,7 @@
     <string name="app_name" translatable="false">PongCast</string>
     <string name="app_id" translatable="false">2E9013FB</string>
 	<!-- This must match the one defined in the receiver.html -->
-    <string name="namespace" translatable="false">urn:x-cast:net.mackenzie_serres.pongcast</string>
+    <string name="namespace" translatable="false">urn:x-cast:net.mackenzie.pongcast</string>
 
 	<!-- Translatable strings below -->
 	<string name="language">Default</string>

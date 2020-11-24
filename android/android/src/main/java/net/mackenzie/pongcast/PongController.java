@@ -1,13 +1,13 @@
-package net.mackenzie_serres.pongcast;
+package net.mackenzie.pongcast;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.mackenzie_serres.chromecast.ChromecastInteractor;
-import net.mackenzie_serres.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
-import net.mackenzie_serres.chromecast.GameController;
+import net.mackenzie.chromecast.ChromecastInteractor;
+import net.mackenzie.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
+import net.mackenzie.chromecast.GameController;
 
 /**
  * This class implements control of the Pong game, implementing the GameController Interface that permits it to

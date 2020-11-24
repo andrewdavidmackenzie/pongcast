@@ -1,4 +1,4 @@
-package net.mackenzie_serres.pongcast;
+package net.mackenzie.pongcast;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.cast.CastMediaControlIntent;
-import net.mackenzie_serres.chromecast.RepeatListener;
+import net.mackenzie.chromecast.RepeatListener;
 
 /**
  * This class provides view functionality for the controller of the game, such as joining, leaving,
