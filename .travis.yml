@@ -1,12 +1,19 @@
 language: android
 android:
   components:
-    - build-tools-21.1.1
     - platform-tools
     - tools
-    - android-21
-    - extra-google-google_play_services
-    - addon-google_apis-google-21
+    - build-tools-30.0.2
+    - android-30
+    - extra-android-m2repository
+    - addon-google_apis-google-30
     - extra-android-support
 
-  before_install: cd android
+# Avoid double build on PRs - it does a pre-merge to master and then builds that
+branches:
+  only:
+    - "master"
+
+script: 
+    - echo yes | sdkmanager "build-tools;30.0.2"
+    - cd android && ./gradlew build
