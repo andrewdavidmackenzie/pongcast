@@ -16,9 +16,4 @@
 	<string name="enableWifi">You must enable WiFi to find Chromecast devices</string>
     <string name="onCourt">Got in!</string>
 
-	<string name="action_settings">Settings</string>
-
-	<string name="message_to_cast">Message to Cast&#8230;</string>
-
-
 </resources>
