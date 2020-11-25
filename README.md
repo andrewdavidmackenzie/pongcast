@@ -29,7 +29,7 @@ Hosting your own receiver
 =
 I have moved to hosting my production version of the receiver from GitHub Pages.
 
-You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
+You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/index.html)
 
 I was previously hosting the receiver on Google Drive, but they have stopped allowing you to publish html pages from drive (the previously published one still worked).
 Also, it looks like they were blocking my .mp3 audio files - probably to stop people sharing soing via Google Drive folders.
