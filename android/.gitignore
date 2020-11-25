@@ -5,3 +5,4 @@ private_key.pepk
 .idea/workspace.xml
 .gradle
 **/*.bin
+build
