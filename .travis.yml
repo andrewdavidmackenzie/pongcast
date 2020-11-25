@@ -17,3 +17,12 @@ branches:
 script: 
     - echo yes | sdkmanager "build-tools;30.0.2"
     - cd android && ./gradlew build
+
+deploy:
+  provider: pages
+  github-token: $GITHUB_PAGES_TOKEN
+  skip_cleanup: true
+  local-dir: receiver
+  keep-history: false
+  on:
+    branch: master
