@@ -85,6 +85,7 @@ function CastController() {
 
     };
 
+    // Messages are different depending on the Controller being used
     window.court.enterMessage = "CONNECT TO CHROMECAST";
     window.court.startMessage = "CLICK PLAY ICON";
     window.court.pausedMessage = "CLICK PLAY TO RESTART";
