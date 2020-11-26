@@ -3,6 +3,8 @@
 function KeyboardController() {
     console.log("KeyboardController starting");
     window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
+
+    // Messages are different depending on the Controller being used
     window.court.enterMessage = "PRESS E TO ENTER";
     window.court.startMessage = "PRESS S TO START";
     window.court.pausedMessage = "PRESS SPACE TO RESTART";

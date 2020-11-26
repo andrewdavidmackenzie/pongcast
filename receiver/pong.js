@@ -90,8 +90,8 @@ Ball.prototype.bounceWall = function (court) {
  Middle third reflects balls current angle
  */
 Ball.prototype.bouncePaddle = function (paddle) {
-    // Gain a bit of speed with every bounce
-    this.x_speed = -1.01 * this.x_speed;
+    // Gain 5% of speed with every bounce
+    this.x_speed = -1.05 * this.x_speed;
     if (this.y < paddle.y + paddle.topSection) {
         if (this.y_speed == 0) {
             this.y_speed = court.width / 200;
