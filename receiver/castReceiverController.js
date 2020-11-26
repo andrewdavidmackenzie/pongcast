@@ -7,7 +7,7 @@ function CastController() {
 
     // create a CastMessageBus to handle messages for a custom namespace
     //noinspection JSUnresolvedVariable,JSUnresolvedFunction
-    window.messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:net.mackenzie_serres.pongcast');
+    window.messageBus = window.castReceiverManager.getCastMessageBus('urn:x-cast:net.mackenzie.pongcast');
 
     // handler for the 'ready' event
     castReceiverManager.onReady = function () {
