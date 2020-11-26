@@ -1,15 +1,7 @@
 pongcast [![travis-ci](https://travis-ci.org/andrewdavidmackenzie/pongcast.png?branch=master)](https://travis-ci.org/andrewdavidmackenzie/pongcast)
 ======
 
-I wanted to learn more about Chromecast development (the receiver that runs on the chromecast itself, 
-and the mobile app "controller" and decided that a good way would be to do a simple game. 
-
-Most of the first apps for chromecast I was seeing were video streaming and the like, but I wanted to do something multi-person, where more than once person interacted with the chromecast at the same time, and the experience was shared between people on the shared screen - your TV.
-
-So I thought a multi-player game with two controllers connecting and playing together on the shared
-TV screen would be good.
-
-In homage to Pong (which met some birthday near the time and was in the news) I decided to make it pong on chromecast, taking me right back to the first video game I ever played.
+A homage to Pong on chromecast, taking me right back to the first video game I ever played.
 
 Try out a version on your browser [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
 
@@ -34,10 +26,10 @@ Folders
 * receiver - custom chromecast receiver html, javascript, image and sound files
 
 Hosting your own receiver
-=====
+=
 I have moved to hosting my production version of the receiver from GitHub Pages.
 
-You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/pong.html)
+You can see it [here](http://andrewdavidmackenzie.github.io/pongcast/index.html)
 
 I was previously hosting the receiver on Google Drive, but they have stopped allowing you to publish html pages from drive (the previously published one still worked).
 Also, it looks like they were blocking my .mp3 audio files - probably to stop people sharing soing via Google Drive folders.
@@ -48,25 +40,13 @@ If you fork this repo, you will also get this branch and you should get a hosted
 You will need to modify the receiver identifier in the android code to refer to the URL where you host you receiver.
 
 Keyboard Control
-=====
+=
+If you open the html page in Chrome (not chromecast) it detects that and loads a keyboard controller 
+instead of the Android Chromecast controller app.
+
+These are the keyboard controls:
 * Use 'e' to Enter the court.
 * Use 's' to Start a game once you are in the court.
 * Use up and down keys on keyboard to control the paddle.
-* Use spacebar to pause/restart the game.
+* Use space bar to pause/restart the game.
 * Use 'l' to leave the court and end the game
-
-Cloning with git submodules
-======
-The android app uses a git submodule for the CastCompanionLibrary, which I forked from the official one on github,
-and added some config files to.
-
-This was to make it easier to track the original, and have a git controlled version of this library that I could
-share among multiple Chomecast apps if needed.
-
-When you clone the project initially you will get an empty directory for CastCompanionLibrary.
-
-You must run two commands:
-- "git submodule init" to initialize your local configuration file
-- "git submodule update" to fetch all the data from that project and check out the appropriate commit listed in your superproject:
-
-Then you should be able to open the project (android folder) in IntelliJ and build.
