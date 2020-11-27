@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.mediarouter.media.MediaRouteSelector;
@@ -163,7 +164,7 @@ public class PongControllerView {
      * Send a message to the player
      * @param message to display
      */
-    public void message(final String message) {
+    public void message(@Nullable final String message) {
         if (message != null) {
             Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
         }

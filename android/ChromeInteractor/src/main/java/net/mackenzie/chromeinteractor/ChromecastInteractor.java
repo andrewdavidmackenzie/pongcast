@@ -398,9 +398,8 @@ public class ChromecastInteractor {
          */
         @Override
         public void onMessageReceived(CastDevice castDevice, String namespace, String message) {
-            gameController.parseMessage(message);
+            gameController.receiverMessage(message);
         }
-
     }
 
     /**
@@ -412,9 +411,12 @@ public class ChromecastInteractor {
         if (apiClient != null) {
             try {
                 Cast.CastApi.sendMessage(apiClient, castMessageCallbacks.getNamespace(), message)
-                        .setResultCallback(result -> {
-                            if (!result.isSuccess()) {
-                                Log.e(TAG, "Sending message failed");
+                        .setResultCallback(new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(@NonNull Status result) {
+                                if (!result.isSuccess()) {
+                                    Log.e(TAG, "Sending message failed");
+                                }
                             }
                         });
             } catch (Exception e) {

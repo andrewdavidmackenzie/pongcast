@@ -2,7 +2,6 @@
 <resources>
 
 	<string name="language">pt</string>
-	<string name="media_route_menu_title">Entrar</string>
 	<string name="preparing">Preparando a pista…</string>
 	<string name="waiting">Esperando entrar na pista…</string>
 	<string name="noRoute">Não foi encontrado qualquer Chromecast, certifique-se que está em</string>
