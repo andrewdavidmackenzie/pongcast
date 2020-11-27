@@ -1,4 +1,4 @@
-package net.mackenzie.chromecast;
+package net.mackenzie.chromeinteractor;
 
 import androidx.annotation.NonNull;
 

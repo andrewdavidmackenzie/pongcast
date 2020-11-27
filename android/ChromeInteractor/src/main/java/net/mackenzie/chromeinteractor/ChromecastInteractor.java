@@ -1,4 +1,4 @@
-package net.mackenzie.chromecast;
+package net.mackenzie.chromeinteractor;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -80,12 +80,12 @@ public class ChromecastInteractor {
      * <p/>
      * When messages are received it will parse them and then update the game accordingly.
      */
-    public ChromecastInteractor(@NonNull final Activity a, @NonNull final String receiverAppId,
-                                @NonNull final String nameSpace, @NonNull final MediaRouteSelector mrs,
+    public ChromecastInteractor(@NonNull final Activity a, @NonNull final String receiverId,
+                                @NonNull final String ns, @NonNull final MediaRouteSelector mrs,
                                 @NonNull final GameController gc) {
         activity = a;
-        this.receiverAppId = receiverAppId;
-        this.nameSpace = nameSpace;
+        receiverAppId = receiverId;
+        nameSpace = ns;
         mediaRouteSelector = mrs;
         gameController = gc;
 

@@ -3,6 +3,7 @@ package net.mackenzie.pongcast;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.mediarouter.app.MediaRouteActionProvider;
@@ -16,7 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.cast.CastMediaControlIntent;
-import net.mackenzie.chromecast.RepeatListener;
+
+import net.mackenzie.chromeinteractor.RepeatListener;
 
 /**
  * This class provides view functionality for the controller of the game, such as joining, leaving,
@@ -46,7 +48,10 @@ public class PongControllerView {
         this.activity = activity;
         activity.setContentView(R.layout.activity_main);
 
-        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
+        ActionBar sab = activity.getSupportActionBar();
+        if (sab != null) {
+            sab.setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
+        }
 
         // When the user clicks on the button, send a message to start the game
         startGameButton = activity.findViewById(R.id.playButton);
@@ -91,7 +96,7 @@ public class PongControllerView {
 
         pongController.setGameView(this);
 
-        this.mediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
+        mediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
                 CastMediaControlIntent.categoryForCast(receiverAppId)).build();
     }
 
@@ -153,7 +158,7 @@ public class PongControllerView {
                 messageView.setText(R.string.waiting);
                 break;
 
-            case PREPARING_COURT:
+            case ENTERING_COURT:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);

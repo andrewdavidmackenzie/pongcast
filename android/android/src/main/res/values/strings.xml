@@ -13,7 +13,7 @@
     <string name="waiting">Waiting to get on court…</string>
 	<string name="noRoute">No Chromecasts found, make sure it is powered on</string>
     <string name="selectRoute">Select a Chromecast to play on</string>
-	<string name="enableWifi">You must enable WiFi to find Chromecast devices</string>
+	<string name="enableWifi">Not connected to WiFi, so cannot find any Chromecast</string>
     <string name="onCourt">Got in!</string>
 
 </resources>

@@ -5,17 +5,16 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.mackenzie.chromecast.ChromecastInteractor;
-import net.mackenzie.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
-import net.mackenzie.chromecast.GameController;
+import net.mackenzie.chromeinteractor.ChromecastInteractor;
+import net.mackenzie.chromeinteractor.GameController;
 
 /**
  * This class implements control of the Pong game, implementing the GameController Interface that permits it to
  * work in conjunction with the ChromecastInteractor.
- *
+ * <p>
  * It holds the logic of what actions can be taken and how the games responds to events, according to the current
  * state of the game.
- *
+ * <p>
  * User: andrew
  * Date: 11/01/15
  * Time: 02:15
@@ -25,7 +24,7 @@ import net.mackenzie.chromecast.GameController;
 public class PongController implements GameController {
     // ENUMS
     public enum COURT_STATE {
-        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, COURT_AVAILABLE, WAITING_TO_ENTER_COURT, PREPARING_COURT,
+        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, COURT_AVAILABLE, WAITING_TO_ENTER_COURT, ENTERING_COURT,
         ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
     }
 
@@ -102,7 +101,7 @@ public class PongController implements GameController {
      * @param event ChromecastInteractor.CHROMECAST_EVENT to process
      */
     @Override
-    public void chromecastEvent(@NonNull final CHROMECAST_EVENT event) {
+    public void chromecastEvent(@NonNull final ChromecastInteractor.CHROMECAST_EVENT event) {
         Log.d(TAG, "Chromecast event: " + event.toString());
         // TODO proper state machine
         switch (event) {
@@ -115,7 +114,10 @@ public class PongController implements GameController {
                 break;
 
             case ROUTE_AVAILABLE:
-                setCourtState(COURT_STATE.COURT_AVAILABLE);
+                if ((courtState == COURT_STATE.NO_AVAILABLE_COURT) ||
+                        (courtState == COURT_STATE.INITIAL)) {
+                    setCourtState(COURT_STATE.COURT_AVAILABLE);
+                }
                 break;
 
             case CONNECTING:
@@ -124,7 +126,7 @@ public class PongController implements GameController {
                 break;
 
             case CONNECTED:
-                setCourtState(COURT_STATE.PREPARING_COURT);
+                setCourtState(COURT_STATE.ENTERING_COURT);
                 break;
 
             case RECEIVER_READY:
@@ -135,6 +137,7 @@ public class PongController implements GameController {
 
     /**
      * Parse a message from the chromecast controller and modify game state and react accordingly
+     *
      * @param message from chromecast to parse
      */
     @Override
@@ -163,7 +166,7 @@ public class PongController implements GameController {
      * when it changes.
      *
      * @param newCourtState - the new state
-     * @param message to display in the view
+     * @param message       to display in the view
      */
     private void setCourtState(@NonNull final COURT_STATE newCourtState, final String message) {
         Log.d(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
@@ -190,7 +193,7 @@ public class PongController implements GameController {
     /**
      * Handle events coming from game itself
      *
-     * @param event GAME_EVENT to process
+     * @param event   GAME_EVENT to process
      * @param message options message string with event
      */
     private void gameEvent(@NonNull final GAME_EVENT event, @Nullable String message) {
