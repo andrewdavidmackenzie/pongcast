@@ -1,3 +1,4 @@
+local.properties
 android/release
 **/*.lock
 castCompanionLibrary/build

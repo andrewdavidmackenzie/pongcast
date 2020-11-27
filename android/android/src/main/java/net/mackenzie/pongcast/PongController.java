@@ -5,17 +5,16 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.mackenzie.chromecast.ChromecastInteractor;
-import net.mackenzie.chromecast.ChromecastInteractor.CHROMECAST_EVENT;
-import net.mackenzie.chromecast.GameController;
+import net.mackenzie.chromeinteractor.ChromecastInteractor;
+import net.mackenzie.chromeinteractor.GameController;
 
 /**
  * This class implements control of the Pong game, implementing the GameController Interface that permits it to
  * work in conjunction with the ChromecastInteractor.
- *
+ * <p>
  * It holds the logic of what actions can be taken and how the games responds to events, according to the current
  * state of the game.
- *
+ * <p>
  * User: andrew
  * Date: 11/01/15
  * Time: 02:15
@@ -25,7 +24,7 @@ import net.mackenzie.chromecast.GameController;
 public class PongController implements GameController {
     // ENUMS
     public enum COURT_STATE {
-        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, COURT_AVAILABLE, WAITING_TO_ENTER_COURT, PREPARING_COURT,
+        INITIAL, NO_WIFI, NO_AVAILABLE_COURT, COURT_AVAILABLE, WAITING_TO_ENTER_COURT, ENTERING_COURT,
         ON_COURT, READY_FOR_GAME, GAME_IN_PLAY, GAME_PAUSED, GAME_OVER
     }
 
@@ -34,16 +33,17 @@ public class PongController implements GameController {
     }
 
     // CONSTANTS
-    private static final String TAG = "PongController";
+    private static final String LOG_TAG = "PongController";
+
+    // MESSAGES receiver app may send
     private static final String START_GAME_MESSAGE = "StartPlay";
     private static final String PAUSE_PLAY_MESSAGE = "PausePlay";
     private static final String PADDLE_UP_MESSAGE = "MoveUp";
     private static final String PADDLE_DOWN_MESSAGE = "MoveDown";
-    private static final String PADDLE_YES_PREFIX = "PADDLE YES";
 
     // MUTABLES
     private COURT_STATE courtState = COURT_STATE.INITIAL;
-    private ChromecastInteractor chromecast;
+    private ChromecastInteractor chromecastInteractor;
     private PongControllerView gameView;
 
     public PongController() {
@@ -54,56 +54,139 @@ public class PongController implements GameController {
     }
 
     /**
-     * Setter for the ChromeInteractor - as they have a mutual dependancy
+     * Setter for the ChromeInteractor - as they have a mutual dependency
      *
      * @param chromecastInteractor to use for controlling game
      */
     @Override
     public void setChromecastInteractor(@NonNull final ChromecastInteractor chromecastInteractor) {
-        this.chromecast = chromecastInteractor;
+        this.chromecastInteractor = chromecastInteractor;
     }
 
     /**
      * Request from the view to start the game
      */
     public void startGame() {
-        // TODO check state
-        chromecast.sendMessage(START_GAME_MESSAGE);
+        if (courtState == COURT_STATE.READY_FOR_GAME) {
+            chromecastInteractor.sendMessage(START_GAME_MESSAGE);
+        }
     }
 
     /**
      * Request from the view to move paddle
      */
     public void paddleUp() {
-        // TODO check state
-        chromecast.sendMessage(PADDLE_UP_MESSAGE);
+        if (courtState == COURT_STATE.GAME_IN_PLAY) {
+            chromecastInteractor.sendMessage(PADDLE_UP_MESSAGE);
+        }
     }
 
     /**
      * Request from the view to move paddle
      */
     public void paddleDown() {
-        // TODO check state
-        chromecast.sendMessage(PADDLE_DOWN_MESSAGE);
+        if (courtState == COURT_STATE.GAME_IN_PLAY) {
+            chromecastInteractor.sendMessage(PADDLE_DOWN_MESSAGE);
+        }
     }
 
     /**
      * A request from the UI to pause the game
      */
     public void pause() {
-        if ((courtState == COURT_STATE.GAME_IN_PLAY)) {
-            chromecast.sendMessage(PAUSE_PLAY_MESSAGE);
+        if (courtState == COURT_STATE.GAME_IN_PLAY) {
+            chromecastInteractor.sendMessage(PAUSE_PLAY_MESSAGE);
         }
     }
 
     /**
-     * Handle events coming from the chromecast
+     * Parse a message from the chromecast controller into a gameEvent and process it
+     *
+     * @param message from chromecast to parse
+     */
+    @Override
+    public void receiverMessage(@NonNull final String message) {
+        Log.i(LOG_TAG, "Receiver Message: " + message);
+        switch (message) {
+            case "PADDLE NONE":
+                processGameEvent(GAME_EVENT.NO_PADDLE, null);
+                break;
+            case "PADDLE YES LEFT":
+                processGameEvent(GAME_EVENT.GOT_PADDLE, "You got left paddle");
+                break;
+            case "PADDLE YES RIGHT":
+                processGameEvent(GAME_EVENT.GOT_PADDLE, "You got right paddle");
+                break;
+            case "GAME WON":
+                processGameEvent(GAME_EVENT.GAME_WON_LOST, "Game won!");
+                break;
+            case "GAME LOST":
+                processGameEvent(GAME_EVENT.GAME_WON_LOST, "Game lost");
+                break;
+            case "GAME STARTED":
+                processGameEvent(GAME_EVENT.GAME_STARTED, null);
+                break;
+            case "GAME PAUSED":
+                processGameEvent(GAME_EVENT.GAME_PAUSED, null);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Handle events coming from game itself
+     *
+     * @param event   GAME_EVENT to process
+     * @param message options message string with event
+     */
+    private void processGameEvent(@NonNull final GAME_EVENT event, @Nullable String message) {
+        Log.d(LOG_TAG, "Game event: " + event.toString());
+        // TODO proper state machine
+        switch (event) {
+            case GAME_STARTED:
+                if (courtState == COURT_STATE.READY_FOR_GAME) {
+                    setCourtState(COURT_STATE.GAME_IN_PLAY);
+                }
+                break;
+
+            case GAME_PAUSED:
+                if (courtState == COURT_STATE.GAME_IN_PLAY) {
+                    setCourtState(COURT_STATE.GAME_PAUSED);
+                }
+                break;
+
+            case GAME_WON_LOST:
+                if (courtState == COURT_STATE.GAME_IN_PLAY) {
+                    setCourtState(COURT_STATE.GAME_OVER);
+                    gameView.message(message);
+                }
+                break;
+
+            case GOT_PADDLE:
+                if (courtState == COURT_STATE.ON_COURT) {
+                    setCourtState(COURT_STATE.READY_FOR_GAME);
+                    gameView.message(message);
+                }
+                break;
+
+            case NO_PADDLE:
+                if (courtState == COURT_STATE.ON_COURT) {
+                    setCourtState(COURT_STATE.ON_COURT);
+                    gameView.message("Sorry, no paddle for you!");
+                }
+                break;
+        }
+    }
+
+    /**
+     * Handle events coming from the chromecast - sent by ChromeInteractor
      *
      * @param event ChromecastInteractor.CHROMECAST_EVENT to process
      */
     @Override
-    public void chromecastEvent(@NonNull final CHROMECAST_EVENT event) {
-        Log.d(TAG, "Chromecast event: " + event.toString());
+    public void chromecastEvent(@NonNull final ChromecastInteractor.CHROMECAST_EVENT event) {
+        Log.d(LOG_TAG, "Chromecast event: " + event.toString());
         // TODO proper state machine
         switch (event) {
             case NO_WIFI:
@@ -115,7 +198,10 @@ public class PongController implements GameController {
                 break;
 
             case ROUTE_AVAILABLE:
-                setCourtState(COURT_STATE.COURT_AVAILABLE);
+                if ((courtState == COURT_STATE.NO_AVAILABLE_COURT) ||
+                        (courtState == COURT_STATE.INITIAL)) {
+                    setCourtState(COURT_STATE.COURT_AVAILABLE);
+                }
                 break;
 
             case CONNECTING:
@@ -124,27 +210,12 @@ public class PongController implements GameController {
                 break;
 
             case CONNECTED:
-                setCourtState(COURT_STATE.PREPARING_COURT);
+                setCourtState(COURT_STATE.ENTERING_COURT);
                 break;
 
             case RECEIVER_READY:
                 setCourtState(COURT_STATE.ON_COURT);
                 break;
-        }
-    }
-
-    /**
-     * Parse a message from the chromecast controller and modify game state and react accordingly
-     * @param message from chromecast to parse
-     */
-    @Override
-    public void parseMessage(@NonNull final String message) {
-        if (message.startsWith("PADDLE")) {
-            parsePaddleMessage(message);
-        } else if (message.startsWith("GAME")) {
-            parseGameMessage(message);
-        } else {
-            Log.w(TAG, "Unknown message: " + message);
         }
     }
 
@@ -155,109 +226,10 @@ public class PongController implements GameController {
      * @param newCourtState - the new state
      */
     private void setCourtState(@NonNull final COURT_STATE newCourtState) {
-        setCourtState(newCourtState, null);
-    }
-
-    /**
-     * Keep track of changes in the state of the court and make the appropriate changes to other states and views
-     * when it changes.
-     *
-     * @param newCourtState - the new state
-     * @param message to display in the view
-     */
-    private void setCourtState(@NonNull final COURT_STATE newCourtState, final String message) {
-        Log.d(TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
+        Log.d(LOG_TAG, "Previous Court State = " + this.courtState.toString() + ", New state = " + newCourtState.toString());
         this.courtState = newCourtState;
-
-        if (gameView != null) {
-            gameView.setViewGameState(this.courtState);
-
-            if (message != null) {
-                gameView.message(message);
-            }
-        }
-    }
-
-    /**
-     * Handle events coming from game itself
-     *
-     * @param event GAME_EVENT to process
-     */
-    private void gameEvent(@NonNull final GAME_EVENT event) {
-        gameEvent(event, null);
-    }
-
-    /**
-     * Handle events coming from game itself
-     *
-     * @param event GAME_EVENT to process
-     * @param message options message string with event
-     */
-    private void gameEvent(@NonNull final GAME_EVENT event, @Nullable String message) {
-        Log.d(TAG, "Game event: " + event.toString());
-        // TODO proper state machine
-        switch (event) {
-            case GAME_STARTED:
-                setCourtState(COURT_STATE.GAME_IN_PLAY);
-                break;
-
-            case GAME_PAUSED:
-                if (courtState == COURT_STATE.GAME_IN_PLAY) {
-                    setCourtState(COURT_STATE.GAME_PAUSED);
-                }
-                break;
-
-            case GAME_WON_LOST:
-                if (courtState == COURT_STATE.GAME_IN_PLAY) {
-                    setCourtState(COURT_STATE.GAME_OVER, message);
-                }
-                break;
-
-            case GOT_PADDLE:
-                if (message != null) {
-                    setCourtState(COURT_STATE.READY_FOR_GAME, "You got " + message.split(PADDLE_YES_PREFIX)[1] + " paddle");
-                }
-                break;
-
-            case NO_PADDLE:
-                setCourtState(COURT_STATE.ON_COURT, "Sorry, no paddle for you!");
-                break;
-
-            default:
-                Log.e(TAG, "Unknown GAME_EVENT: " + event.toString());
-        }
-    }
-
-    /**
-     * Parse messages that affect the paddle and make appropriate changes
-     *
-     * @param message - from receiver to parse
-     */
-    private void parsePaddleMessage(final String message) {
-        Log.i(TAG, "Paddle Message: " + message);
-        if (message.startsWith(PADDLE_YES_PREFIX)) {
-            if ((courtState == COURT_STATE.ON_COURT)) {
-                gameEvent(GAME_EVENT.GOT_PADDLE, message);
-            }
-        } else {
-            gameEvent(GAME_EVENT.NO_PADDLE);
-        }
-    }
-
-    /**
-     * Parse a message from the Receiver about the game
-     *
-     * @param message - from the receiver
-     */
-    private void parseGameMessage(final String message) {
-        Log.i(TAG, "Game Message: " + message);
-        if (message.startsWith("GAME WON") || message.startsWith("GAME LOST")) {
-            gameEvent(GAME_EVENT.GAME_WON_LOST, message);
-        } else if (message.equals("GAME STARTED")) {
-            gameEvent(GAME_EVENT.GAME_STARTED);
-        } else if (message.equals("GAME PAUSED")) {
-            gameEvent(GAME_EVENT.GAME_PAUSED);
-        }
+        // Update the view to match the new state
+        gameView.setViewGameState(this.courtState);
     }
 }
 

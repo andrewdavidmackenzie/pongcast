@@ -2,21 +2,20 @@ package net.mackenzie.pongcast;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
-import androidx.mediarouter.app.MediaRouteActionProvider;
-import androidx.mediarouter.media.MediaRouteSelector;
-
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.mediarouter.media.MediaRouteSelector;
+
 import com.google.android.gms.cast.CastMediaControlIntent;
-import net.mackenzie.chromecast.RepeatListener;
+
+import net.mackenzie.chromeinteractor.RepeatListener;
 
 /**
  * This class provides view functionality for the controller of the game, such as joining, leaving,
@@ -33,7 +32,6 @@ public class PongControllerView {
     private static final String TAG = "PongControllerView";
 
     // IMMUTABLES
-    private final MediaRouteSelector mediaRouteSelector;
     private final Button startGameButton;
     private final TextView messageView;
     private final View paddleControls;
@@ -43,10 +41,13 @@ public class PongControllerView {
     public PongControllerView(final AppCompatActivity activity,
                               final String receiverAppId,
                               final PongController pongController) {
-        this.activity = activity;
-        activity.setContentView(R.layout.activity_main);
+        this.activity = activity; // Save activity to use when calling `Toast` to send a message
+        activity.setContentView(R.layout.activity_main); // Set this `View` intro the activity
 
-        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
+        ActionBar sab = activity.getSupportActionBar();
+        if (sab != null) {
+            sab.setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
+        }
 
         // When the user clicks on the button, send a message to start the game
         startGameButton = activity.findViewById(R.id.playButton);
@@ -90,30 +91,6 @@ public class PongControllerView {
         }));
 
         pongController.setGameView(this);
-
-        this.mediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
-                CastMediaControlIntent.categoryForCast(receiverAppId)).build();
-    }
-
-    /**
-     * Accessor for media route selector in UI
-     * @return the media route selector for the chromecast
-     */
-    public MediaRouteSelector getMediaSelector() {
-        return mediaRouteSelector;
-    }
-
-    /**
-     * Sets the selector for the chromecast device into an action in a Menu
-     *
-     * @param menu to add the action to
-     */
-    public void setMediaRouteSelector(final Menu menu) {
-        MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item);
-        MediaRouteActionProvider mediaRouteActionProvider =
-                (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
-        // Set the MediaRouteActionProvider selector for device discovery.
-        mediaRouteActionProvider.setRouteSelector(mediaRouteSelector);
     }
 
     /**
@@ -153,7 +130,7 @@ public class PongControllerView {
                 messageView.setText(R.string.waiting);
                 break;
 
-            case PREPARING_COURT:
+            case ENTERING_COURT:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
@@ -187,7 +164,7 @@ public class PongControllerView {
      * Send a message to the player
      * @param message to display
      */
-    public void message(final String message) {
+    public void message(@Nullable final String message) {
         if (message != null) {
             Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
         }

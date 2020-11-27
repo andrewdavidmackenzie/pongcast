@@ -1,4 +1,4 @@
-package net.mackenzie.chromecast;
+package net.mackenzie.chromeinteractor;
 
 import androidx.annotation.NonNull;
 
@@ -15,5 +15,5 @@ import androidx.annotation.NonNull;
 public interface GameController {
     void setChromecastInteractor(@NonNull final ChromecastInteractor chromecastInteractor);
     void chromecastEvent(@NonNull final ChromecastInteractor.CHROMECAST_EVENT event);
-    void parseMessage(@NonNull final String message);
+    void receiverMessage(@NonNull final String message);
 }

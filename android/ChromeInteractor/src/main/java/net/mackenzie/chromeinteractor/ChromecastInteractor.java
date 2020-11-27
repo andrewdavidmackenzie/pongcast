@@ -1,4 +1,4 @@
-package net.mackenzie.chromecast;
+package net.mackenzie.chromeinteractor;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -9,13 +9,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
+import androidx.mediarouter.app.MediaRouteActionProvider;
 import androidx.mediarouter.media.MediaRouteSelector;
 import androidx.mediarouter.media.MediaRouter;
 
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.CastDevice;
+import com.google.android.gms.cast.CastMediaControlIntent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -49,11 +54,11 @@ public class ChromecastInteractor {
     private static final String TAG = "ChromecastInteractor";
 
     // IMMUTABLES
+    private final MediaRouteSelector mediaRouteSelector;
     private final String receiverAppId;
     private final String nameSpace;
     private final GameController gameController;
     private final MediaRouter mediaRouter;
-    private final MediaRouteSelector mediaRouteSelector;
     private final Activity activity;
 
     // INITIALIZED IMMUTABLES
@@ -80,17 +85,18 @@ public class ChromecastInteractor {
      * <p/>
      * When messages are received it will parse them and then update the game accordingly.
      */
-    public ChromecastInteractor(@NonNull final Activity a, @NonNull final String receiverAppId,
-                                @NonNull final String nameSpace, @NonNull final MediaRouteSelector mrs,
-                                @NonNull final GameController gc) {
+    public ChromecastInteractor(@NonNull final Activity a, @NonNull final String receiverId,
+                                @NonNull final String ns, @NonNull final GameController gc) {
         activity = a;
-        this.receiverAppId = receiverAppId;
-        this.nameSpace = nameSpace;
-        mediaRouteSelector = mrs;
+        receiverAppId = receiverId;
+        nameSpace = ns;
         gameController = gc;
 
         // Configure Cast device discovery
         mediaRouter = MediaRouter.getInstance(activity.getApplicationContext());
+
+        mediaRouteSelector = new MediaRouteSelector.Builder().addControlCategory(
+                CastMediaControlIntent.categoryForCast(receiverAppId)).build();
 
         gameController.setChromecastInteractor(this);
 
@@ -116,6 +122,19 @@ public class ChromecastInteractor {
     }
 
     /**
+     * Sets the selector for the chromecast device into an action in a Menu
+     *
+     * @param menu to add the action to
+     */
+    public void setMediaRouteSelector(final Menu menu) {
+        MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item);
+        MediaRouteActionProvider mediaRouteActionProvider =
+                (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
+        // Set the MediaRouteActionProvider selector for device discovery.
+        mediaRouteActionProvider.setRouteSelector(mediaRouteSelector);
+    }
+
+    /**
      * remove the callback for route changes
      */
     public void pause() {
@@ -126,6 +145,7 @@ public class ChromecastInteractor {
     /*
      * **********************************  MEDIA ROUTER RELATED METHODS  ************************************
      */
+
     /**
      * Check if it is possible to find a chromecast
      * - no wifi
@@ -324,9 +344,7 @@ public class ChromecastInteractor {
      */
     private void removeCastCallbacks() {
         try {
-            if (castMessageCallbacks != null) {
-                Cast.CastApi.removeMessageReceivedCallbacks(apiClient, castMessageCallbacks.getNamespace());
-            }
+            Cast.CastApi.removeMessageReceivedCallbacks(apiClient, castMessageCallbacks.getNamespace());
         } catch (IOException e) {
             Log.e(TAG, "Exception while removing callbacks", e);
         }
@@ -380,7 +398,7 @@ public class ChromecastInteractor {
          */
         @Override
         public void onMessageReceived(CastDevice castDevice, String namespace, String message) {
-            gameController.parseMessage(message);
+            gameController.receiverMessage(message);
         }
     }
 
