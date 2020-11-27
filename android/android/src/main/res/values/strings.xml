@@ -8,7 +8,6 @@
 
 	<!-- Translatable strings below -->
 	<string name="language">Default</string>
-    <string name="media_route_menu_title">Play on&#8230;</string>
     <string name="preparing">Preparing court…</string>
     <string name="waiting">Waiting to get on court…</string>
 	<string name="noRoute">No Chromecasts found, make sure it is powered on</string>

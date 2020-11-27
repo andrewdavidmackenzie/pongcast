@@ -14,17 +14,16 @@ import net.mackenzie.chromeinteractor.ChromecastInteractor;
  */
 public class MainActivity extends AppCompatActivity {
     private PongController pongController;
-    private ChromecastInteractor chromecast;
-    private PongControllerView pongControllerView;
+    private ChromecastInteractor chromecastInteractor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         pongController = new PongController();
-        pongControllerView = new PongControllerView(this, getString(R.string.app_id), pongController);
-        chromecast = new ChromecastInteractor(this, getString(R.string.app_id), getString(R.string.namespace),
-                pongControllerView.getMediaSelector(), pongController);
+        PongControllerView pongControllerView = new PongControllerView(this, getString(R.string.app_id), pongController);
+        chromecastInteractor = new ChromecastInteractor(this, getString(R.string.app_id), getString(R.string.namespace),
+                pongController);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO try doing this always to make symmetrical with onResume()
         if (isFinishing()) {
-            chromecast.pause();
+            chromecastInteractor.pause();
         }
         super.onPause();
     }
@@ -42,18 +41,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        chromecast.resume();
+        chromecastInteractor.resume();
     }
 
     @Override
     public void onDestroy() {
-        chromecast.disconnect();
+        chromecastInteractor.disconnect();
         super.onDestroy();
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        // Ignore configuration changes
+        // Ignore configuration changes - like rotation of th mobile device
     }
 
     /**
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        pongControllerView.setMediaRouteSelector(menu);
+        chromecastInteractor.setMediaRouteSelector(menu);
         return true;
     }
 }
