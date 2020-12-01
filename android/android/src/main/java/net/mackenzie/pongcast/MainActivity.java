@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         pongController = new PongController(this);
-        PongControllerView pongControllerView = new PongControllerView(this, pongController);
+        new PongControllerView(this, pongController);
         chromecastInteractor = new ChromecastInteractor(this, getString(R.string.app_id), getString(R.string.namespace),
                 pongController);
     }

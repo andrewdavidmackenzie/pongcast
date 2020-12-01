@@ -111,7 +111,7 @@ public class ChromecastInteractor {
     /**
      * Filter out state changes that disrupt things from the GameController
      *
-     * @param newState
+     * @param newState - the newState to pass to the GameController
      */
     private void setState(CHROMECAST_STATE newState) {
         // filter out a state change to the same state
