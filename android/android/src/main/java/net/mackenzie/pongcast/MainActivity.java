@@ -29,15 +29,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         pongController.pause();
-
-        // TODO try doing this always to make symmetrical with onResume()
-        if (isFinishing()) {
-            chromecastInteractor.pause();
-        }
+        chromecastInteractor.pause();
         super.onPause();
     }
 
-    // TODO Avoid Pause/Resume on first rotation
     @Override
     protected void onResume() {
         super.onResume();
