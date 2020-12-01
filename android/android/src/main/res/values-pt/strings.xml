@@ -8,5 +8,6 @@
 	<string name="selectRoute">Escolha uma Chromecast para jogar em</string>
 	<string name="enableWifi">Habilitar WiFi para encontrar dispositivos Chromecast</string>
 	<string name="onCourt">Você entrou!</string>
+	<string name="noPaddle">Perdona, no hay pala para ti!</string>
 
 </resources>

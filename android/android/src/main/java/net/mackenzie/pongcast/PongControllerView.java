@@ -11,10 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.mediarouter.media.MediaRouteSelector;
 
-import com.google.android.gms.cast.CastMediaControlIntent;
-
+import net.mackenzie.chromeinteractor.ChromecastInteractor;
 import net.mackenzie.chromeinteractor.RepeatListener;
 
 /**
@@ -39,7 +37,6 @@ public class PongControllerView {
 
     @SuppressLint("ClickableViewAccessibility")
     public PongControllerView(final AppCompatActivity activity,
-                              final String receiverAppId,
                               final PongController pongController) {
         this.activity = activity; // Save activity to use when calling `Toast` to send a message
         activity.setContentView(R.layout.activity_main); // Set this `View` intro the activity
@@ -93,15 +90,16 @@ public class PongControllerView {
         pongController.setGameView(this);
     }
 
-    /**
-     * Update the views depending on the state of the court and game
-     *
-     * @param courtState to use to change the views on screen
-     */
-    public void setViewGameState(final PongController.COURT_STATE courtState) {
-        Log.d(TAG, "setViewGameState() with courtState = " + courtState);
 
-        switch (courtState) {
+    /**
+     * Update the views depending on the state of the court
+     *
+     * @param chromecastState to use to change the views on screen
+     */
+    public void setCourtState(final ChromecastInteractor.CHROMECAST_STATE chromecastState) {
+        Log.d(TAG, "setCourtState() to " + chromecastState);
+
+        switch (chromecastState) {
             case NO_WIFI:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
@@ -109,50 +107,68 @@ public class PongControllerView {
                 messageView.setText(R.string.enableWifi);
                 break;
 
-            case NO_AVAILABLE_COURT:
+            case NO_ROUTE_AVAILABLE:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.noRoute);
                 break;
 
-            case COURT_AVAILABLE:
+            case ROUTE_AVAILABLE:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.selectRoute);
                 break;
 
-            case WAITING_TO_ENTER_COURT:
+            case CONNECTING:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.waiting);
                 break;
 
-            case ENTERING_COURT:
+            case CONNECTED:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.preparing);
                 break;
 
-            case ON_COURT:
+            case RECEIVER_READY:
+                startGameButton.setVisibility(View.INVISIBLE);
+                paddleControls.setVisibility(View.INVISIBLE);
+                messageView.setVisibility(View.VISIBLE);
+                messageView.setText(R.string.onCourt);
+                break;
+        }
+    }
+
+    /**
+     * Update the views depending on the state of the court and game
+     *
+     * @param gameState to use to change the views on screen
+     */
+    public void setGameState(final PongController.GAME_STATE gameState) {
+        Log.d(TAG, "setGameState() with courtState = " + gameState);
+
+        switch (gameState) {
+            case NO_PADDLE:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.VISIBLE);
                 messageView.setText(R.string.onCourt);
                 break;
 
-            case READY_FOR_GAME:
-            case GAME_OVER:
+            case GOT_PADDLE:
+            case GAME_WON_LOST:
             case GAME_PAUSED:
                 startGameButton.setVisibility(View.VISIBLE);
                 paddleControls.setVisibility(View.INVISIBLE);
                 messageView.setVisibility(View.INVISIBLE);
                 break;
 
-            case GAME_IN_PLAY:
+            case GAME_STARTED:
                 startGameButton.setVisibility(View.INVISIBLE);
                 paddleControls.setVisibility(View.VISIBLE);
                 messageView.setVisibility(View.INVISIBLE);
@@ -161,7 +177,7 @@ public class PongControllerView {
     }
 
     /**
-     * Send a message to the player
+     * Send a Toast (pop-up) message to the player
      * @param message to display
      */
     public void message(@Nullable final String message) {

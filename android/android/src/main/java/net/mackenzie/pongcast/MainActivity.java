@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pongController = new PongController();
-        PongControllerView pongControllerView = new PongControllerView(this, getString(R.string.app_id), pongController);
+        pongController = new PongController(this);
+        PongControllerView pongControllerView = new PongControllerView(this, pongController);
         chromecastInteractor = new ChromecastInteractor(this, getString(R.string.app_id), getString(R.string.namespace),
                 pongController);
     }

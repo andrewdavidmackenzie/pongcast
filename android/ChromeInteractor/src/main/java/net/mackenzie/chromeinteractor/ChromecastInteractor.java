@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class ChromecastInteractor {
     // ENUMS
-    public enum CHROMECAST_EVENT {
+    public enum CHROMECAST_STATE {
         NO_WIFI,              // Wifi is needed to connect to a Chromecast
         NO_ROUTE_AVAILABLE,   // Cannot connect to a chromecast
         ROUTE_AVAILABLE,      // A chromecast route can now be selected
@@ -140,7 +140,6 @@ public class ChromecastInteractor {
         MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item);
         MediaRouteActionProvider mediaRouteActionProvider =
                 (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
-        // Set the MediaRouteActionProvider selector for device discovery.
         mediaRouteActionProvider.setRouteSelector(mediaRouteSelector);
     }
 
@@ -162,14 +161,14 @@ public class ChromecastInteractor {
 
             if (routes.isEmpty()) {
                 Log.i(LOG_TAG, "No Routes found ");
-                gameController.chromecastEvent(CHROMECAST_EVENT.NO_ROUTE_AVAILABLE);
+                gameController.newChromecastState(CHROMECAST_STATE.NO_ROUTE_AVAILABLE);
             } else {
                 Log.i(LOG_TAG, "Routes found ");
-                gameController.chromecastEvent(CHROMECAST_EVENT.ROUTE_AVAILABLE);
+                gameController.newChromecastState(CHROMECAST_STATE.ROUTE_AVAILABLE);
             }
         } else {
             Log.i(LOG_TAG, "WiFi is switched off");
-            gameController.chromecastEvent(CHROMECAST_EVENT.NO_WIFI);
+            gameController.newChromecastState(CHROMECAST_STATE.NO_WIFI);
         }
     }
 
@@ -210,8 +209,9 @@ public class ChromecastInteractor {
      * @param selectedDevice the chromecast selected by the user to connect to
      */
     private void connect(final CastDevice selectedDevice) {
+        Log.i(LOG_TAG, "connect() called");
         try {
-            gameController.chromecastEvent(CHROMECAST_EVENT.CONNECTING);
+            gameController.newChromecastState(CHROMECAST_STATE.CONNECTING);
             Cast.CastOptions.Builder apiOptionsBuilder = Cast.CastOptions.builder(selectedDevice, castListener);
 
             apiClient = new GoogleApiClient.Builder(activity)
@@ -233,6 +233,7 @@ public class ChromecastInteractor {
      * disconnect from Google Play services
      */
     public void disconnect() {
+        Log.i(LOG_TAG, "disconnect() called");
         if (apiClient != null) {
             removeCastCallbacks();
 
@@ -263,10 +264,10 @@ public class ChromecastInteractor {
 
             if (waitingForReconnect) {
                 waitingForReconnect = false;
-                gameController.chromecastEvent(CHROMECAST_EVENT.CONNECTING); // reconnecting
+                gameController.newChromecastState(CHROMECAST_STATE.CONNECTING); // reconnecting
 
                 // Check if the receiver app is still running
-                if ((connectionHint != null) && connectionHint.getBoolean(Cast.EXTRA_APP_NO_LONGER_RUNNING)) {
+                if (connectionHint != null && connectionHint.getBoolean(Cast.EXTRA_APP_NO_LONGER_RUNNING)) {
                     // It was running when we lost the connection, now that we have reconnected - see if still running
                     Log.d(LOG_TAG, "Receiver is no longer running - try restarting it");
                     launchReceiver();
@@ -275,7 +276,7 @@ public class ChromecastInteractor {
                     createCastMessageChannel();
                 }
             } else {
-                gameController.chromecastEvent(CHROMECAST_EVENT.CONNECTED);
+                gameController.newChromecastState(CHROMECAST_STATE.CONNECTED);
 
                 Log.d(LOG_TAG, "New connection");
                 launchReceiver();
@@ -284,8 +285,8 @@ public class ChromecastInteractor {
 
         @Override
         public void onConnectionSuspended(int cause) {
-            Log.d(LOG_TAG, "onConnectionSuspended");
-            gameController.chromecastEvent(CHROMECAST_EVENT.CONNECTION_SUSPENDED);
+            Log.d(LOG_TAG, "onConnectionSuspended()");
+            gameController.newChromecastState(CHROMECAST_STATE.CONNECTION_SUSPENDED);
             waitingForReconnect = true;
         }
     }
@@ -296,7 +297,7 @@ public class ChromecastInteractor {
     private class ConnectionFailedListener implements GoogleApiClient.OnConnectionFailedListener {
         @Override
         public void onConnectionFailed(@NonNull ConnectionResult result) {
-            Log.e(LOG_TAG, "onConnectionFailed ");
+            Log.e(LOG_TAG, "onConnectionFailed()");
             // Make sure and remove all callbacks etc
             disconnect();
         }
@@ -333,7 +334,7 @@ public class ChromecastInteractor {
                 Log.d(LOG_TAG, "Receiver was successfully launched");
                 createCastMessageChannel();
             } else {
-                Log.e(LOG_TAG, "application Launch failed - retry");
+                Log.e(LOG_TAG, "Receiver launch failed - retrying");
                 launchReceiver();
             }
         }
@@ -356,10 +357,9 @@ public class ChromecastInteractor {
     private void setCastCallbacks() {
         try {
             Cast.CastApi.setMessageReceivedCallbacks(apiClient, castMessageCallbacks.getNamespace(), castMessageCallbacks);
-
-            gameController.chromecastEvent(CHROMECAST_EVENT.RECEIVER_READY);
+            gameController.newChromecastState(CHROMECAST_STATE.RECEIVER_READY);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Exception while creating channel", e);
+            Log.e(LOG_TAG, "Exception while setting messageReceived callbacks channel", e);
         }
     }
 
@@ -370,6 +370,7 @@ public class ChromecastInteractor {
     private class CastListener extends Cast.Listener {
         @Override
         public void onApplicationDisconnected(int errorCode) {
+            Log.i(LOG_TAG, "onApplicationDisconnected()");
             disconnect();
         }
     }
@@ -398,6 +399,7 @@ public class ChromecastInteractor {
          */
         @Override
         public void onMessageReceived(CastDevice castDevice, String namespace, String message) {
+            Log.d(LOG_TAG, "onMessageReceived(): " + message);
             gameController.receiverMessage(message);
         }
     }
@@ -408,6 +410,7 @@ public class ChromecastInteractor {
      * @param message String to send to the cast device
      */
     public void sendMessage(String message) {
+        Log.d(LOG_TAG, "sendMessage(): " + message);
         if (apiClient != null) {
             try {
                 Cast.CastApi.sendMessage(apiClient, castMessageCallbacks.getNamespace(), message)
