@@ -3,7 +3,8 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <script type="text/javascript" src="https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script type="text/javascript"
+            src="https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script src="pong.js"></script>
     <script src="castReceiverController.js"></script>
     <script src="keyboardController.js"></script>
@@ -61,6 +62,7 @@
             font-family: 'Pong';
             src: url('pong.ttf');
         }
+
     </style>
 </head>
 
@@ -73,11 +75,10 @@
 
     // Wait until this has all loaded before creating the canvas and adding controllers for the game
     window.onload = function () {
-        var canvas = document.getElementById('court');
-        window.court = new Court(canvas);
-        window.court.draw();
-
         var isChromecast = navigator.userAgent.indexOf('CrKey') !== -1;
+        var canvas = document.getElementById('court');
+        window.court = new Court(canvas, isChromecast ? 1.5 : 1.0);
+        window.court.draw();
 
         if (isChromecast) {
             CastController();
@@ -88,11 +89,13 @@
         window.court.courtMessage();
 
         window.audio = document.getElementById('audio');
-        console.log("Version: 1.1.1");
+        console.log("Version: 2.0.0");
     };
+
 </script>
 
-<canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!</canvas>
+<canvas id='court' width="960" height="540">Your browser does not support canvas - go get Chrome!
+</canvas>
 <div id="scoreboard">
     <span class="left"></span>
     <span class="right"></span>
