@@ -27,6 +27,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class for handling all interactions with a Chromecast for the purposes of playing a game that an android
@@ -115,10 +116,8 @@ public class ChromecastInteractor {
     public void resume() {
         Log.i(LOG_TAG, "resume() called");
 
-        // Check wifi and route status
         checkRouteStatus();
 
-        // Start media router discovery
         mediaRouter.addCallback(mediaRouteSelector, mediaRouterCallback,
                 MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY);
     }
@@ -159,15 +158,14 @@ public class ChromecastInteractor {
         NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         if (wifi.isConnectedOrConnecting()) {
-            // See if a route is available
-            boolean routeAvailable = mediaRouter.isRouteAvailable(mediaRouteSelector,
-                    MediaRouter.AVAILABILITY_FLAG_REQUIRE_MATCH);
-            Log.i(LOG_TAG, "Route Available:" + routeAvailable);
+            List<MediaRouter.RouteInfo> routes = mediaRouter.getRoutes();
 
-            if (routeAvailable) {
-                gameController.chromecastEvent(CHROMECAST_EVENT.ROUTE_AVAILABLE);
-            } else {
+            if (routes.isEmpty()) {
+                Log.i(LOG_TAG, "No Routes found ");
                 gameController.chromecastEvent(CHROMECAST_EVENT.NO_ROUTE_AVAILABLE);
+            } else {
+                Log.i(LOG_TAG, "Routes found ");
+                gameController.chromecastEvent(CHROMECAST_EVENT.ROUTE_AVAILABLE);
             }
         } else {
             Log.i(LOG_TAG, "WiFi is switched off");
@@ -366,8 +364,8 @@ public class ChromecastInteractor {
     }
 
     /**
-     * Listener for events from the Chromecast
-     * We only react to the application lost event
+     * Listener for events from the Chromecast device
+     * We only react to the application disconnected event
      */
     private class CastListener extends Cast.Listener {
         @Override
