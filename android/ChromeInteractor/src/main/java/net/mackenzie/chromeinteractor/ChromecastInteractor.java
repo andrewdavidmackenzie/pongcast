@@ -72,6 +72,7 @@ public class ChromecastInteractor {
     // MUTABLES
     private boolean waitingForReconnect;
     private GoogleApiClient apiClient;
+    private CHROMECAST_STATE state = CHROMECAST_STATE.NO_WIFI;
 
     private class WiFiChangeReceiver extends BroadcastReceiver {
         @Override
@@ -105,6 +106,21 @@ public class ChromecastInteractor {
         WiFiChangeReceiver wiFiChangeReceiver = new WiFiChangeReceiver();
         IntentFilter wifiChangeIntentFilter = new IntentFilter("android.net.wifi.WIFI_STATE_CHANGED");
         activity.registerReceiver(wiFiChangeReceiver, wifiChangeIntentFilter);
+    }
+
+    /**
+     * Filter out state changes that disrupt things from the GameController
+     *
+     * @param newState
+     */
+    private void setState(CHROMECAST_STATE newState) {
+        // filter out a state change to the same state
+        if (newState == state)
+            return;
+
+        Log.d(LOG_TAG, "New ChromeCast State = " + newState + ", Previous State = " + state);
+        state = newState;
+        gameController.newChromecastState(state);
     }
 
     /**
@@ -161,14 +177,17 @@ public class ChromecastInteractor {
 
             if (routes.isEmpty()) {
                 Log.i(LOG_TAG, "No Routes found ");
-                gameController.newChromecastState(CHROMECAST_STATE.NO_ROUTE_AVAILABLE);
+                setState(CHROMECAST_STATE.NO_ROUTE_AVAILABLE);
             } else {
                 Log.i(LOG_TAG, "Routes found ");
-                gameController.newChromecastState(CHROMECAST_STATE.ROUTE_AVAILABLE);
+
+                // filter our ROUTE_AVAILABLE state if already in a more progressed state
+                if (state == CHROMECAST_STATE.NO_WIFI || state == CHROMECAST_STATE.NO_ROUTE_AVAILABLE)
+                    setState(CHROMECAST_STATE.ROUTE_AVAILABLE);
             }
         } else {
             Log.i(LOG_TAG, "WiFi is switched off");
-            gameController.newChromecastState(CHROMECAST_STATE.NO_WIFI);
+            setState(CHROMECAST_STATE.NO_WIFI);
         }
     }
 
@@ -211,7 +230,7 @@ public class ChromecastInteractor {
     private void connect(final CastDevice selectedDevice) {
         Log.i(LOG_TAG, "connect() called");
         try {
-            gameController.newChromecastState(CHROMECAST_STATE.CONNECTING);
+            setState(CHROMECAST_STATE.CONNECTING);
             Cast.CastOptions.Builder apiOptionsBuilder = Cast.CastOptions.builder(selectedDevice, castListener);
 
             apiClient = new GoogleApiClient.Builder(activity)
@@ -264,7 +283,7 @@ public class ChromecastInteractor {
 
             if (waitingForReconnect) {
                 waitingForReconnect = false;
-                gameController.newChromecastState(CHROMECAST_STATE.CONNECTING); // reconnecting
+                setState(CHROMECAST_STATE.CONNECTING); // reconnecting
 
                 // Check if the receiver app is still running
                 if (connectionHint != null && connectionHint.getBoolean(Cast.EXTRA_APP_NO_LONGER_RUNNING)) {
@@ -276,7 +295,7 @@ public class ChromecastInteractor {
                     createCastMessageChannel();
                 }
             } else {
-                gameController.newChromecastState(CHROMECAST_STATE.CONNECTED);
+                setState(CHROMECAST_STATE.CONNECTED);
 
                 Log.d(LOG_TAG, "New connection");
                 launchReceiver();
@@ -286,7 +305,7 @@ public class ChromecastInteractor {
         @Override
         public void onConnectionSuspended(int cause) {
             Log.d(LOG_TAG, "onConnectionSuspended()");
-            gameController.newChromecastState(CHROMECAST_STATE.CONNECTION_SUSPENDED);
+            setState(CHROMECAST_STATE.CONNECTION_SUSPENDED);
             waitingForReconnect = true;
         }
     }
@@ -357,7 +376,7 @@ public class ChromecastInteractor {
     private void setCastCallbacks() {
         try {
             Cast.CastApi.setMessageReceivedCallbacks(apiClient, castMessageCallbacks.getNamespace(), castMessageCallbacks);
-            gameController.newChromecastState(CHROMECAST_STATE.RECEIVER_READY);
+            setState(CHROMECAST_STATE.RECEIVER_READY);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Exception while setting messageReceived callbacks channel", e);
         }
