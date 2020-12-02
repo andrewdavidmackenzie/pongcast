@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pongController = new PongController();
-        PongControllerView pongControllerView = new PongControllerView(this, getString(R.string.app_id), pongController);
+        pongController = new PongController(this);
+        new PongControllerView(this, pongController);
         chromecastInteractor = new ChromecastInteractor(this, getString(R.string.app_id), getString(R.string.namespace),
                 pongController);
     }
@@ -29,15 +29,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         pongController.pause();
-
-        // TODO try doing this always to make symmetrical with onResume()
-        if (isFinishing()) {
-            chromecastInteractor.pause();
-        }
+        chromecastInteractor.pause();
         super.onPause();
     }
 
-    // TODO Avoid Pause/Resume on first rotation
     @Override
     protected void onResume() {
         super.onResume();

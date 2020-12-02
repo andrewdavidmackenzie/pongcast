@@ -13,6 +13,7 @@
 	<string name="noRoute">No Chromecasts found, make sure it is powered on</string>
     <string name="selectRoute">Select a Chromecast to play on</string>
 	<string name="enableWifi">Not connected to WiFi, so cannot find any Chromecast</string>
-    <string name="onCourt">Got in!</string>
+    <string name="onCourt">You are on court!</string>
+    <string name="noPaddle">Sorry, no paddle for you!</string>
 
 </resources>

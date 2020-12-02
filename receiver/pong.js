@@ -76,8 +76,8 @@ function Ball(court, ballSize, context, courtColor, ballColor) {
     this.ballColor = ballColor;
     this.x = this.court.width / 2;
     this.y = this.court.height / 2;
-    this.y_speed = 0.5;
-    this.x_speed = court.width / 200;
+    this.y_speed = court.y_speed;
+    this.x_speed = court.x_speed;
 }
 
 Ball.prototype.bounceWall = function (court) {
@@ -256,12 +256,15 @@ ScoreBoard.prototype.draw = function () {
 };
 
 //////////////////////////////////// COURT ////////////////////////////////
-function Court(canvas) {
+function Court(canvas, speed) {
     this.context = canvas.getContext('2d');
     this.courtColor = "#999999";
 
     this.width = canvas.width;
     this.height = canvas.height;
+
+    this.y_speed = speed * court.height / 400;
+    this.x_speed = speed * court.width / 200;
 
     // Draw court initially
     this.context.fillStyle = this.courtColor;

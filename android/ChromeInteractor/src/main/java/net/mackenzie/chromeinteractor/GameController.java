@@ -14,6 +14,6 @@ import androidx.annotation.NonNull;
  */
 public interface GameController {
     void setChromecastInteractor(@NonNull final ChromecastInteractor chromecastInteractor);
-    void chromecastEvent(@NonNull final ChromecastInteractor.CHROMECAST_EVENT event);
+    void newChromecastState(@NonNull final ChromecastInteractor.CHROMECAST_STATE event);
     void receiverMessage(@NonNull final String message);
 }
