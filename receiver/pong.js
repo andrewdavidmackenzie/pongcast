@@ -260,11 +260,14 @@ function Court(canvas, speed) {
     this.context = canvas.getContext('2d');
     this.courtColor = "#999999";
 
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
     this.width = canvas.width;
     this.height = canvas.height;
 
-    this.y_speed = speed * court.height / 400;
-    this.x_speed = speed * court.width / 200;
+    this.y_speed = speed * this.height / 400;
+    this.x_speed = speed * this.width / 200;
 
     // Draw court initially
     this.context.fillStyle = this.courtColor;
