@@ -82,7 +82,6 @@ function CastController() {
             default:
                 break;
         }
-
     };
 
     // Messages are different depending on the Controller being used
