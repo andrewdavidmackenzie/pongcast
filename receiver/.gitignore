@@ -1,2 +1,6 @@
 module_receiver.xml
 receiver.iml
+.gradle
+gradle/
+gradlew
+gradlew.bat

@@ -2,19 +2,17 @@
 
 function KeyboardController() {
     console.log("KeyboardController starting");
-    window.keyboardPlayer = new KeyboardPlayer(window.court, "Keyboard");
+    window.keyboardPlayer = new KeyboardPlayer("Keyboard");
 
     // Messages are different depending on the Controller being used
-    window.court.enterMessage = "PRESS E TO ENTER";
-    window.court.startMessage = "PRESS S TO START";
-    window.court.pausedMessage = "PRESS SPACE TO RESTART";
+    window.court.setMessages("PRESS E TO ENTER", "PRESS S TO START", "PRESS SPACE TO RESTART");
 }
 
 KeyboardPlayer.prototype = new Player();
 
 // KeyboardPlayer that controls a paddle using up and down keys on the keyboard
-function KeyboardPlayer(court, name) {
-    Player.apply(this, court);
+function KeyboardPlayer(name) {
+    Player.apply(this);
     this.name = name;
 
     window.keysDown = [];
@@ -31,26 +29,22 @@ function KeyboardPlayer(court, name) {
 
     // Control court entry, game starting etc
     window.addEventListener("keydown", function (event) {
-        var value = Number(event.keyCode);
-
-        if ((value == 83) || (value == 115)) { // 's' or 'S'
-            court.startPlay();
-        }
-
-        if (value == 32) { // space
-            court.togglePlay();
-        }
-
-        if ((value == 15) || (value == 68)) { // 'd' or 'D'
-            window.enableDebug();
-        }
-
-        if ((value == 16) || (value == 69)) { // 'e' or 'E'
-            window.court.enter(window.keyboardPlayer);
-        }
-
-        if ((value == 23) || (value == 76)) { // 'l' or 'L'
-            window.court.leave(window.keyboardPlayer);
+        switch(event.code) {
+            case "KeyE":
+                window.court.enter(window.keyboardPlayer);
+                break;
+            case "KeyS":
+                court.startPlay();
+                break;
+            case "Space":
+                court.togglePlay();
+                break;
+            case "KeyD":
+                window.enableDebug();
+                break;
+            case "KeyL":
+                window.court.leave(window.keyboardPlayer);
+                break;
         }
     });
 
@@ -60,11 +54,11 @@ function KeyboardPlayer(court, name) {
 // Check what keys are pressed everytime we get asked to update our paddle position
 KeyboardPlayer.prototype.updatePaddle = function () {
     if (window.keysDown.length > 0) {
-        for (var key in window.keysDown) {
-            var value = Number(key);
-            if (value == 38) { // up arrow
+        for (let key in window.keysDown) {
+            let value = Number(key);
+            if (value === 38) { // up arrow
                 return -this.paddle.defaultSpeed;
-            } else if (value == 40) { // down arrow
+            } else if (value === 40) { // down arrow
                 return this.paddle.defaultSpeed;
             }
         }
