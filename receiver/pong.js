@@ -41,8 +41,7 @@ Paddle.prototype.move = function (distance) {
 };
 
 //////////////////////////////////// PLAYER ////////////////////////////////
-function Player(court, name) {
-    this.court = court;
+function Player(name) {
     this.name = name;
 }
 
@@ -53,13 +52,13 @@ Player.prototype.givePaddle = function (paddle) {
 //////////////////////////////////// COMPUTER PLAYER ////////////////////////////////
 ComputerPlayer.prototype = new Player();
 
-function ComputerPlayer(court, name) {
-    Player.apply(this, court);
+function ComputerPlayer(name) {
+    Player.apply(this);
     this.name = name;
 }
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
-    var diff = this.paddle.y + this.paddle.halfHeight - ball.y;
+    let diff = this.paddle.y + this.paddle.halfHeight - ball.y;
     return Math.floor(-diff / 4);
 };
 
@@ -93,7 +92,7 @@ Ball.prototype.bouncePaddle = function (paddle) {
     // Gain 5% of speed with every bounce
     this.x_speed = -1.05 * this.x_speed;
     if (this.y < paddle.y + paddle.topSection) {
-        if (this.y_speed == 0) {
+        if (this.y_speed === 0) {
             this.y_speed = court.width / 200;
         } else if (this.y_speed > 0) {
             this.y_speed = -this.y_speed;
@@ -101,7 +100,7 @@ Ball.prototype.bouncePaddle = function (paddle) {
             this.y_speed = this.y_speed * 2;
         }
     } else if (this.y > paddle.y + paddle.bottomSection) { // bottom section
-        if (this.y_speed == 0) {
+        if (this.y_speed === 0) {
             this.y_speed = -court.width / 200;
         } else if (this.y_speed > 0) {
             this.y_speed = this.y_speed * 2;
@@ -114,14 +113,14 @@ Ball.prototype.bouncePaddle = function (paddle) {
 };
 
 Ball.prototype.update = function () {
-    var oldX = this.x;
+    let oldX = this.x;
 
     // update position according to its speed
     this.x += this.x_speed;
     this.y += this.y_speed;
 
     // check for hitting the top wall
-    var top_y = this.y - this.halfBallSize;
+    let top_y = this.y - this.halfBallSize;
     if (top_y <= 0) {
         this.y = this.halfBallSize;
         this.bounceWall(this.court);
@@ -129,7 +128,7 @@ Ball.prototype.update = function () {
     }
 
     // check for hitting bottom wall
-    var bottom_y = this.y + this.halfBallSize;
+    let bottom_y = this.y + this.halfBallSize;
     if (bottom_y >= this.court.height) {
         this.y = this.court.height - this.halfBallSize;
         this.bounceWall(this.court);
@@ -193,7 +192,7 @@ function Game(court) {
 
     // add players until enough for a game (2)
     while (this.court.numPlayers < 2) {
-        this.court.enter(new ComputerPlayer(this.court, "Computer"));
+        this.court.enter(new ComputerPlayer("Computer"));
     }
 
     this.court.players[0].score = 0;
@@ -208,11 +207,10 @@ Game.prototype.point = function (player, opponent) {
 
     this.court.scoreboard.pointWon(player);
 
-    if (player.score == this.pointsToWin) {
+    if (player.score === this.pointsToWin) {
         this.end(player, opponent);
     } else {
-        // Create a new ball in the center of the court - Moving
-        this.court.ball = new Ball(this.court, this.court.ballSize, this.court.context, this.court.courtColor, this.court.ballColor);
+        this.court.newBall();
     }
 };
 
@@ -275,14 +273,14 @@ function Court(canvas, speed) {
     // set the fill for ball and paddles from now on
     this.context.fillStyle = "#FFFFFF";
 
-    var paddleWidth = 10;
-    var paddleHeight = 50;
-    var paddleXOffset = 60;
-    var courtMiddleY = Math.floor((this.height - paddleHeight) / 2);
+    let paddleWidth = 10;
+    let paddleHeight = 50;
+    let paddleXOffset = 60;
+    let courtMiddleY = Math.floor((this.height - paddleHeight) / 2);
 
     this.paddles = new Array(2);
     this.paddles[0] = new Paddle(paddleXOffset, paddleXOffset + paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context);
-    var front = this.width - paddleXOffset - paddleWidth;
+    let front = this.width - paddleXOffset - paddleWidth;
     this.paddles[1] = new Paddle(front, front, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context);
 
     // Create a new ball in the center of the court - not moving
@@ -313,6 +311,18 @@ Court.prototype.courtMessage = function () {
     }
 };
 
+Court.prototype.setMessages = function(enter, start, pause) {
+    this.enterMessage = enter;
+    this.startMessage = start;
+    this.pausedMessage = pause;
+
+}
+
+Court.prototype.newBall = function() {
+    // Create a new ball in the center of the court - Moving
+    this.ball = new Ball(this, this.ballSize, this.context, this.courtColor, this.ballColor);
+}
+
 Court.prototype.bounce = function () {
     //noinspection JSUnresolvedFunction
     window.audio.src = "wall.mp3";
@@ -320,7 +330,7 @@ Court.prototype.bounce = function () {
 };
 
 Court.prototype.enter = function (player) {
-    var response;
+    let response;
 
     if (this.players[0] == null) {
         this.players[0] = player;
@@ -346,10 +356,10 @@ Court.prototype.enter = function (player) {
 };
 
 Court.prototype.leave = function (leaver) {
-    var winner;
+    let winner;
     console.log("Player '" + leaver.name + "' has left the court");
 
-    if (leaver == this.players[0]) {
+    if (leaver === this.players[0]) {
         winner = this.players[1];
         this.players[0] = null;
     } else {
@@ -373,59 +383,6 @@ Court.prototype.leave = function (leaver) {
     // Reclaim his paddle
     leaver.paddle.clear();
     leaver.paddle = null;
-};
-
-Court.prototype.draw = function () {
-    // update paddle positions
-    if (this.players[0]) {
-        var move_0 = this.players[0].updatePaddle(this.ball);
-        if (move_0 != 0) {
-            this.paddles[0].clear();
-            this.paddles[0].move(move_0);
-        }
-    }
-
-    if (this.players[1]) {
-        var move_1 = this.players[1].updatePaddle(this.ball);
-        if (move_1 != 0) {
-            this.paddles[1].clear();
-            this.paddles[1].move(move_1);
-        }
-    }
-
-    if (window.debug > 1) {
-        //noinspection JSUnresolvedVariable
-        console.log('    to move paddle took ' + (performance.now() - window.start) + ' ms');
-    }
-
-    if (this.ball) {
-        this.ball.clear();
-
-        // Update the ball position and detect if it has exited one end of the court or another
-        var result = this.ball.update();
-
-        if (result != 0) {
-            if (result == -1)
-                this.game.point(this.players[1], this.players[0]);
-            else
-                this.game.point(this.players[0], this.players[1]);
-        }
-
-        // Draw the ball at the new position
-        this.ball.draw();
-        if (window.debug > 1) {
-            //noinspection JSUnresolvedVariable
-            console.log('    to draw ball took ' + (performance.now() - window.start) + ' ms');
-        }
-
-        // Draw them after the ball may have deleted a part of them
-        this.paddles[0].draw();
-        this.paddles[1].draw();
-        if (window.debug > 1) {
-            //noinspection JSUnresolvedVariable
-            console.log('    to draw paddles took ' + (performance.now() - window.start) + ' ms');
-        }
-    }
 };
 
 // TODO Control game state here
@@ -466,22 +423,77 @@ Court.prototype.togglePlay = function () {
     }
 };
 
+Court.prototype.draw = function () {
+    // update paddle positions
+    if (this.players[0]) {
+        let move_0 = this.players[0].updatePaddle(this.ball);
+        if (move_0 !== 0) {
+            this.paddles[0].clear();
+            this.paddles[0].move(move_0);
+        }
+    }
+
+    if (this.players[1]) {
+        let move_1 = this.players[1].updatePaddle(this.ball);
+        if (move_1 !== 0) {
+            this.paddles[1].clear();
+            this.paddles[1].move(move_1);
+        }
+    }
+
+    if (window.debug) {
+        //noinspection JSUnresolvedVariable
+        console.log('    to move paddles took ' + (performance.now() - window.start) + ' ms');
+    }
+
+    if (this.ball) {
+        this.ball.clear();
+
+        // Update the ball position and detect if it has exited one end of the court or another
+        let result = this.ball.update();
+
+        if (result !== 0) {
+            if (result === -1)
+                this.game.point(this.players[1], this.players[0]);
+            else
+                this.game.point(this.players[0], this.players[1]);
+        }
+
+        // Draw the ball at the new position
+        this.ball.draw();
+        if (window.debug) {
+            //noinspection JSUnresolvedVariable
+            console.log('    to draw ball took ' + (performance.now() - window.start) + ' ms');
+        }
+
+        // Draw them after the ball may have deleted a part of them
+        this.paddles[0].draw();
+        this.paddles[1].draw();
+        if (window.debug > 1) {
+            //noinspection JSUnresolvedVariable
+            console.log('    to draw paddles took ' + (performance.now() - window.start) + ' ms');
+        }
+    }
+};
+
 // This will be called from window on refresh
 Court.prototype.update = function () {
     if (!window.court.paused) {
         if (window.debug) {
             //noinspection JSUnresolvedVariable
             console.log('time since last update ' + (performance.now() - window.start) + ' ms');
+
+            //noinspection JSUnresolvedVariable
+            window.start = performance.now();
         }
-        //noinspection JSUnresolvedVariable
-        window.start = performance.now();
 
         window.court.draw(); // my drawing routing
 
-        //noinspection JSUnresolvedVariable
-        var end = performance.now();
         if (window.debug) {
-            console.log('to exit court.draw() took ' + (end - window.start) + ' ms');
+            //noinspection JSUnresolvedVariable
+            let end = performance.now();
+
+            console.log('    to draw court took ' + (end - window.start) + ' ms');
         }
 
         // reschedule next animation update
@@ -491,8 +503,4 @@ Court.prototype.update = function () {
 
 window.enableDebug = function enableDebug() {
     window.debug = 1;
-};
-
-window.enableStats = function enableStats() {
-    window.stats = true;
 };

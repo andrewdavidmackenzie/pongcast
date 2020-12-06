@@ -18,21 +18,21 @@ function CastController() {
     // handler for 'senderconnected' event - this player can then enter the court
     castReceiverManager.onSenderConnected = function (event) {
         //noinspection JSUnresolvedVariable
-        var name = event.senderId;
+        let name = event.senderId;
         console.log("Player Connected: " + name);
         //noinspection JSUnresolvedFunction
         console.log("Players Connected: " + window.castReceiverManager.getSenders().length);
 
         // Keep track of all people connected, indexing them by unique name
-        var player = new ChromecastPlayer(window.court, name);
+        let player = new ChromecastPlayer(name);
         window.players = [];
         window.players[name] = player;
 
         // have the player enter the court
-        var response = window.court.enter(player);
+        let response = window.court.enter(player);
         // send a message to the player to tell them if they got a paddle and which one
         //noinspection JSUnresolvedFunction,JSUnresolvedVariable
-        var senderChannel = window.messageBus.getCastChannel(event.senderId);
+        let senderChannel = window.messageBus.getCastChannel(event.senderId);
         senderChannel.send(response);
     };
 
@@ -43,7 +43,7 @@ function CastController() {
 
         // when the last man leaves - switch out the lights
         //noinspection JSUnresolvedFunction
-        if (window.castReceiverManager.getSenders().length == 0) {
+        if (window.castReceiverManager.getSenders().length === 0) {
             setTimeout(function() {
                 window.close();
             }, 3000);
@@ -85,9 +85,7 @@ function CastController() {
     };
 
     // Messages are different depending on the Controller being used
-    window.court.enterMessage = "CONNECT TO CHROMECAST";
-    window.court.startMessage = "CLICK PLAY ICON";
-    window.court.pausedMessage = "CLICK PLAY TO RESTART";
+    window.court.setMessages("CONNECT TO CHROMECAST", "CLICK PLAY ICON", "CLICK PLAY TO RESTART");
 
     // start the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Court is ready"});
@@ -99,7 +97,7 @@ function CastController() {
 ChromecastPlayer.prototype = new Player();
 
 // ChromecastPlayer that controls a paddle using up and down keys on the keyboard
-function ChromecastPlayer(court, name) {
+function ChromecastPlayer(name) {
     Player.apply(this, court);
     this.name = name;
     this.updownCount = 0;
@@ -110,7 +108,7 @@ function ChromecastPlayer(court, name) {
  to move up/down from the sender since the last update
  */
 ChromecastPlayer.prototype.updatePaddle = function () {
-    var movement = -(this.paddle.defaultSpeed * this.updownCount);
+    let movement = -(this.paddle.defaultSpeed * this.updownCount);
     this.updownCount = 0;
     return movement;
 };
@@ -119,7 +117,7 @@ ChromecastPlayer.prototype.gameOver = function (won) {
     // send a message to the player to tell them they won or lost
     try {
         //noinspection JSUnresolvedFunction
-        var senderChannel = window.messageBus.getCastChannel(this.name);
+        let senderChannel = window.messageBus.getCastChannel(this.name);
         if (won) {
             senderChannel.send("GAME WON");
         } else {
