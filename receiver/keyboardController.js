@@ -29,26 +29,22 @@ function KeyboardPlayer(name) {
 
     // Control court entry, game starting etc
     window.addEventListener("keydown", function (event) {
-        let value = Number(event.keyCode);
-
-        if ((value === 83) || (value === 115)) { // 's' or 'S'
-            court.startPlay();
-        }
-
-        if (value === 32) { // space
-            court.togglePlay();
-        }
-
-        if ((value === 15) || (value === 68)) { // 'd' or 'D'
-            window.enableDebug();
-        }
-
-        if ((value === 16) || (value === 69)) { // 'e' or 'E'
-            window.court.enter(window.keyboardPlayer);
-        }
-
-        if ((value === 23) || (value === 76)) { // 'l' or 'L'
-            window.court.leave(window.keyboardPlayer);
+        switch(event.code) {
+            case "KeyE":
+                window.court.enter(window.keyboardPlayer);
+                break;
+            case "KeyS":
+                court.startPlay();
+                break;
+            case "Space":
+                court.togglePlay();
+                break;
+            case "KeyD":
+                window.enableDebug();
+                break;
+            case "KeyL":
+                window.court.leave(window.keyboardPlayer);
+                break;
         }
     });
 
