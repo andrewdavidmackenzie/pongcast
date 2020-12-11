@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.mackenzie.pongcast"
-    android:versionCode="002010004"
-    android:versionName="02.01.00">
+    android:versionCode="002010105"
+    android:versionName="02.01.01">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
