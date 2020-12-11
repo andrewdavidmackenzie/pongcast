@@ -1,3 +1,7 @@
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function CastController() {
     //noinspection JSUnresolvedVariable,JSUnresolvedFunction
     cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.WARNING);
@@ -30,6 +34,10 @@ function CastController() {
 
         // have the player enter the court
         let response = window.court.enter(player);
+
+        // Try to increase reliability by waiting a little after sender connected event
+        await sleep(500);
+
         // send a message to the player to tell them if they got a paddle and which one
         //noinspection JSUnresolvedFunction,JSUnresolvedVariable
         let senderChannel = window.messageBus.getCastChannel(event.senderId);
