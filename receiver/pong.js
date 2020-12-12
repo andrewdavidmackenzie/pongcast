@@ -1,12 +1,12 @@
 //////////////////////////////////// PADDLE ////////////////////////////////
 function Paddle(x, frontX, y, width, height, courtHeight, context) {
-    this.defaultSpeed = Math.floor((1 * courtHeight) / 100) | 0; // 2% of the height
+    this.defaultSpeed = (courtHeight / 150) | 0;
     this.x = x | 0;
     this.frontX = frontX | 0;
     this.y = y | 0;
     this.width = width | 0;
     this.height = height | 0;
-    this.halfHeight = Math.floor(this.height / 2) | 0;
+    this.halfHeight = (this.height / 2) | 0;
     this.context = context;
     /* restrict movement and leave a gap at top and bottom */
     this.minY = this.halfHeight | 0;
@@ -59,7 +59,7 @@ function ComputerPlayer(name) {
 
 ComputerPlayer.prototype.updatePaddle = function (ball) {
     let diff = this.paddle.y + this.paddle.halfHeight - ball.y;
-    return (Math.floor(-diff / 4)  | 0);
+    return ((-diff / 4)  | 0);
 };
 
 ComputerPlayer.prototype.gameOver = function (won) {
@@ -69,7 +69,7 @@ ComputerPlayer.prototype.gameOver = function (won) {
 function Ball(court, ballSize, context, courtColor, ballColor) {
     this.court = court;
     this.ballSize = ballSize | 0;
-    this.halfBallSize = Math.floor(ballSize / 2) | 0;
+    this.halfBallSize = (ballSize / 2) | 0;
     this.context = context;
     this.courtColor = courtColor;
     this.ballColor = ballColor;
@@ -169,14 +169,14 @@ Ball.prototype.update = function () {
 };
 
 Ball.prototype.clear = function () {
-    this.context.clearRect(Math.floor(this.x) - this.halfBallSize,
-        Math.floor(this.y) - this.halfBallSize,
+    this.context.clearRect(this.x - this.halfBallSize,
+        this.y - this.halfBallSize,
         this.ballSize, this.ballSize);
 };
 
 Ball.prototype.draw = function () {
-    this.context.fillRect(Math.floor(this.x) - this.halfBallSize,
-        Math.floor(this.y) - this.halfBallSize,
+    this.context.fillRect(this.x - this.halfBallSize,
+        this.y - this.halfBallSize,
         this.ballSize, this.ballSize);
 };
 
@@ -276,7 +276,7 @@ function Court(canvas, speed) {
     let paddleWidth = 10 | 0;
     let paddleHeight = 50 | 0;
     let paddleXOffset = 60 | 0;
-    let courtMiddleY = (Math.floor((this.height - paddleHeight) / 2)) | 0;
+    let courtMiddleY = ((this.height - paddleHeight) / 2) | 0;
 
     this.paddles = new Array(2);
     this.paddles[0] = new Paddle(paddleXOffset, paddleXOffset + paddleWidth, courtMiddleY, paddleWidth, paddleHeight, this.height, this.context);
@@ -470,6 +470,7 @@ Court.prototype.draw = function () {
         // Draw them after the ball may have deleted a part of them
         this.paddles[0].draw();
         this.paddles[1].draw();
+
         if (window.debug) {
             //noinspection JSUnresolvedVariable
             console.log('        +--> paddles.draw() finished at ' + (performance.now() - window.start) + ' ms');

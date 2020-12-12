@@ -20,7 +20,7 @@ function CastController() {
     };
 
     // handler for 'senderconnected' event - this player can then enter the court
-    castReceiverManager.onSenderConnected = function (event) {
+    castReceiverManager.onSenderConnected = async function (event) {
         //noinspection JSUnresolvedVariable
         let name = event.senderId;
         console.log("Player Connected: " + name);
@@ -116,7 +116,7 @@ function ChromecastPlayer(name) {
  to move up/down from the sender since the last update
  */
 ChromecastPlayer.prototype.updatePaddle = function () {
-    let movement = -(this.paddle.defaultSpeed * this.updownCount);
+    let movement = -(this.paddle.defaultSpeed * this.updownCount) | 0;
     this.updownCount = 0;
     return movement;
 };
