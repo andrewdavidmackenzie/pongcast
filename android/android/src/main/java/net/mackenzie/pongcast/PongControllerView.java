@@ -66,7 +66,7 @@ public class PongControllerView {
                 pongController.paddleUp();
             }
         });
-        upButton.setOnTouchListener(new RepeatListener(300, 80, new View.OnClickListener() {
+        upButton.setOnTouchListener(new RepeatListener(40, 20, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pongController.paddleUp();
@@ -80,7 +80,7 @@ public class PongControllerView {
                 pongController.paddleDown();
             }
         });
-        downButton.setOnTouchListener(new RepeatListener(300, 80, new View.OnClickListener() {
+        downButton.setOnTouchListener(new RepeatListener(40, 20, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pongController.paddleDown();
