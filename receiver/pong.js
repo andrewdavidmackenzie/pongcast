@@ -16,9 +16,7 @@ function Paddle(x, frontX, y, width, height, courtHeight, context) {
 }
 
 Paddle.prototype.bounce = function () {
-    //noinspection JSUnresolvedFunction
-    window.audio.src = "paddle.mp3";
-    window.audio.play();
+    window.paddle.play();
 };
 
 Paddle.prototype.clear = function () {
@@ -219,8 +217,7 @@ Game.prototype.end = function (winner, looser) {
     winner.gameOver(true);
     looser.gameOver(false);
 
-    // TODO find this sound then enable
-//    this.gameWon.play();
+    window.win.play();
 
     this.court.pausePlay();
     this.court.game = null;
@@ -237,9 +234,7 @@ function ScoreBoard(court, scoreboardElement) {
 
 ScoreBoard.prototype.pointWon = function (player) {
     // Play point won sound
-    //noinspection JSUnresolvedFunction
-    window.audio.src = "point.mp3";
-    window.audio.play();
+    window.point.play();
 
     // increment score of that player
     player.score++;
@@ -324,9 +319,7 @@ Court.prototype.newBall = function() {
 }
 
 Court.prototype.bounce = function () {
-    //noinspection JSUnresolvedFunction
-    window.audio.src = "wall.mp3";
-    window.audio.play();
+    window.wall.play();
 };
 
 Court.prototype.enter = function (player) {
