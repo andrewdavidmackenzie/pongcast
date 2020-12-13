@@ -3,6 +3,7 @@ package net.mackenzie.pongcast;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class PongControllerView {
         messageView = activity.findViewById(R.id.messageView);
 
         paddleControls = activity.findViewById(R.id.paddleControl);
-        Button upButton, downButton;
+        View upButton, downButton;
         upButton = paddleControls.findViewById(R.id.upButton);
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override

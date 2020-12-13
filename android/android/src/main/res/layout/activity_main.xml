@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF"
-                tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
 
-	<TextView
-			android:id="@+id/messageView"
-			android:textColor="@color/black"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:visibility="invisible"
-			android:layout_centerInParent="true"
-			android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
 
-	<Button
-			android:id="@+id/playButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:visibility="invisible"
-			android:layout_centerInParent="true"
-			android:layout_gravity="center"
-			android:background="@drawable/play"/>
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/play"
+        android:visibility="invisible" />
 
-	<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:visibility="invisible"
-			android:id="@+id/paddleControl">
+    <LinearLayout
+        android:id="@+id/paddleControl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
-		<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="0.5">
+        <Button
+            android:id="@+id/upButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/up_button" />
 
-			<Button
-					android:id="@+id/upButton"
-					android:layout_centerInParent="true"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:gravity="fill_horizontal"
-					android:background="@drawable/up2"/>
-		</RelativeLayout>
-
-		<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="0dp"
-				android:layout_weight="0.5">
-
-			<Button
-				android:id="@+id/downButton"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_centerInParent="true"
-				android:gravity="fill_horizontal"
-				android:background="@drawable/down2" />
-		</RelativeLayout>
-	</LinearLayout>
+        <Button
+            android:id="@+id/downButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/down_button" />
+    </LinearLayout>
 
 </RelativeLayout>
