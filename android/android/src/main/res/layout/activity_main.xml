@@ -39,9 +39,10 @@
 			<Button
 					android:id="@+id/upButton"
 					android:layout_centerInParent="true"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="@drawable/up"/>
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="fill_horizontal"
+					android:background="@drawable/up2"/>
 		</RelativeLayout>
 
 		<RelativeLayout
@@ -50,11 +51,12 @@
 				android:layout_weight="0.5">
 
 			<Button
-					android:id="@+id/downButton"
-					android:layout_centerInParent="true"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:background="@drawable/down"/>
+				android:id="@+id/downButton"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_centerInParent="true"
+				android:gravity="fill_horizontal"
+				android:background="@drawable/down2" />
 		</RelativeLayout>
 	</LinearLayout>
 
