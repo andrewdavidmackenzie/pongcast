@@ -42,6 +42,7 @@ import java.util.List;
 public class ChromecastInteractor {
     // ENUMS
     public enum CHROMECAST_STATE {
+        INITIAL,              // Start-up state, even before we check wifi state
         NO_WIFI,              // Wifi is needed to connect to a Chromecast
         NO_ROUTE_AVAILABLE,   // Cannot connect to a chromecast
         ROUTE_AVAILABLE,      // A chromecast route can now be selected
@@ -72,7 +73,7 @@ public class ChromecastInteractor {
     // MUTABLES
     private boolean waitingForReconnect;
     private GoogleApiClient apiClient;
-    private CHROMECAST_STATE state = CHROMECAST_STATE.NO_WIFI;
+    private CHROMECAST_STATE state = CHROMECAST_STATE.INITIAL;
 
     private class WiFiChangeReceiver extends BroadcastReceiver {
         @Override
